@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
-
+import { Link } from "react-router-dom";
+import "../css/sidebar.css";
 const Home = () => {
   const logoutUser = async () => {
     await axios
@@ -15,8 +16,20 @@ const Home = () => {
   };
   return (
     <>
-      Home
-      <button onClick={logoutUser}>Logout</button>
+      <div className="sidebar">
+        <Link className="a active" to="/">
+          Dashboard
+        </Link>
+
+        <Link className=" a logout_button" to="/" onClick={logoutUser}>
+          Logout
+        </Link>
+      </div>
+
+      <div className="content">
+        <h2>Dashboard</h2>
+        <p>home dashboard</p>
+      </div>
     </>
   );
 };

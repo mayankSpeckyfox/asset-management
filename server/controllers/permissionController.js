@@ -1,5 +1,4 @@
 import Permission from "../models/Permission.js";
-import router from "../routes/Permissionroutes.js";
 
 //create permission
 export const createPermission = async (req, res) => {
