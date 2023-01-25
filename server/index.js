@@ -5,7 +5,7 @@ import cookieParser from "cookie-parser";
 import connect from "./db.js";
 import rolesRouter from "./routes/Rolesroute.js";
 import userRouter from "./routes/Userroutes.js";
-
+import permissionRouter from "./routes/Permissionroutes.js";
 const app = express();
 app.use(express.json());
 dotenv.config();
@@ -17,6 +17,8 @@ app.use(cors());
 app.use("/api/roles", rolesRouter);
 //router for user
 app.use("/api/users", userRouter);
+//router for permissions
+app.use("/api/permissions", permissionRouter);
 
 //port
 const Port = process.env.PORT;
