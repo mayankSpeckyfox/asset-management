@@ -24,7 +24,7 @@ router.get(
   getAllRoles
 );
 //update a role by id
-router.put(
+router.patch(
   "/updaterole/:id",
   isAuthenticatedUser,
   authorizeRoles("admin"),
