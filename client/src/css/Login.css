@@ -1,0 +1,15 @@
+.validation_error {
+  color: red;
+  font-family: sans-serif;
+  font-size: small;
+}
+
+.login_form_container {
+  border: 2px solid silver;
+  margin-top: 10%;
+  border-radius: 30px;
+}
+.login_heading {
+  color: silver;
+  font-family: fantasy;
+}
