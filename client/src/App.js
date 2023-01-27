@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Layout from "./components/Layout";
 import Login from "./components/Login";
 import axios from "axios";
 import Home from "./components/Home.js";
-import Role from "./components/Role.js";
+
+import Createuser from "./components/user/Createuser.js";
+import Allusers from "./components/user/Allusers.js";
+import Createrole from "./components/role/Createrole";
+import Allroles from "./components/role/Allroles";
+import Permissions from "./components/permissions/Permissions.js";
 
 const App = () => {
   const [myToken, setMyToken] = useState();
@@ -27,7 +32,27 @@ const App = () => {
       <Routes>
         <Route path="/" element={myToken && <Layout />}>
           <Route index element={myToken ? <Home /> : <Login />} />
-          <Route path="/role" element={<Role />} />
+          <Route
+            path="/createuser"
+            element={myToken ? <Createuser /> : <Navigate to="/" />}
+          />
+          <Route
+            path="/createrole"
+            element={myToken ? <Createrole /> : <Navigate to="/" />}
+          />
+          <Route
+            path="/allusers"
+            element={myToken ? <Allusers /> : <Navigate to="/" />}
+          />
+          <Route
+            path="/allroles"
+            element={myToken ? <Allroles /> : <Navigate to="/" />}
+          />
+          <Route
+            path="/permissions"
+            element={myToken ? <Permissions /> : <Navigate to="/" />}
+          />
+          <Route path="*" element={<Navigate to="/" />} />
         </Route>
       </Routes>
     </>

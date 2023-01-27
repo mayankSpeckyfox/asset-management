@@ -4,7 +4,9 @@ const Home = () => {
   return (
     <>
       <div className="home-content">
-        <h1>Home</h1>
+        <div className="container-fluid">
+          <h1>Welcome</h1>
+        </div>
       </div>
     </>
   );

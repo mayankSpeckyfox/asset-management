@@ -1,9 +1,9 @@
-.home-content {
+.all-roles-content {
   margin-left: 200px;
 }
 
 @media screen and (max-width: 700px) {
-  .home-content {
+  .all-roles-content {
     margin-left: 100px;
   }
 }

@@ -1,9 +1,9 @@
-.role-content {
+.permission-content {
   margin-left: 200px;
 }
 
 @media screen and (max-width: 700px) {
-  .role-content {
-    margin-left: 0;
+  .permission-content {
+    margin-left: 100px;
   }
 }
