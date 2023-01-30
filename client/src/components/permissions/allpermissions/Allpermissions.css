@@ -1,0 +1,15 @@
+.all-permissions-heading {
+  font-family: fantasy;
+  color: blueviolet;
+  border: 1px solid blue;
+  background-color: rgb(216, 242, 242);
+  padding: 10px;
+}
+.permission-list {
+  list-style-type: none;
+}
+.permission-list li {
+  border: 1px solid violet;
+  padding: 10px;
+  background-color: rgb(235, 232, 228);
+}

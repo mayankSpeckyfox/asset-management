@@ -1,7 +1,11 @@
 .create-role-content {
   margin-left: 200px;
 }
-
+.create-role-heading {
+  font-family: fantasy;
+  color: brown;
+  text-align: center;
+}
 @media screen and (max-width: 700px) {
   .create-role-content {
     margin-left: 100px;

@@ -1,7 +1,15 @@
 .permission-content {
   margin-left: 200px;
 }
-
+.permission-validation-error {
+  color: red;
+  font-family: sans-serif;
+  font-size: small;
+}
+.permission-heading {
+  font-family: fantasy;
+  color: rgb(120, 28, 12);
+}
 @media screen and (max-width: 700px) {
   .permission-content {
     margin-left: 100px;

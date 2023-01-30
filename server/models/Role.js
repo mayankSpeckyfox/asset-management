@@ -6,30 +6,7 @@ const RoleSchema = new mongoose.Schema({
     required: true,
     unique: true,
   },
-  permissions: [
-    {
-      permissionname: {
-        type: String,
-        required: true,
-      },
-      create: {
-        type: Boolean,
-        default: false,
-      },
-      read: {
-        type: Boolean,
-        default: false,
-      },
-      update: {
-        type: Boolean,
-        default: false,
-      },
-      delete: {
-        type: Boolean,
-        default: false,
-      },
-    },
-  ],
+  permissions: {},
 });
 
 export default mongoose.model("Role", RoleSchema);
