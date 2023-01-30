@@ -60,6 +60,13 @@ const Createrole = () => {
 
             <hr />
             <table>
+              <tr>
+                <th>Permissions</th>
+                <th>Create</th>
+                <th>Read</th>
+                <th>Update</th>
+                <th>Delete</th>
+              </tr>
               {permissions.map((val, ind) => {
                 return (
                   <tr key={val._id}>
