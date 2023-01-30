@@ -17,13 +17,16 @@ const Createrole = () => {
         })
         .then((res) => {
           console.log(res);
+          alert(res.data.message);
         })
         .catch((err) => {
           console.log(err);
+          alert(err.response.data.message);
         });
     };
     sendRoleData();
     reset();
+    setRolename("");
   };
 
   const getPermissions = async () => {
@@ -56,31 +59,39 @@ const Createrole = () => {
             />
 
             <hr />
-            <ul>
+            <table>
               {permissions.map((val, ind) => {
                 return (
-                  <li key={val._id}>
-                    {val.permissionname}
-                    <input
-                      type="checkbox"
-                      {...register(`${val.permissionname}.create`, {})}
-                    />
-                    <input
-                      type="checkbox"
-                      {...register(`${val.permissionname}.read`, {})}
-                    />
-                    <input
-                      type="checkbox"
-                      {...register(`${val.permissionname}.update`, {})}
-                    />
-                    <input
-                      type="checkbox"
-                      {...register(`${val.permissionname}.delete`, {})}
-                    />
-                  </li>
+                  <tr key={val._id}>
+                    <td>{val.permissionname}</td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        {...register(`${val.permissionname}.create`, {})}
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        {...register(`${val.permissionname}.read`, {})}
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        {...register(`${val.permissionname}.update`, {})}
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        {...register(`${val.permissionname}.delete`, {})}
+                      />
+                    </td>
+                  </tr>
                 );
               })}
-            </ul>
+            </table>
             <button type="submit" className="btn btn-info">
               Create Role
             </button>
