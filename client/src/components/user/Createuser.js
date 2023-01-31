@@ -66,8 +66,13 @@ const Createuser = () => {
     <>
       <div className="create-user-content">
         <div className="container-fluid ">
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <h2 className="create-user-heading pt-3 pb-3">CREATE USER</h2>
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="border border-2 p-5 mt-5 mb-5">
+            <blockquote className="blockquote mt-2">
+              <h3 className="text-muted">CREATE USER</h3>
+            </blockquote>
+            <hr />
             <input
               className="form-control "
               type="text"
@@ -137,7 +142,7 @@ const Createuser = () => {
             </select>
             <hr />
 
-            <button className="btn btn-success" type="submit">
+            <button className="btn btn-info" type="submit">
               Create User
             </button>
           </form>

@@ -6,10 +6,7 @@
   font-family: sans-serif;
   font-size: small;
 }
-.create-user-heading {
-  font-family: fantasy;
-  color: rgb(120, 28, 12);
-}
+
 @media screen and (max-width: 700px) {
   .create-user-content {
     margin-left: 100px;

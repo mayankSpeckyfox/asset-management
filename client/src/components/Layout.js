@@ -1,10 +1,13 @@
 import { Outlet } from "react-router-dom";
-
+import { useState } from "react";
 import axios from "axios";
-
+import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { Link } from "react-router-dom";
 import "../css/sidebar.css";
 const Layout = () => {
+  const [showUser, setShowUser] = useState(false);
+  const [showRole, setShowRole] = useState(false);
   const logoutUser = async () => {
     await axios
       .get(`api/users/logout`)
@@ -22,39 +25,46 @@ const Layout = () => {
         <Link className="a" to="/permissions">
           Permissions
         </Link>
-        <span className="a dropdown">
-          <span
-            className=" dropdown-toggle"
-            type="button"
-            data-toggle="dropdown">
-            Role
-          </span>
-          <ul className="dropdown-menu">
-            <li>
-              <Link to="/createrole">Create</Link>
-            </li>
-            <li>
-              <Link to="/allroles">Roles</Link>
-            </li>
-          </ul>
+        <span className="a spreader" onClick={() => setShowRole(!showRole)}>
+          Role
+          {showRole ? (
+            <ArrowDropDownIcon sx={{ fontSize: "x-large" }} />
+          ) : (
+            <ArrowDropUpIcon sx={{ fontSize: "x-large" }} />
+          )}
         </span>
+        {showRole && (
+          <span>
+            <Link className="a spreader-link" to="/createrole">
+              Create Role
+            </Link>
 
-        <span className="a dropdown">
-          <span
-            className=" dropdown-toggle"
-            type="button"
-            data-toggle="dropdown">
-            User
+            <Link className="a spreader-link" to="/allroles">
+              All Roles
+            </Link>
           </span>
-          <ul className="dropdown-menu">
-            <li>
-              <Link to="/createuser">Create</Link>
-            </li>
-            <li>
-              <Link to="/allusers">Users</Link>
-            </li>
-          </ul>
+        )}
+
+        <span onClick={() => setShowUser(!showUser)} className="a spreader">
+          User
+          {showUser ? (
+            <ArrowDropDownIcon sx={{ fontSize: "x-large" }} />
+          ) : (
+            <ArrowDropUpIcon sx={{ fontSize: "x-large" }} />
+          )}
         </span>
+        {showUser && (
+          <span>
+            <Link className="a spreader-link" to="/createuser">
+              Create User
+            </Link>
+
+            <Link className="a spreader-link" to="/allusers">
+              All Users
+            </Link>
+          </span>
+        )}
+
         <Link className=" a logout_button" to="/" onClick={logoutUser}>
           Logout
         </Link>

@@ -47,8 +47,12 @@ const Permissions = () => {
     <>
       <div className="permission-content">
         <div className="container-fluid">
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <h2 className="permission-heading"> ADD PERMISSIONS</h2>
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="p-5 border border-2 mt-5">
+            <blockquote className="blockquote mt-2">
+              <h3 className="text-muted"> ADD PERMISSIONS</h3>
+            </blockquote>
             <hr />
             <input
               placeholder="Permission Name"

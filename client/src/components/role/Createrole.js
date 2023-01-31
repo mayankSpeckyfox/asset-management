@@ -46,63 +46,84 @@ const Createrole = () => {
     <>
       <div className="create-role-content">
         <div className="container-fluid">
-          <h2 className="create-role-heading">CREATE ROLE</h2>
-
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <input
-              className="form-control"
-              placeholder="Role Name"
-              value={rolename}
-              onChange={(e) => {
-                setRolename(e.target.value);
-              }}
-            />
-
+          <div className="p-5 border border-2 mt-5 mb-5 ">
+            <blockquote className="blockquote">
+              <h3 className="text-muted">CREATE ROLE</h3>
+            </blockquote>
             <hr />
-            <table>
-              <tr>
-                <th>Permissions</th>
-                <th>Create</th>
-                <th>Read</th>
-                <th>Update</th>
-                <th>Delete</th>
-              </tr>
-              {permissions.map((val, ind) => {
-                return (
-                  <tr key={val._id}>
-                    <td>{val.permissionname}</td>
-                    <td>
-                      <input
-                        type="checkbox"
-                        {...register(`${val.permissionname}.create`, {})}
-                      />
-                    </td>
-                    <td>
-                      <input
-                        type="checkbox"
-                        {...register(`${val.permissionname}.read`, {})}
-                      />
-                    </td>
-                    <td>
-                      <input
-                        type="checkbox"
-                        {...register(`${val.permissionname}.update`, {})}
-                      />
-                    </td>
-                    <td>
-                      <input
-                        type="checkbox"
-                        {...register(`${val.permissionname}.delete`, {})}
-                      />
-                    </td>
-                  </tr>
-                );
-              })}
-            </table>
-            <button type="submit" className="btn btn-info">
-              Create Role
-            </button>
-          </form>
+            <div>
+              <form onSubmit={handleSubmit(onSubmit)}>
+                <input
+                  className="form-control "
+                  placeholder="Role Name"
+                  value={rolename}
+                  onChange={(e) => {
+                    setRolename(e.target.value);
+                  }}
+                />
+
+                <hr />
+                <div className="table-responsive">
+                  <table className=" table table-striped ">
+                    <thead>
+                      <tr>
+                        <th>Permissions</th>
+                        <th>Create</th>
+                        <th>Read</th>
+                        <th>Update</th>
+                        <th>Delete</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {permissions.map((val, ind) => {
+                        return (
+                          <tr key={val._id}>
+                            <td>{val.permissionname}</td>
+                            <td>
+                              <input
+                                type="checkbox"
+                                {...register(
+                                  `${val.permissionname}.create`,
+                                  {}
+                                )}
+                              />
+                            </td>
+                            <td>
+                              <input
+                                type="checkbox"
+                                {...register(`${val.permissionname}.read`, {})}
+                              />
+                            </td>
+                            <td>
+                              <input
+                                type="checkbox"
+                                {...register(
+                                  `${val.permissionname}.update`,
+                                  {}
+                                )}
+                              />
+                            </td>
+                            <td>
+                              <input
+                                type="checkbox"
+                                {...register(
+                                  `${val.permissionname}.delete`,
+                                  {}
+                                )}
+                              />
+                            </td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
+                </div>
+                <button type="submit" className="btn btn-info">
+                  Create Role
+                </button>
+              </form>
+            </div>
+          </div>
         </div>
       </div>
     </>
