@@ -2,17 +2,19 @@
   margin: 0;
   padding: 0;
   width: 200px;
-  background-color: #323030;
-
+  text-align: center;
+  background-image: url("../images/keith-misner-h0Vxgz5tyXA-unsplash.jpg");
   position: fixed;
   height: 100%;
   overflow: auto;
 }
+
 .spreader:hover {
   cursor: pointer;
 }
 .spreader-link {
-  background-color: rgb(71, 69, 69);
+  background-color: rgba(158, 105, 105, 0.785);
+  opacity: 0.7;
 }
 .sidebar .a {
   display: block;
@@ -21,16 +23,8 @@
   text-decoration: none;
 }
 
-.sidebar .a.active {
-  background-color: #020e0a;
-  color: white;
-}
-.sidebar .a.active:hover {
-  background-color: #555;
-}
-
 .sidebar .a:hover:not(.active) {
-  background-color: #555;
+  background-color: rgba(134, 71, 71, 0.705);
   color: white;
 }
 

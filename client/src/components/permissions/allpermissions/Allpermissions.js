@@ -8,7 +8,9 @@ const Allpermissions = (props) => {
     <>
       <div className="p-5 border border-2 mb-5">
         <blockquote className="blockquote">
-          <h3 className="text-muted">ALL PERMISSIONS</h3>
+          <h4 className="text-muted">
+            <b>ALL PERMISSIONS</b>
+          </h4>
         </blockquote>
         <hr />
         <div className="table-responsive">

@@ -79,7 +79,9 @@ const Createuser = () => {
             onSubmit={handleSubmit(onSubmit)}
             className="border border-2 p-5 mt-5 mb-5">
             <blockquote className="blockquote mt-2">
-              <h3 className="text-muted">CREATE USER</h3>
+              <h4 className="text-muted">
+                <b>CREATE USER</b>
+              </h4>
             </blockquote>
             <hr />
             <input

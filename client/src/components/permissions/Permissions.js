@@ -59,7 +59,9 @@ const Permissions = () => {
             onSubmit={handleSubmit(onSubmit)}
             className="p-5 border border-2 mt-5">
             <blockquote className="blockquote mt-2">
-              <h3 className="text-muted"> ADD PERMISSIONS</h3>
+              <h4 className="text-muted">
+                <b>ADD PERMISSIONS</b>
+              </h4>
             </blockquote>
             <hr />
             <input

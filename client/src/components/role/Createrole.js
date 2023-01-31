@@ -57,7 +57,9 @@ const Createrole = () => {
           </div>
           <div className="p-5 border border-2 mt-5 mb-5 ">
             <blockquote className="blockquote">
-              <h3 className="text-muted">CREATE ROLE</h3>
+              <h4 className="text-muted">
+                <b>CREATE ROLE</b>
+              </h4>
             </blockquote>
             <hr />
             <div>
