@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "./Createuser.css";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-
+import CottageOutlinedIcon from "@mui/icons-material/CottageOutlined";
 const Createuser = () => {
   const [allRoles, setAllRoles] = useState([]);
   const [role, setRole] = useState();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -66,6 +68,13 @@ const Createuser = () => {
     <>
       <div className="create-user-content">
         <div className="container-fluid ">
+          <div className="mt-4">
+            <CottageOutlinedIcon
+              className="home-icon"
+              onClick={() => navigate("/")}
+              sx={{ fontSize: "xx-large", color: "brown" }}
+            />
+          </div>
           <form
             onSubmit={handleSubmit(onSubmit)}
             className="border border-2 p-5 mt-5 mb-5">

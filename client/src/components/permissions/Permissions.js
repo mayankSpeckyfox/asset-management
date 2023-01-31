@@ -3,6 +3,7 @@ import "./Permissions.css";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import CottageOutlinedIcon from "@mui/icons-material/CottageOutlined";
 import Allpermissions from "./allpermissions/Allpermissions.js";
 const Permissions = () => {
   const [permissions, setPermissions] = useState([]);
@@ -47,6 +48,13 @@ const Permissions = () => {
     <>
       <div className="permission-content">
         <div className="container-fluid">
+          <div className="mt-4">
+            <CottageOutlinedIcon
+              className="home-icon"
+              onClick={() => navigate("/")}
+              sx={{ fontSize: "xx-large", color: "brown" }}
+            />
+          </div>
           <form
             onSubmit={handleSubmit(onSubmit)}
             className="p-5 border border-2 mt-5">

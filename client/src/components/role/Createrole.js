@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import "./Createrole.css";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import CottageOutlinedIcon from "@mui/icons-material/CottageOutlined";
 import { useForm } from "react-hook-form";
 
 const Createrole = () => {
   const [permissions, setPermissions] = useState([]);
   const [rolename, setRolename] = useState();
-
+  const navigate = useNavigate();
   const { register, handleSubmit, reset } = useForm();
   const onSubmit = (data) => {
     const sendRoleData = async () => {
@@ -46,6 +48,13 @@ const Createrole = () => {
     <>
       <div className="create-role-content">
         <div className="container-fluid">
+          <div className="mt-4">
+            <CottageOutlinedIcon
+              className="home-icon"
+              onClick={() => navigate("/")}
+              sx={{ fontSize: "xx-large", color: "brown" }}
+            />
+          </div>
           <div className="p-5 border border-2 mt-5 mb-5 ">
             <blockquote className="blockquote">
               <h3 className="text-muted">CREATE ROLE</h3>
