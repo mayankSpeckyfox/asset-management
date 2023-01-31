@@ -68,7 +68,7 @@ const Createuser = () => {
     <>
       <div className="create-user-content">
         <div className="container-fluid ">
-          <div className="mt-4">
+          <div className="p-4 page-nav">
             <CottageOutlinedIcon
               className="home-icon"
               onClick={() => navigate("/")}
@@ -77,7 +77,7 @@ const Createuser = () => {
           </div>
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="border border-2 p-5 mt-5 mb-5">
+            className="border border-1 p-5 mt-5 mb-5 form-class">
             <blockquote className="blockquote mt-2">
               <h4 className="text-muted">
                 <b>CREATE USER</b>

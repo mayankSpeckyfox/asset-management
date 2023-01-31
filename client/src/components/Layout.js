@@ -26,6 +26,10 @@ const Layout = () => {
   return (
     <>
       <div className="sidebar sidebar-wrapper">
+        <span className="a mt-3">
+          <b>Asset Management</b>
+        </span>
+        <hr />
         <Link className="a" to="/permissions">
           <b> Permissions</b>
         </Link>

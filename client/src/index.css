@@ -1,3 +1,13 @@
 .home-icon:hover {
   cursor: pointer;
 }
+.form-class {
+  background-color: white;
+}
+.page-nav {
+  background-color: rgba(237, 230, 230, 0.872);
+  border-bottom: 1px solid silver;
+}
+body {
+  background-color: rgb(247, 243, 243);
+}

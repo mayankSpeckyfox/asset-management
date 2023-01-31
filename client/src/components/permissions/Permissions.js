@@ -48,7 +48,7 @@ const Permissions = () => {
     <>
       <div className="permission-content">
         <div className="container-fluid">
-          <div className="mt-4">
+          <div className="p-4 page-nav">
             <CottageOutlinedIcon
               className="home-icon"
               onClick={() => navigate("/")}
@@ -57,7 +57,7 @@ const Permissions = () => {
           </div>
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="p-5 border border-2 mt-5">
+            className="p-5 border border-1 mt-5 form-class">
             <blockquote className="blockquote mt-2">
               <h4 className="text-muted">
                 <b>ADD PERMISSIONS</b>

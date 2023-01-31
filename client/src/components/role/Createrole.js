@@ -48,14 +48,14 @@ const Createrole = () => {
     <>
       <div className="create-role-content">
         <div className="container-fluid">
-          <div className="mt-4">
+          <div className="p-4 page-nav">
             <CottageOutlinedIcon
               className="home-icon"
               onClick={() => navigate("/")}
               sx={{ fontSize: "xx-large", color: "brown" }}
             />
           </div>
-          <div className="p-5 border border-2 mt-5 mb-5 ">
+          <div className="p-5 border border-1 mt-5 mb-5  form-class">
             <blockquote className="blockquote">
               <h4 className="text-muted">
                 <b>CREATE ROLE</b>
@@ -75,7 +75,7 @@ const Createrole = () => {
 
                 <hr />
                 <div className="table-responsive">
-                  <table className=" table table-striped ">
+                  <table className=" table table-striped text-muted ">
                     <thead>
                       <tr>
                         <th>Permissions</th>

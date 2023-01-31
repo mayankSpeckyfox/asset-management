@@ -6,7 +6,7 @@ const Allpermissions = (props) => {
   const { permissions } = props;
   return (
     <>
-      <div className="p-5 border border-2 mb-5">
+      <div className="p-5 border border-1 mb-5 form-class">
         <blockquote className="blockquote">
           <h4 className="text-muted">
             <b>ALL PERMISSIONS</b>
@@ -14,7 +14,7 @@ const Allpermissions = (props) => {
         </blockquote>
         <hr />
         <div className="table-responsive">
-          <table className="table table-striped">
+          <table className="table table-striped text-muted">
             <thead>
               <tr>
                 <th>Permissions</th>
