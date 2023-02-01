@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "./Createuser.css";
 import axios from "axios";
+import GroupAddOutlinedIcon from "@mui/icons-material/GroupAddOutlined";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import CottageOutlinedIcon from "@mui/icons-material/CottageOutlined";
+import { Stack } from "@mui/material";
 const Createuser = () => {
   const [allRoles, setAllRoles] = useState([]);
   const [role, setRole] = useState();
@@ -28,6 +30,7 @@ const Createuser = () => {
           .then((res) => {
             console.log(res);
             alert(res.data.message);
+            navigate("/allusers");
           })
           .catch((er) => {
             console.log(er);
@@ -69,11 +72,21 @@ const Createuser = () => {
       <div className="create-user-content">
         <div className="container-fluid ">
           <div className="p-4 page-nav">
-            <CottageOutlinedIcon
-              className="home-icon"
-              onClick={() => navigate("/")}
-              sx={{ fontSize: "xx-large", color: "brown" }}
-            />
+            <Stack direction="row" sx={{ justifyContent: "space-between" }}>
+              <CottageOutlinedIcon
+                className="home-icon"
+                onClick={() => navigate("/")}
+                sx={{ fontSize: "xx-large", color: "brown" }}
+              />
+              <Stack
+                direction="row"
+                onClick={() => navigate("/allusers")}
+                spacing={1}
+                sx={{ color: "brown", cursor: "pointer" }}>
+                <GroupAddOutlinedIcon sx={{ fontSize: "large" }} />
+                <b>All Users</b>
+              </Stack>
+            </Stack>
           </div>
           <form
             onSubmit={handleSubmit(onSubmit)}

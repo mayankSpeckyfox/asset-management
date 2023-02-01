@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "./Createrole.css";
+import GroupOutlinedIcon from "@mui/icons-material/GroupOutlined";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import CottageOutlinedIcon from "@mui/icons-material/CottageOutlined";
 import { useForm } from "react-hook-form";
-
+import { Stack } from "@mui/material";
 const Createrole = () => {
   const [permissions, setPermissions] = useState([]);
   const [rolename, setRolename] = useState();
@@ -20,6 +21,7 @@ const Createrole = () => {
         .then((res) => {
           console.log(res);
           alert(res.data.message);
+          navigate("/allroles");
         })
         .catch((err) => {
           console.log(err);
@@ -49,11 +51,21 @@ const Createrole = () => {
       <div className="create-role-content">
         <div className="container-fluid">
           <div className="p-4 page-nav">
-            <CottageOutlinedIcon
-              className="home-icon"
-              onClick={() => navigate("/")}
-              sx={{ fontSize: "xx-large", color: "brown" }}
-            />
+            <Stack direction="row" sx={{ justifyContent: "space-between" }}>
+              <CottageOutlinedIcon
+                className="home-icon"
+                onClick={() => navigate("/")}
+                sx={{ fontSize: "xx-large", color: "brown" }}
+              />
+              <Stack
+                direction="row"
+                onClick={() => navigate("/allroles")}
+                spacing={1}
+                sx={{ color: "brown", cursor: "pointer" }}>
+                <GroupOutlinedIcon sx={{ fontSize: "large" }} />
+                <b>All Roles</b>
+              </Stack>
+            </Stack>
           </div>
           <div className="p-5 border border-1 mt-5 mb-5  form-class">
             <blockquote className="blockquote">

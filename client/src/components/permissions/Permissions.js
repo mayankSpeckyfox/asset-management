@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "./Permissions.css";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import CottageOutlinedIcon from "@mui/icons-material/CottageOutlined";
-import Allpermissions from "./allpermissions/Allpermissions.js";
+import VpnKeyOutlinedIcon from "@mui/icons-material/VpnKeyOutlined";
+import { Stack } from "@mui/material";
 const Permissions = () => {
-  const [permissions, setPermissions] = useState([]);
   const navigate = useNavigate();
   const {
     register,
@@ -20,7 +20,7 @@ const Permissions = () => {
         .post(`api/permissions/create`, { permissionname: data.permissionname })
         .then((res) => {
           alert(res.data.message);
-          navigate("/");
+          navigate("/allpermissions");
         })
         .catch((err) => {
           console.log(err);
@@ -30,30 +30,27 @@ const Permissions = () => {
     createPermission();
     reset();
   };
-  //get all pemissions
-  const getAllPermissions = async () => {
-    await axios
-      .get(`api/permissions/getallpermissions`)
-      .then((res) => {
-        setPermissions(res.data.allPermissions);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-  useEffect(() => {
-    getAllPermissions();
-  }, []);
+
   return (
     <>
       <div className="permission-content">
         <div className="container-fluid">
           <div className="p-4 page-nav">
-            <CottageOutlinedIcon
-              className="home-icon"
-              onClick={() => navigate("/")}
-              sx={{ fontSize: "xx-large", color: "brown" }}
-            />
+            <Stack direction="row" sx={{ justifyContent: "space-between" }}>
+              <CottageOutlinedIcon
+                className="home-icon"
+                onClick={() => navigate("/")}
+                sx={{ fontSize: "xx-large", color: "brown" }}
+              />
+              <Stack
+                onClick={() => navigate("/allpermissions")}
+                direction="row"
+                spacing={1}
+                sx={{ color: "brown", cursor: "pointer" }}>
+                <VpnKeyOutlinedIcon sx={{ fontSize: "large" }} />{" "}
+                <b> Permissions</b>
+              </Stack>
+            </Stack>
           </div>
           <form
             onSubmit={handleSubmit(onSubmit)}
@@ -83,7 +80,6 @@ const Permissions = () => {
             </button>
           </form>
           <hr />
-          <Allpermissions permissions={permissions} />
         </div>
       </div>
     </>

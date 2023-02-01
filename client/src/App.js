@@ -10,6 +10,7 @@ import Allusers from "./components/user/Allusers.js";
 import Createrole from "./components/role/Createrole";
 import Allroles from "./components/role/Allroles";
 import Permissions from "./components/permissions/Permissions.js";
+import Allpermissions from "./components/permissions/allpermissions/Allpermissions.js";
 
 const App = () => {
   const [myToken, setMyToken] = useState();
@@ -49,8 +50,12 @@ const App = () => {
             element={myToken ? <Allroles /> : <Navigate to="/" />}
           />
           <Route
-            path="/permissions"
+            path="/createpermission"
             element={myToken ? <Permissions /> : <Navigate to="/" />}
+          />
+          <Route
+            path="allpermissions"
+            element={myToken ? <Allpermissions /> : <Navigate to="/" />}
           />
           <Route path="*" element={<Navigate to="/" />} />
         </Route>
