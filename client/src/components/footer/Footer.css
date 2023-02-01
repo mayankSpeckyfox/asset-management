@@ -1,0 +1,16 @@
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  left: 200px;
+  background-color: rgba(237, 230, 230, 0.872);
+  border-top: 1px solid silver;
+  height: 60px;
+  color: brown;
+}
+
+@media screen and (max-width: 700px) {
+  .footer {
+    left: 120px;
+  }
+}

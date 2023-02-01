@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import CottageOutlinedIcon from "@mui/icons-material/CottageOutlined";
 import VpnKeyOutlinedIcon from "@mui/icons-material/VpnKeyOutlined";
 import { Stack } from "@mui/material";
+import Footer from "../footer/Footer.js";
 const Permissions = () => {
   const navigate = useNavigate();
   const {
@@ -80,6 +81,8 @@ const Permissions = () => {
             </button>
           </form>
           <hr />
+
+          <Footer />
         </div>
       </div>
     </>
