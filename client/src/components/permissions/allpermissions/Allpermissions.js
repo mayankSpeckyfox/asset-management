@@ -54,14 +54,14 @@ const Allpermissions = () => {
             <div className="table-responsive">
               <table className="table table-striped text-muted">
                 <thead>
-                  <tr>
+                  <tr className="permission-table-row">
                     <th>Permissions</th>
                   </tr>
                 </thead>
                 <tbody>
                   {permissions.map((val, ind) => {
                     return (
-                      <tr key={val._id}>
+                      <tr key={val._id} className="permission-table-row">
                         <Individualpermission
                           permissionname={val.permissionname}
                         />

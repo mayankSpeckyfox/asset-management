@@ -86,10 +86,10 @@ const Createrole = () => {
                 />
 
                 <hr />
-                <div className="table-responsive">
+                <div className="table-responsive  tableScroll">
                   <table className=" table table-striped text-muted ">
                     <thead>
-                      <tr>
+                      <tr className="tableRow">
                         <th>Permissions</th>
                         <th>Create</th>
                         <th>Read</th>
@@ -100,7 +100,7 @@ const Createrole = () => {
                     <tbody>
                       {permissions.map((val, ind) => {
                         return (
-                          <tr key={val._id}>
+                          <tr key={val._id} className="tableRow">
                             <td>{val.permissionname}</td>
                             <td>
                               <input
