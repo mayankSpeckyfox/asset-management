@@ -13,9 +13,9 @@ const Allpermissions = () => {
   //get all pemissions
   const getAllPermissions = async () => {
     await axios
-      .get(`api/permissions/getallpermissions`)
+      .get(`api/permissions/getallpermissions?`)
       .then((res) => {
-        setPermissions(res.data.allPermissions);
+        setPermissions(res.data.permissions);
       })
       .catch((err) => {
         console.log(err);

@@ -1,5 +1,5 @@
 import Permission from "../models/Permission.js";
-
+import ApiFeatures from "../utils/apifeatures.js";
 //create permission
 export const createPermission = async (req, res) => {
   try {
@@ -53,13 +53,26 @@ export const updatePermission = async (req, res) => {
 
 export const getAllPermissions = async (req, res) => {
   try {
+    const resultPerPage = 2;
+    const permissionCount = await Permission.countDocuments();
+    const apiFeature = new ApiFeatures(
+      Permission.find(),
+      req.query,
+      "permissionname"
+    ).search();
+    apiFeature.pagination(resultPerPage);
+    let permissions = await apiFeature.query;
+
     const allPermissions = await Permission.find();
     if (!allPermissions) {
       return res.status(404).json({ message: "Sorry no permissions found" });
     }
-    res
-      .status(200)
-      .json({ message: "Permissions fetched successfully", allPermissions });
+    res.status(200).json({
+      message: "Permissions fetched successfully",
+      permissions,
+      allPermissions,
+      permissionCount,
+    });
   } catch (err) {
     console.log(err);
     res.status(500).json({ message: "Sorry ! Error occured" });

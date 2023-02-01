@@ -33,29 +33,17 @@ const App = () => {
       <Routes>
         <Route path="/" element={myToken && <Layout />}>
           <Route index element={myToken ? <Home /> : <Login />} />
-          <Route
-            path="/createuser"
-            element={myToken ? <Createuser /> : <Navigate to="/" />}
-          />
-          <Route
-            path="/createrole"
-            element={myToken ? <Createrole /> : <Navigate to="/" />}
-          />
-          <Route
-            path="/allusers"
-            element={myToken ? <Allusers /> : <Navigate to="/" />}
-          />
-          <Route
-            path="/allroles"
-            element={myToken ? <Allroles /> : <Navigate to="/" />}
-          />
+          <Route path="/createuser" element={myToken && <Createuser />} />
+          <Route path="/createrole" element={myToken && <Createrole />} />
+          <Route path="/allusers" element={myToken && <Allusers />} />
+          <Route path="/allroles" element={myToken && <Allroles />} />
           <Route
             path="/createpermission"
-            element={myToken ? <Permissions /> : <Navigate to="/" />}
+            element={myToken && <Permissions />}
           />
           <Route
             path="allpermissions"
-            element={myToken ? <Allpermissions /> : <Navigate to="/" />}
+            element={myToken && <Allpermissions />}
           />
           <Route path="*" element={<Navigate to="/" />} />
         </Route>
