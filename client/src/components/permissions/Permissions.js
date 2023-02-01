@@ -1,6 +1,7 @@
 import React from "react";
 import "./Permissions.css";
 import axios from "axios";
+import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import CottageOutlinedIcon from "@mui/icons-material/CottageOutlined";
@@ -38,6 +39,10 @@ const Permissions = () => {
         <div className="container-fluid">
           <div className="p-4 page-nav">
             <Stack direction="row" sx={{ justifyContent: "space-between" }}>
+              <KeyboardBackspaceIcon
+                onClick={() => navigate(-1)}
+                sx={{ fontSize: "xx-large", color: "brown", cursor: "pointer" }}
+              />
               <CottageOutlinedIcon
                 className="home-icon"
                 onClick={() => navigate("/")}

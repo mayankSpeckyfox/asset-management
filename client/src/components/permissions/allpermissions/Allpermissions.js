@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Individualpermission from "./individualPermission/Individualpermission.js";
 import "./Allpermissions.css";
+import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import ModeOutlinedIcon from "@mui/icons-material/ModeOutlined";
 import { useNavigate } from "react-router-dom";
 import CottageOutlinedIcon from "@mui/icons-material/CottageOutlined";
@@ -29,6 +30,10 @@ const Allpermissions = () => {
         <div className="container-fluid">
           <div className="p-4 page-nav">
             <Stack direction="row" sx={{ justifyContent: "space-between" }}>
+              <KeyboardBackspaceIcon
+                onClick={() => navigate(-1)}
+                sx={{ fontSize: "xx-large", color: "brown", cursor: "pointer" }}
+              />
               <CottageOutlinedIcon
                 className="home-icon"
                 onClick={() => navigate("/")}

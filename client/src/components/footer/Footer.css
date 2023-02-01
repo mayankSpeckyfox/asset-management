@@ -8,9 +8,20 @@
   height: 60px;
   color: brown;
 }
-
+.social-icon {
+  padding-left: 200px;
+}
 @media screen and (max-width: 700px) {
   .footer {
     left: 120px;
+  }
+  .social-icon {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .social-icon {
+    padding-left: 50px;
   }
 }

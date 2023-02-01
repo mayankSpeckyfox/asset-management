@@ -5,6 +5,9 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import CottageOutlinedIcon from "@mui/icons-material/CottageOutlined";
 import { useForm } from "react-hook-form";
+import Footer from "../footer/Footer.js";
+
+import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import { Stack } from "@mui/material";
 const Createrole = () => {
   const [permissions, setPermissions] = useState([]);
@@ -52,6 +55,10 @@ const Createrole = () => {
         <div className="container-fluid">
           <div className="p-4 page-nav">
             <Stack direction="row" sx={{ justifyContent: "space-between" }}>
+              <KeyboardBackspaceIcon
+                onClick={() => navigate(-1)}
+                sx={{ fontSize: "xx-large", color: "brown", cursor: "pointer" }}
+              />
               <CottageOutlinedIcon
                 className="home-icon"
                 onClick={() => navigate("/")}
@@ -67,7 +74,7 @@ const Createrole = () => {
               </Stack>
             </Stack>
           </div>
-          <div className="p-5 border border-1 mt-5 mb-5  form-class">
+          <div className="p-5 border border-1 mt-5  form-class">
             <blockquote className="blockquote">
               <h4 className="text-muted">
                 <b>CREATE ROLE</b>
@@ -147,6 +154,7 @@ const Createrole = () => {
               </form>
             </div>
           </div>
+          <Footer />
         </div>
       </div>
     </>

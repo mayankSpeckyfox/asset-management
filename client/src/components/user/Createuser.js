@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "./Createuser.css";
 import axios from "axios";
+import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import GroupAddOutlinedIcon from "@mui/icons-material/GroupAddOutlined";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import CottageOutlinedIcon from "@mui/icons-material/CottageOutlined";
 import { Stack } from "@mui/material";
+import Footer from "../footer/Footer.js";
 const Createuser = () => {
   const [allRoles, setAllRoles] = useState([]);
   const [role, setRole] = useState();
@@ -73,6 +75,10 @@ const Createuser = () => {
         <div className="container-fluid ">
           <div className="p-4 page-nav">
             <Stack direction="row" sx={{ justifyContent: "space-between" }}>
+              <KeyboardBackspaceIcon
+                onClick={() => navigate(-1)}
+                sx={{ fontSize: "xx-large", color: "brown", cursor: "pointer" }}
+              />
               <CottageOutlinedIcon
                 className="home-icon"
                 onClick={() => navigate("/")}
@@ -90,7 +96,7 @@ const Createuser = () => {
           </div>
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="border border-1 p-5 mt-5 mb-5 form-class">
+            className="border border-1 p-5 mt-5  form-class">
             <blockquote className="blockquote mt-2">
               <h4 className="text-muted">
                 <b>CREATE USER</b>
@@ -170,6 +176,7 @@ const Createuser = () => {
               Create User
             </button>
           </form>
+          <Footer />
         </div>
       </div>
     </>
