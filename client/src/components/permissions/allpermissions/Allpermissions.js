@@ -9,11 +9,12 @@ import CottageOutlinedIcon from "@mui/icons-material/CottageOutlined";
 import { Stack } from "@mui/material";
 const Allpermissions = () => {
   const [permissions, setPermissions] = useState([]);
+  const [page, setPage] = useState(1);
   const navigate = useNavigate();
   //get all pemissions
   const getAllPermissions = async () => {
     await axios
-      .get(`api/permissions/getallpermissions?`)
+      .get(`api/permissions/getallpermissions?page=${page}`)
       .then((res) => {
         setPermissions(res.data.permissions);
       })

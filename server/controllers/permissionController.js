@@ -67,11 +67,16 @@ export const getAllPermissions = async (req, res) => {
     if (!allPermissions) {
       return res.status(404).json({ message: "Sorry no permissions found" });
     }
+    let totalPages =
+      permissionCount % resultPerPage === 0
+        ? permissionCount / resultPerPage
+        : Math.floor(permissionCount / resultPerPage) + 1;
     res.status(200).json({
       message: "Permissions fetched successfully",
       permissions,
       allPermissions,
       permissionCount,
+      totalPages,
     });
   } catch (err) {
     console.log(err);
