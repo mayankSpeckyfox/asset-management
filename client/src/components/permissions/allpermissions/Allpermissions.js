@@ -7,16 +7,27 @@ import ModeOutlinedIcon from "@mui/icons-material/ModeOutlined";
 import { useNavigate } from "react-router-dom";
 import CottageOutlinedIcon from "@mui/icons-material/CottageOutlined";
 import { Stack } from "@mui/material";
+import Footer from "../../footer/Footer.js";
 const Allpermissions = () => {
   const [permissions, setPermissions] = useState([]);
-  const [page, setPage] = useState(1);
+  const [pageNumber, setPageNumber] = useState(1);
+  const [totalpages, setTotalpages] = useState();
   const navigate = useNavigate();
+  let pageArray = [];
+  for (let i = 1; i <= totalpages; i++) {
+    pageArray[i - 1] = i;
+  }
   //get all pemissions
-  const getAllPermissions = async () => {
+
+  const getAllPermissions = async (val) => {
     await axios
-      .get(`api/permissions/getallpermissions?page=${page}`)
+      .get(`api/permissions/getallpermissions?page=${val}`)
       .then((res) => {
         setPermissions(res.data.permissions);
+        setTotalpages(res.data.totalPages);
+        if (val) {
+          setPageNumber(val);
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -53,10 +64,12 @@ const Allpermissions = () => {
           <div className="p-5 border border-1 mb-5 mt-5 form-class">
             <blockquote className="blockquote">
               <h4 className="text-muted">
-                <b>ALL PERMISSIONS</b>
+                <b>ALL PERMISSIONS </b>
               </h4>
             </blockquote>
             <hr />
+            <span className="pagenumber-class">PAGE : {pageNumber}</span>
+
             <div className="table-responsive">
               <table className="table table-striped text-muted">
                 <thead>
@@ -77,7 +90,35 @@ const Allpermissions = () => {
                 </tbody>
               </table>
             </div>
+            <hr />
+            <Stack
+              direction="row"
+              className="pagination-wrapper"
+              spacing={1}
+              sx={{ width: "80px" }}>
+              {pageArray.map((val, ind) => {
+                return (
+                  <Stack
+                    className="pagination-icons"
+                    sx={{
+                      cursor: "pointer",
+                      color: "brown",
+
+                      padding: "3px",
+                      borderRadius: "20px",
+                      border: "1px solid silver",
+                    }}
+                    onClick={() => {
+                      getAllPermissions(val);
+                    }}
+                    key={val - 1}>
+                    {val}
+                  </Stack>
+                );
+              })}
+            </Stack>
           </div>
+          <Footer />
         </div>
       </div>
     </>

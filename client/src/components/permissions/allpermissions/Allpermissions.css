@@ -4,6 +4,31 @@
 .permission-table-row:hover {
   background-color: silver;
 }
+.pagination-icons:hover {
+  background-color: brown;
+  color: white;
+  font-weight: bold;
+}
+.pagination-wrapper {
+  overflow: auto;
+
+  padding: 5px;
+}
+
+.pagination-wrapper::-webkit-scrollbar {
+  display: none;
+}
+.pagenumber-class {
+  font-weight: bold;
+  font-size: medium;
+  color: brown;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+
+  padding-left: 5px;
+  padding-right: 5px;
+  display: block;
+  margin-bottom: 10px;
+}
 @media screen and (max-width: 700px) {
   .all-permission-content {
     margin-left: 120px;
