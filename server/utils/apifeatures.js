@@ -1,14 +1,13 @@
 class ApiFeatures {
-  constructor(query, queryStr, property) {
+  constructor(query, queryStr) {
     this.query = query;
     this.queryStr = queryStr;
-    this.property = property;
   }
 
   search() {
     const keyword = this.queryStr.keyword
       ? {
-          property: {
+          permissionname: {
             $regex: this.queryStr.keyword,
             $options: "i",
           },

@@ -9,10 +9,19 @@
   color: white;
   font-weight: bold;
 }
+.permission-tableScroll::-webkit-scrollbar {
+  display: none;
+}
 .pagination-wrapper {
   overflow: auto;
 
   padding: 5px;
+}
+.search-input {
+  border: 0;
+  border-bottom: 2px solid brown;
+  outline: none;
+  width: 20%;
 }
 
 .pagination-wrapper::-webkit-scrollbar {
@@ -32,5 +41,8 @@
 @media screen and (max-width: 700px) {
   .all-permission-content {
     margin-left: 120px;
+  }
+  .search-input {
+    width: 100%;
   }
 }
