@@ -55,7 +55,10 @@ export const getAllPermissions = async (req, res) => {
   try {
     const resultPerPage = 2;
     const permissionCount = await Permission.countDocuments();
-    const apiFeature = new ApiFeatures(Permission.find(), req.query).search();
+    const apiFeature = new ApiFeatures(
+      Permission.find(),
+      req.query
+    ).permissionsearch();
 
     apiFeature.pagination(resultPerPage);
     let permissions = await apiFeature.query;

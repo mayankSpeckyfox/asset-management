@@ -4,10 +4,23 @@ class ApiFeatures {
     this.queryStr = queryStr;
   }
 
-  search() {
+  permissionsearch() {
     const keyword = this.queryStr.keyword
       ? {
           permissionname: {
+            $regex: this.queryStr.keyword,
+            $options: "i",
+          },
+        }
+      : {};
+
+    this.query = this.query.find({ ...keyword });
+    return this;
+  }
+  search() {
+    const keyword = this.queryStr.keyword
+      ? {
+          name: {
             $regex: this.queryStr.keyword,
             $options: "i",
           },

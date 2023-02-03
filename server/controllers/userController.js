@@ -1,5 +1,5 @@
 import User from "../models/User.js";
-
+import ApiFeatures from "../utils/apifeatures.js";
 import { sendToken } from "../utils/jwtToken.js";
 //create a user
 export const createUser = async (req, res) => {
@@ -28,11 +28,30 @@ export const createUser = async (req, res) => {
 
 export const getAllUsers = async (req, res) => {
   try {
+    const resultPerPage = 2;
+    const userCount = await User.countDocuments();
+    const apiFeature = new ApiFeatures(User.find(), req.query).search();
+
+    apiFeature.pagination(resultPerPage);
+    let users = await apiFeature.query;
+
     const allUsers = await User.find();
     if (!allUsers) {
       return res.status(400).json({ message: "Sorry no users found" });
     }
-    res.status(200).json({ message: "Users fetched successfully", allUsers });
+
+    let totalPages = !(resultPerPage === userCount || userCount < resultPerPage)
+      ? userCount % resultPerPage === 0
+        ? userCount / resultPerPage
+        : Math.floor(userCount / resultPerPage) + 1
+      : 1;
+    res.status(200).json({
+      message: "Users fetched successfully",
+      users,
+      allUsers,
+      userCount,
+      totalPages,
+    });
   } catch (err) {
     console.log(err);
     res.status(500).json({ message: "Sorry ! Error occured " });
