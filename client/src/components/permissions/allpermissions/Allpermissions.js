@@ -23,14 +23,18 @@ const Allpermissions = () => {
 
   //get permissions for search
   const searchFunction = async () => {
-    await axios
-      .get(`api/permissions/getsearchedpermissions?keyword=${keyword}`)
-      .then((res) => {
-        setSearchedValues(res.data.permissions);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    if (keyword) {
+      await axios
+        .get(`api/permissions/getsearchedpermissions?keyword=${keyword}`)
+        .then((res) => {
+          setSearchedValues(res.data.permissions);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      setSearchedValues([]);
+    }
   };
 
   //get all pemissions
