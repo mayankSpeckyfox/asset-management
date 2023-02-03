@@ -24,7 +24,7 @@ const Allpermissions = () => {
   //get permissions for search
   const searchFunction = async () => {
     await axios
-      .get(`api/permissions/getallpermissions?keyword=${keyword}`)
+      .get(`api/permissions/getsearchedpermissions?keyword=${keyword}`)
       .then((res) => {
         setSearchedValues(res.data.permissions);
       })

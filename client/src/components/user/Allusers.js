@@ -12,6 +12,7 @@ import Footer from "../footer/Footer.js";
 const Allusers = () => {
   const [users, setUsers] = useState([]);
   const [pageNumber, setPageNumber] = useState(1);
+
   const [totalpages, setTotalpages] = useState();
   const [keyword, setKeyword] = useState();
   const [searchedValues, setSearchedValues] = useState([]);
@@ -24,7 +25,7 @@ const Allusers = () => {
   //get permissions for search
   const searchFunction = async () => {
     await axios
-      .get(`api/users/getallusers?keyword=${keyword}`)
+      .get(`api/users/getsearchedusers?keyword=${keyword}`)
       .then((res) => {
         setSearchedValues(res.data.users);
       })

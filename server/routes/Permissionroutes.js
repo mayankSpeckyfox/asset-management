@@ -4,6 +4,7 @@ import {
   deletePermission,
   getAllPermissions,
   getIndividualPermission,
+  getSearchedPermissions,
   updatePermission,
 } from "../controllers/permissionController.js";
 import { authorizeRoles, isAuthenticatedUser } from "../middleware/auth.js";
@@ -28,6 +29,13 @@ router.get(
   isAuthenticatedUser,
   authorizeRoles("admin"),
   getAllPermissions
+);
+//get searched permissions
+router.get(
+  "/getsearchedpermissions",
+  isAuthenticatedUser,
+  authorizeRoles("admin"),
+  getSearchedPermissions
 );
 //get individual permission
 router.get(

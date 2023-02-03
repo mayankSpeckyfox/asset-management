@@ -33,8 +33,8 @@ export const getAllUsers = async (req, res) => {
     const apiFeature = new ApiFeatures(User.find(), req.query).search();
 
     apiFeature.pagination(resultPerPage);
-    let users = await apiFeature.query;
 
+    const users = await apiFeature.query;
     const allUsers = await User.find();
     if (!allUsers) {
       return res.status(400).json({ message: "Sorry no users found" });
@@ -51,6 +51,26 @@ export const getAllUsers = async (req, res) => {
       allUsers,
       userCount,
       totalPages,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "Sorry ! Error occured " });
+  }
+};
+//get searched users
+
+export const getSearchedUsers = async (req, res) => {
+  try {
+    const apiFeature = new ApiFeatures(User.find(), req.query).search();
+
+    const users = await apiFeature.query;
+
+    if (!users) {
+      return res.status(400).json({ message: "Sorry no users found" });
+    }
+    res.status(200).json({
+      message: "Searched users fetched successfully",
+      users,
     });
   } catch (err) {
     console.log(err);

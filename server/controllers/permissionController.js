@@ -61,7 +61,7 @@ export const getAllPermissions = async (req, res) => {
     ).permissionsearch();
 
     apiFeature.pagination(resultPerPage);
-    let permissions = await apiFeature.query;
+    const permissions = await apiFeature.query;
 
     const allPermissions = await Permission.find();
     if (!allPermissions) {
@@ -80,6 +80,30 @@ export const getAllPermissions = async (req, res) => {
       allPermissions,
       permissionCount,
       totalPages,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "Sorry ! Error occured" });
+  }
+};
+//get searched permissions
+
+export const getSearchedPermissions = async (req, res) => {
+  try {
+    const apiFeature = new ApiFeatures(
+      Permission.find(),
+      req.query
+    ).permissionsearch();
+
+    const permissions = await apiFeature.query;
+
+    if (!permissions) {
+      return res.status(404).json({ message: "Sorry no permissions found" });
+    }
+
+    res.status(200).json({
+      message: "Searched permissions fetched successfully",
+      permissions,
     });
   } catch (err) {
     console.log(err);

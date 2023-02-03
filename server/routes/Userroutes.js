@@ -5,6 +5,7 @@ import {
   getAllUsers,
   getCookies,
   getIndividualUser,
+  getSearchedUsers,
   loginUser,
   logout,
   updateUser,
@@ -25,6 +26,13 @@ router.get(
   isAuthenticatedUser,
   authorizeRoles("admin"),
   getAllUsers
+);
+//get searched users
+router.get(
+  "/getsearchedusers",
+  isAuthenticatedUser,
+  authorizeRoles("admin"),
+  getSearchedUsers
 );
 //update individual user by id
 router.patch(
