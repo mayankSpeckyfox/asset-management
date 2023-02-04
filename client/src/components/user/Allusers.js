@@ -12,7 +12,7 @@ import Footer from "../footer/Footer.js";
 const Allusers = () => {
   const [users, setUsers] = useState([]);
   const [pageNumber, setPageNumber] = useState(1);
-
+  const [showTable, setShowTable] = useState(false);
   const [totalpages, setTotalpages] = useState();
   const [keyword, setKeyword] = useState();
   const [searchedValues, setSearchedValues] = useState([]);
@@ -22,23 +22,25 @@ const Allusers = () => {
     pageArray[i - 1] = i;
   }
 
-  //get permissions for search
+  //get Users for search
   const searchFunction = async () => {
     if (keyword) {
       await axios
         .get(`api/users/getsearchedusers?keyword=${keyword}`)
         .then((res) => {
           setSearchedValues(res.data.users);
+          setShowTable(true);
         })
         .catch((err) => {
           console.log(err);
         });
     } else {
       setSearchedValues([]);
+      setShowTable(false);
     }
   };
 
-  //get all pemissions
+  //get all Users
 
   const getAllUsers = async (val) => {
     await axios
@@ -111,24 +113,26 @@ const Allusers = () => {
               />
             </Stack>
             <hr />
-            <div className="table-responsive user-tableScroll">
-              <table className="table table-striped text-muted">
-                <thead>
-                  <tr className="user-table-row">
-                    <th>Searched Users</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {searchedValues.map((val, ind) => {
-                    return (
-                      <tr key={val._id} className="user-table-row">
-                        <Individualuser name={val.name} />
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
-            </div>
+            {showTable && (
+              <div className="table-responsive user-tableScroll">
+                <table className="table table-striped text-muted">
+                  <thead>
+                    <tr className="user-table-row">
+                      <th>Searched Users</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {searchedValues.map((val, ind) => {
+                      return (
+                        <tr key={val._id} className="user-table-row">
+                          <Individualuser name={val.name} />
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            )}
             <hr />
             <span className="pagenumber-class">PAGE : {pageNumber}</span>
 

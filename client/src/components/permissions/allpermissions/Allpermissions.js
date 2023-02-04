@@ -12,6 +12,7 @@ import Footer from "../../footer/Footer.js";
 const Allpermissions = () => {
   const [permissions, setPermissions] = useState([]);
   const [pageNumber, setPageNumber] = useState(1);
+  const [showTable, setShowTable] = useState(false);
   const [totalpages, setTotalpages] = useState();
   const [keyword, setKeyword] = useState();
   const [searchedValues, setSearchedValues] = useState([]);
@@ -28,12 +29,14 @@ const Allpermissions = () => {
         .get(`api/permissions/getsearchedpermissions?keyword=${keyword}`)
         .then((res) => {
           setSearchedValues(res.data.permissions);
+          setShowTable(true);
         })
         .catch((err) => {
           console.log(err);
         });
     } else {
       setSearchedValues([]);
+      setShowTable(false);
     }
   };
 
@@ -109,26 +112,28 @@ const Allpermissions = () => {
               />
             </Stack>
             <hr />
-            <div className="table-responsive permission-tableScroll">
-              <table className="table table-striped text-muted">
-                <thead>
-                  <tr className="permission-table-row">
-                    <th>Searched permissions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {searchedValues.map((val, ind) => {
-                    return (
-                      <tr key={val._id} className="permission-table-row">
-                        <Individualpermission
-                          permissionname={val.permissionname}
-                        />
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
-            </div>
+            {showTable && (
+              <div className="table-responsive permission-tableScroll">
+                <table className="table table-striped text-muted">
+                  <thead>
+                    <tr className="permission-table-row">
+                      <th>Searched permissions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {searchedValues.map((val, ind) => {
+                      return (
+                        <tr key={val._id} className="permission-table-row">
+                          <Individualpermission
+                            permissionname={val.permissionname}
+                          />
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            )}
             <hr />
             <span className="pagenumber-class">PAGE : {pageNumber}</span>
 
