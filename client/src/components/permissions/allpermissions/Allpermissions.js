@@ -56,6 +56,18 @@ const Allpermissions = () => {
         console.log(err);
       });
   };
+
+  const deleteFun = async (id) => {
+    await axios
+      .delete(`api/permissions/deletepermission/${id}`)
+      .then((res) => {
+        alert(res.data.message);
+        window.location.reload();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   useEffect(() => {
     getAllPermissions();
   }, []);
@@ -135,6 +147,8 @@ const Allpermissions = () => {
                       return (
                         <tr key={val._id} className="permission-table-row">
                           <Individualpermission
+                            deleteFun={deleteFun}
+                            id={val._id}
                             permissionname={val.permissionname}
                           />
                         </tr>
@@ -160,6 +174,7 @@ const Allpermissions = () => {
                     return (
                       <tr key={val._id} className="permission-table-row">
                         <Individualpermission
+                          deleteFun={deleteFun}
                           permissionname={val.permissionname}
                           id={val._id}
                         />

@@ -56,6 +56,19 @@ const Allroles = () => {
         console.log(err);
       });
   };
+
+  const deleteFun = async (id) => {
+    await axios
+      .delete(`api/roles/deleterole/${id}`)
+      .then((res) => {
+        alert(res.data.message);
+        window.location.reload();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   useEffect(() => {
     getAllRoles();
   }, []);
@@ -134,6 +147,7 @@ const Allroles = () => {
                           <Individualrole
                             rolename={val.rolename}
                             id={val._id}
+                            deleteFun={deleteFun}
                           />
                         </tr>
                       );
@@ -157,7 +171,11 @@ const Allroles = () => {
                   {roles.map((val, ind) => {
                     return (
                       <tr key={val._id} className="permission-table-row">
-                        <Individualrole rolename={val.rolename} id={val._id} />
+                        <Individualrole
+                          rolename={val.rolename}
+                          id={val._id}
+                          deleteFun={deleteFun}
+                        />
                       </tr>
                     );
                   })}

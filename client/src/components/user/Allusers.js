@@ -56,6 +56,17 @@ const Allusers = () => {
         console.log(err);
       });
   };
+  const deleteFun = async (id) => {
+    await axios
+      .delete(`api/users/deleteuser/${id}`)
+      .then((res) => {
+        alert(res.data.message);
+        window.location.reload();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   useEffect(() => {
     getAllUsers();
   }, []);
@@ -139,6 +150,7 @@ const Allusers = () => {
                             email={val.email}
                             role={val.role}
                             id={val._id}
+                            deleteFun={deleteFun}
                           />
                         </tr>
                       );
@@ -169,6 +181,7 @@ const Allusers = () => {
                           email={val.email}
                           role={val.role}
                           id={val._id}
+                          deleteFun={deleteFun}
                         />
                       </tr>
                     );
