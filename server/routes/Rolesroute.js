@@ -4,6 +4,7 @@ import {
   deleteRole,
   getAllRoles,
   getIndividualRole,
+  getSearchedRoles,
   updateRole,
 } from "../controllers/rolesController.js";
 import { authorizeRoles, isAuthenticatedUser } from "../middleware/auth.js";
@@ -22,6 +23,14 @@ router.get(
   isAuthenticatedUser,
   authorizeRoles("admin"),
   getAllRoles
+);
+
+//get searched roles
+router.get(
+  "/getsearchedroles",
+  isAuthenticatedUser,
+  authorizeRoles("admin"),
+  getSearchedRoles
 );
 //update a role by id
 router.patch(

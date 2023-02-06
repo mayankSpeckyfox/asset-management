@@ -53,7 +53,7 @@ export const updatePermission = async (req, res) => {
 
 export const getAllPermissions = async (req, res) => {
   try {
-    const resultPerPage = 2;
+    const resultPerPage = 10;
     const permissionCount = await Permission.countDocuments();
     const apiFeature = new ApiFeatures(
       Permission.find(),

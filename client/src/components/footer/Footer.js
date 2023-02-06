@@ -13,6 +13,7 @@ const Footer = () => {
       .get(`api/users/logout`)
       .then((res) => {
         console.log(res);
+        navigate("/");
         window.location.reload();
       })
       .catch((err) => {

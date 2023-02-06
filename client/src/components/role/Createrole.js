@@ -55,34 +55,40 @@ const Createrole = () => {
         <div className="container-fluid">
           <div className="p-4 page-nav">
             <Stack direction="row" sx={{ justifyContent: "space-between" }}>
-              <KeyboardBackspaceIcon
-                onClick={() => navigate(-1)}
-                sx={{ fontSize: "xx-large", color: "brown", cursor: "pointer" }}
-              />
+              <Stack direction="row" spacing={2}>
+                <KeyboardBackspaceIcon
+                  onClick={() => navigate(-1)}
+                  sx={{
+                    fontSize: "x-large",
+                    color: "brown",
+                    cursor: "pointer",
+                  }}
+                />
+                <span className="text-muted ">
+                  <b className="nav-head">CREATE ROLE </b>
+                </span>
+              </Stack>
               <CottageOutlinedIcon
                 className="home-icon"
                 onClick={() => navigate("/")}
-                sx={{ fontSize: "xx-large", color: "brown" }}
+                sx={{ fontSize: "x-large", color: "brown" }}
               />
               <Stack
                 direction="row"
+                className="nav-icon"
                 onClick={() => navigate("/allroles")}
                 spacing={1}
                 sx={{ color: "brown", cursor: "pointer" }}>
-                <GroupOutlinedIcon sx={{ fontSize: "large" }} />
+                <GroupOutlinedIcon sx={{ fontSize: "medium" }} />
                 <b>All Roles</b>
               </Stack>
             </Stack>
           </div>
           <div className="p-5 border border-1 mt-5  form-class">
-            <blockquote className="blockquote">
-              <h4 className="text-muted">
-                <b>CREATE ROLE</b>
-              </h4>
-            </blockquote>
             <hr />
             <div>
               <form onSubmit={handleSubmit(onSubmit)}>
+                <label className="form-label">Role Name</label>
                 <input
                   className="form-control "
                   placeholder="Role Name"

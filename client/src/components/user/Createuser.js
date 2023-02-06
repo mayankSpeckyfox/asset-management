@@ -75,21 +75,32 @@ const Createuser = () => {
         <div className="container-fluid ">
           <div className="p-4 page-nav">
             <Stack direction="row" sx={{ justifyContent: "space-between" }}>
-              <KeyboardBackspaceIcon
-                onClick={() => navigate(-1)}
-                sx={{ fontSize: "xx-large", color: "brown", cursor: "pointer" }}
-              />
+              <Stack direction="row" spacing={2}>
+                <KeyboardBackspaceIcon
+                  onClick={() => navigate(-1)}
+                  sx={{
+                    fontSize: "x-large",
+                    color: "brown",
+                    cursor: "pointer",
+                  }}
+                />
+
+                <span className="text-muted ">
+                  <b className="nav-head">CREATE USER </b>
+                </span>
+              </Stack>
               <CottageOutlinedIcon
                 className="home-icon"
                 onClick={() => navigate("/")}
-                sx={{ fontSize: "xx-large", color: "brown" }}
+                sx={{ fontSize: "x-large", color: "brown" }}
               />
               <Stack
+                className="nav-icon"
                 direction="row"
                 onClick={() => navigate("/allusers")}
                 spacing={1}
                 sx={{ color: "brown", cursor: "pointer" }}>
-                <GroupAddOutlinedIcon sx={{ fontSize: "large" }} />
+                <GroupAddOutlinedIcon sx={{ fontSize: "medium" }} />
                 <b>All Users</b>
               </Stack>
             </Stack>
@@ -97,12 +108,8 @@ const Createuser = () => {
           <form
             onSubmit={handleSubmit(onSubmit)}
             className="border border-1 p-5 mt-5  form-class">
-            <blockquote className="blockquote mt-2">
-              <h4 className="text-muted">
-                <b>CREATE USER</b>
-              </h4>
-            </blockquote>
             <hr />
+            <label className="form-label">Name</label>
             <input
               className="form-control "
               type="text"
@@ -116,6 +123,7 @@ const Createuser = () => {
               </span>
             )}
             <hr />
+            <label className="form-label">Email</label>
             <input
               className="form-control"
               type="email"
@@ -129,7 +137,7 @@ const Createuser = () => {
               </span>
             )}
             <hr />
-
+            <label className="form-label">Password</label>
             <input
               className="form-control"
               type="password"
@@ -143,7 +151,7 @@ const Createuser = () => {
               </span>
             )}
             <hr />
-
+            <label className="form-label">Conform Password</label>
             <input
               className="form-control"
               type="password"
@@ -157,6 +165,7 @@ const Createuser = () => {
               </span>
             )}
             <hr />
+            <label className="form-label">Select Role</label>
             <select
               name="roles"
               onChange={(e) => setRole(e.target.value)}

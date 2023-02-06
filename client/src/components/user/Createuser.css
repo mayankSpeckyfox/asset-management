@@ -6,9 +6,23 @@
   font-family: sans-serif;
   font-size: small;
 }
-
+.nav-head {
+  color: brown;
+}
+.form-label {
+  font-family: roboto, helvetica neue, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  color: #727070;
+}
 @media screen and (max-width: 700px) {
   .create-user-content {
     margin-left: 120px;
+  }
+  .nav-head {
+    font-size: xx-small;
+  }
+  .nav-icon {
+    font-size: xx-small;
   }
 }

@@ -1,9 +1,58 @@
 .all-roles-content {
   margin-left: 200px;
 }
+.pagination-icons:hover {
+  background-color: brown;
+  color: white;
+  opacity: 0.3;
+  font-weight: bold;
+}
+.role-table-row:hover {
+  background-color: silver;
+}
+.role-tableScroll::-webkit-scrollbar {
+  display: none;
+}
+.pagination-wrapper {
+  overflow: auto;
 
+  padding: 5px;
+}
+
+.pagination-wrapper::-webkit-scrollbar {
+  display: none;
+}
+.search-input {
+  border: 0;
+  border-bottom: 2px solid brown;
+  outline: none;
+  width: 20%;
+}
+.pagenumber-class {
+  font-weight: bold;
+  font-size: medium;
+  color: brown;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+
+  padding-left: 5px;
+  padding-right: 5px;
+  display: block;
+  margin-bottom: 10px;
+}
+.nav-head {
+  color: brown;
+}
 @media screen and (max-width: 700px) {
   .all-roles-content {
     margin-left: 120px;
+  }
+  .search-input {
+    width: 100%;
+  }
+  .nav-head {
+    font-size: xx-small;
+  }
+  .nav-icon {
+    font-size: xx-small;
   }
 }

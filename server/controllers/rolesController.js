@@ -1,5 +1,5 @@
 import Role from "../models/Role.js";
-
+import ApiFeatures from "../utils/apifeatures.js";
 //create a role
 export const createRole = async (req, res) => {
   try {
@@ -23,13 +23,49 @@ export const createRole = async (req, res) => {
 
 export const getAllRoles = async (req, res) => {
   try {
-    const roles = await Role.find();
-    return res
-      .status(200)
-      .json({ message: "fetched all roles successfully", roles });
+    const resultPerPage = 10;
+    const roleCount = await Role.countDocuments();
+    const apiFeature = new ApiFeatures(Role.find(), req.query).rolesearch();
+
+    apiFeature.pagination(resultPerPage);
+    const roles = await apiFeature.query;
+    const allroles = await Role.find();
+    let totalPages = !(resultPerPage === roleCount || roleCount < resultPerPage)
+      ? roleCount % resultPerPage === 0
+        ? roleCount / resultPerPage
+        : Math.floor(roleCount / resultPerPage) + 1
+      : 1;
+    return res.status(200).json({
+      message: "fetched all roles successfully",
+      roles,
+      allroles,
+      totalPages,
+    });
   } catch (err) {
     console.log(err);
     res.status(500).json({ message: "sorry error occured" });
+  }
+};
+
+//get searched permissions
+
+export const getSearchedRoles = async (req, res) => {
+  try {
+    const apiFeature = new ApiFeatures(Role.find(), req.query).rolesearch();
+
+    const roles = await apiFeature.query;
+
+    if (!roles) {
+      return res.status(404).json({ message: "Sorry no roles found" });
+    }
+
+    res.status(200).json({
+      message: "Searched roles fetched successfully",
+      roles,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "Sorry ! Error occured" });
   }
 };
 

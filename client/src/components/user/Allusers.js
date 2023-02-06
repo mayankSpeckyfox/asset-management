@@ -65,32 +65,37 @@ const Allusers = () => {
         <div className="container-fluid">
           <div className="p-4 page-nav ">
             <Stack direction="row" sx={{ justifyContent: "space-between" }}>
-              <KeyboardBackspaceIcon
-                onClick={() => navigate(-1)}
-                sx={{ fontSize: "xx-large", color: "brown", cursor: "pointer" }}
-              />
+              <Stack direction="row" spacing={2}>
+                <KeyboardBackspaceIcon
+                  onClick={() => navigate(-1)}
+                  sx={{
+                    fontSize: "x-large",
+                    color: "brown",
+                    cursor: "pointer",
+                  }}
+                />
+                <span className="text-muted ">
+                  <b className="nav-head">ALL USERS </b>
+                </span>
+              </Stack>
               <CottageOutlinedIcon
-                className="home-icon"
+                className="home-icon "
                 onClick={() => navigate("/")}
-                sx={{ fontSize: "xx-large", color: "brown" }}
+                sx={{ fontSize: "x-large", color: "brown" }}
               />
               <Stack
+                className="nav-icon"
                 direction="row"
                 onClick={() => navigate("/createuser")}
                 spacing={1}
                 sx={{ color: "brown", cursor: "pointer" }}>
-                <ModeOutlinedIcon sx={{ fontSize: "large" }} />
+                <ModeOutlinedIcon sx={{ fontSize: "medium" }} />
                 <b>Create User</b>
               </Stack>
             </Stack>
           </div>
 
           <div className="p-5 border border-1  mt-5 form-class">
-            <blockquote className="blockquote">
-              <h4 className="text-muted">
-                <b>ALL USERS </b>
-              </h4>
-            </blockquote>
             <Stack
               direction="row"
               spacing={1}
@@ -118,36 +123,53 @@ const Allusers = () => {
                 <table className="table table-striped text-muted">
                   <thead>
                     <tr className="user-table-row">
-                      <th>Searched Users</th>
+                      <th>Users</th>
+                      <th>Email</th>
+                      <th>Role</th>
+                      <th style={{ textAlign: "center" }}>Edit</th>
+                      <th style={{ textAlign: "center" }}>Delete</th>
                     </tr>
                   </thead>
                   <tbody>
                     {searchedValues.map((val, ind) => {
                       return (
                         <tr key={val._id} className="user-table-row">
-                          <Individualuser name={val.name} />
+                          <Individualuser
+                            name={val.name}
+                            email={val.email}
+                            role={val.role}
+                            id={val._id}
+                          />
                         </tr>
                       );
                     })}
                   </tbody>
                 </table>
+                <hr />
               </div>
             )}
-            <hr />
-            <span className="pagenumber-class">PAGE : {pageNumber}</span>
 
             <div className="table-responsive user-tableScroll">
               <table className="table table-striped text-muted">
                 <thead>
                   <tr className="user-table-row">
                     <th>Users</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th style={{ textAlign: "center" }}>Edit</th>
+                    <th style={{ textAlign: "center" }}>Delete</th>
                   </tr>
                 </thead>
                 <tbody>
                   {users.map((val, ind) => {
                     return (
                       <tr key={val._id} className="user-table-row">
-                        <Individualuser name={val.name} />
+                        <Individualuser
+                          name={val.name}
+                          email={val.email}
+                          role={val.role}
+                          id={val._id}
+                        />
                       </tr>
                     );
                   })}
@@ -157,16 +179,19 @@ const Allusers = () => {
             <hr />
             <Stack
               direction="row"
+              sx={{ justifyContent: "center" }}
               className="pagination-wrapper"
-              spacing={1}
-              sx={{ width: "80px" }}>
+              spacing={1}>
               {pageArray.map((val, ind) => {
+                const col = pageNumber === val ? "white" : "brown";
+                const bcol = pageNumber === val ? "brown" : "white";
                 return (
                   <Stack
                     className="pagination-icons"
                     sx={{
                       cursor: "pointer",
-                      color: "brown",
+                      color: col,
+                      backgroundColor: bcol,
 
                       padding: "3px",
                       borderRadius: "20px",

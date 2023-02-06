@@ -39,21 +39,32 @@ const Permissions = () => {
         <div className="container-fluid">
           <div className="p-4 page-nav">
             <Stack direction="row" sx={{ justifyContent: "space-between" }}>
-              <KeyboardBackspaceIcon
-                onClick={() => navigate(-1)}
-                sx={{ fontSize: "xx-large", color: "brown", cursor: "pointer" }}
-              />
+              <Stack direction="row" spacing={2}>
+                <KeyboardBackspaceIcon
+                  onClick={() => navigate(-1)}
+                  sx={{
+                    fontSize: "x-large",
+                    color: "brown",
+                    cursor: "pointer",
+                  }}
+                />
+
+                <span className="text-muted ">
+                  <b className="nav-head">ADD PERMISSION </b>
+                </span>
+              </Stack>
               <CottageOutlinedIcon
                 className="home-icon"
                 onClick={() => navigate("/")}
-                sx={{ fontSize: "xx-large", color: "brown" }}
+                sx={{ fontSize: "x-large", color: "brown" }}
               />
               <Stack
                 onClick={() => navigate("/allpermissions")}
                 direction="row"
                 spacing={1}
+                className="nav-icon"
                 sx={{ color: "brown", cursor: "pointer" }}>
-                <VpnKeyOutlinedIcon sx={{ fontSize: "large" }} />{" "}
+                <VpnKeyOutlinedIcon sx={{ fontSize: "medium" }} />{" "}
                 <b> Permissions</b>
               </Stack>
             </Stack>
@@ -61,12 +72,8 @@ const Permissions = () => {
           <form
             onSubmit={handleSubmit(onSubmit)}
             className="p-5 border border-1 mt-5 form-class">
-            <blockquote className="blockquote mt-2">
-              <h4 className="text-muted">
-                <b>ADD PERMISSIONS</b>
-              </h4>
-            </blockquote>
             <hr />
+            <label className="form-label">Permission</label>
             <input
               placeholder="Permission Name"
               className="form-control"

@@ -7,9 +7,24 @@
 .tableRow:hover {
   background-color: silver;
 }
+.nav-head {
+  color: brown;
+}
+.form-label {
+  font-family: roboto, helvetica neue, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  color: #727070;
+}
 @media screen and (max-width: 700px) {
   .create-role-content {
     margin-left: 120px;
+  }
+  .nav-head {
+    font-size: xx-small;
+  }
+  .nav-icon {
+    font-size: xx-small;
   }
 }
 @media screen and (max-width: 530px) {

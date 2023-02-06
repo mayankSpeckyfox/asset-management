@@ -65,31 +65,39 @@ const Allpermissions = () => {
         <div className="container-fluid">
           <div className="p-4 page-nav ">
             <Stack direction="row" sx={{ justifyContent: "space-between" }}>
-              <KeyboardBackspaceIcon
-                onClick={() => navigate(-1)}
-                sx={{ fontSize: "xx-large", color: "brown", cursor: "pointer" }}
-              />
+              <Stack direction="row" spacing={2}>
+                <KeyboardBackspaceIcon
+                  className="nav-icon"
+                  onClick={() => navigate(-1)}
+                  sx={{
+                    fontSize: "x-large",
+                    color: "brown",
+                    cursor: "pointer",
+                  }}
+                />
+
+                <span className="text-muted ">
+                  <b className="nav-head">ALL PERMISSIONS </b>
+                </span>
+              </Stack>
+
               <CottageOutlinedIcon
-                className="home-icon"
+                className="home-icon nav-icon"
                 onClick={() => navigate("/")}
-                sx={{ fontSize: "xx-large", color: "brown" }}
+                sx={{ fontSize: "x-large", color: "brown" }}
               />
               <Stack
+                className="nav-icon"
                 direction="row"
                 onClick={() => navigate("/createpermission")}
                 spacing={1}
                 sx={{ color: "brown", cursor: "pointer" }}>
-                <ModeOutlinedIcon sx={{ fontSize: "large" }} />
+                <ModeOutlinedIcon sx={{ fontSize: "medium" }} />
                 <b>Create Permission</b>
               </Stack>
             </Stack>
           </div>
           <div className="p-5 border border-1  mt-5 form-class">
-            <blockquote className="blockquote">
-              <h4 className="text-muted">
-                <b>ALL PERMISSIONS </b>
-              </h4>
-            </blockquote>
             <Stack
               direction="row"
               spacing={1}
@@ -117,7 +125,9 @@ const Allpermissions = () => {
                 <table className="table table-striped text-muted">
                   <thead>
                     <tr className="permission-table-row">
-                      <th>Searched permissions</th>
+                      <th>Permissions</th>
+                      <th style={{ textAlign: "center" }}>Edit</th>
+                      <th style={{ textAlign: "center" }}>Delete</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -132,16 +142,17 @@ const Allpermissions = () => {
                     })}
                   </tbody>
                 </table>
+                <hr />
               </div>
             )}
-            <hr />
-            <span className="pagenumber-class">PAGE : {pageNumber}</span>
 
             <div className="table-responsive permission-tableScroll">
               <table className="table table-striped text-muted">
                 <thead>
                   <tr className="permission-table-row">
                     <th>Permissions</th>
+                    <th style={{ textAlign: "center" }}>Edit</th>
+                    <th style={{ textAlign: "center" }}>Delete</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -150,6 +161,7 @@ const Allpermissions = () => {
                       <tr key={val._id} className="permission-table-row">
                         <Individualpermission
                           permissionname={val.permissionname}
+                          id={val._id}
                         />
                       </tr>
                     );
@@ -160,16 +172,19 @@ const Allpermissions = () => {
             <hr />
             <Stack
               direction="row"
+              sx={{ justifyContent: "center" }}
               className="pagination-wrapper"
-              spacing={1}
-              sx={{ width: "80px" }}>
+              spacing={1}>
               {pageArray.map((val, ind) => {
+                const col = pageNumber === val ? "white" : "brown";
+                const bcol = pageNumber === val ? "brown" : "white";
                 return (
                   <Stack
                     className="pagination-icons"
                     sx={{
                       cursor: "pointer",
-                      color: "brown",
+                      color: col,
+                      backgroundColor: bcol,
 
                       padding: "3px",
                       borderRadius: "20px",

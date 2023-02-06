@@ -1,13 +1,14 @@
 import React from "react";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import "./Individualpermission.css";
-const Individualpermission = (props) => {
-  const { permissionname, id } = props;
+import "./Individualrole.css";
+const Individualrole = (props) => {
+  const { rolename, id } = props;
   return (
     <>
-      <td>{permissionname}</td>
+      <td>{rolename}</td>
       <td className="tableData">
+        {" "}
         <EditIcon
           sx={{
             color: "brown",
@@ -26,4 +27,4 @@ const Individualpermission = (props) => {
     </>
   );
 };
-export default Individualpermission;
+export default Individualrole;

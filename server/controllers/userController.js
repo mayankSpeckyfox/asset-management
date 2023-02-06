@@ -28,7 +28,7 @@ export const createUser = async (req, res) => {
 
 export const getAllUsers = async (req, res) => {
   try {
-    const resultPerPage = 2;
+    const resultPerPage = 10;
     const userCount = await User.countDocuments();
     const apiFeature = new ApiFeatures(User.find(), req.query).search();
 

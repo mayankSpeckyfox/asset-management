@@ -17,6 +17,21 @@ class ApiFeatures {
     this.query = this.query.find({ ...keyword });
     return this;
   }
+
+  rolesearch() {
+    const keyword = this.queryStr.keyword
+      ? {
+          rolename: {
+            $regex: this.queryStr.keyword,
+            $options: "i",
+          },
+        }
+      : {};
+
+    this.query = this.query.find({ ...keyword });
+    return this;
+  }
+
   search() {
     const keyword = this.queryStr.keyword
       ? {

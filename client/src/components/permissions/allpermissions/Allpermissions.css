@@ -1,12 +1,14 @@
 .all-permission-content {
   margin-left: 200px;
 }
+
 .permission-table-row:hover {
   background-color: silver;
 }
 .pagination-icons:hover {
   background-color: brown;
   color: white;
+  opacity: 0.3;
   font-weight: bold;
 }
 .permission-tableScroll::-webkit-scrollbar {
@@ -38,11 +40,20 @@
   display: block;
   margin-bottom: 10px;
 }
+.nav-head {
+  color: brown;
+}
 @media screen and (max-width: 700px) {
   .all-permission-content {
     margin-left: 120px;
   }
   .search-input {
     width: 100%;
+  }
+  .nav-head {
+    font-size: xx-small;
+  }
+  .nav-icon {
+    font-size: xx-small;
   }
 }
