@@ -1,0 +1,18 @@
+.edit-permission-content {
+  margin-left: 200px;
+}
+.nav-head {
+  color: brown;
+}
+
+@media screen and (max-width: 700px) {
+  .edit-permission-content {
+    margin-left: 120px;
+  }
+  .nav-head {
+    font-size: xx-small;
+  }
+  .nav-icon {
+    font-size: xx-small;
+  }
+}
