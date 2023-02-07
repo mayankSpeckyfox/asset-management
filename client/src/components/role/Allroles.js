@@ -9,12 +9,15 @@ import CottageOutlinedIcon from "@mui/icons-material/CottageOutlined";
 import { Stack } from "@mui/material";
 import Footer from "../footer/Footer.js";
 import Individualrole from "./individualrole/Individualrole.js";
+import Editrole from "./editrole/Editrole.js";
 const Allroles = () => {
   const [roles, setRoles] = useState([]);
   const [pageNumber, setPageNumber] = useState(1);
   const [showTable, setShowTable] = useState(false);
   const [totalpages, setTotalpages] = useState();
   const [keyword, setKeyword] = useState();
+  const [showEdit, setShowEdit] = useState(false);
+  const [editData, setEditData] = useState();
   const [searchedValues, setSearchedValues] = useState([]);
   const navigate = useNavigate();
   let pageArray = [];
@@ -69,84 +72,133 @@ const Allroles = () => {
       });
   };
 
+  const closeEdit = () => {
+    setShowEdit(false);
+  };
+  const editFun = async (id) => {
+    await axios
+      .get(`api/roles/individualrole/${id}`)
+      .then((res) => {
+        setEditData(res.data.individualRole);
+        setShowEdit(true);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   useEffect(() => {
     getAllRoles();
   }, []);
   return (
     <>
-      <div className="all-roles-content">
-        <div className="container-fluid">
-          <div className="p-4 page-nav ">
-            <Stack direction="row" sx={{ justifyContent: "space-between" }}>
-              <Stack direction="row" spacing={2}>
-                <KeyboardBackspaceIcon
-                  onClick={() => navigate(-1)}
+      {!showEdit ? (
+        <div className="all-roles-content">
+          <div className="container-fluid">
+            <div className="p-4 page-nav ">
+              <Stack direction="row" sx={{ justifyContent: "space-between" }}>
+                <Stack direction="row" spacing={2}>
+                  <KeyboardBackspaceIcon
+                    onClick={() => navigate(-1)}
+                    sx={{
+                      fontSize: "x-large",
+                      color: "brown",
+                      cursor: "pointer",
+                    }}
+                  />
+
+                  <span className="text-muted ">
+                    <b className="nav-head">ALL ROLES </b>
+                  </span>
+                </Stack>
+                <CottageOutlinedIcon
+                  className="home-icon"
+                  onClick={() => navigate("/")}
+                  sx={{ fontSize: "x-large", color: "brown" }}
+                />
+                <Stack
+                  direction="row"
+                  onClick={() => navigate("/createrole")}
+                  spacing={1}
+                  sx={{ color: "brown", cursor: "pointer" }}>
+                  <ModeOutlinedIcon sx={{ fontSize: "medium" }} />
+                  <b className="nav-icon">Create Role</b>
+                </Stack>
+              </Stack>
+            </div>
+            <div className="p-5 border border-1  mt-5 form-class">
+              <Stack
+                direction="row"
+                spacing={1}
+                sx={{
+                  width: "100%",
+                  justifyContent: "flex-end",
+                }}>
+                <input
+                  className="search-input"
+                  type="text"
+                  placeholder="Search...."
+                  value={keyword}
+                  onChange={(e) => {
+                    setKeyword(e.target.value);
+                  }}
+                />
+                <SearchIcon
                   sx={{
-                    fontSize: "x-large",
+                    fontSize: "xx-large",
                     color: "brown",
                     cursor: "pointer",
                   }}
+                  onClick={searchFunction}
                 />
+              </Stack>
+              <hr />
+              {showTable && (
+                <div className="table-responsive role-tableScroll">
+                  <table className="table table-striped text-muted">
+                    <thead>
+                      <tr className="role-table-row">
+                        <th>Roles</th>
+                        <th style={{ textAlign: "center" }}>Edit</th>
+                        <th style={{ textAlign: "center" }}>Delete</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {searchedValues.map((val, ind) => {
+                        return (
+                          <tr key={val._id} className="role-table-row">
+                            <Individualrole
+                              rolename={val.rolename}
+                              id={val._id}
+                              editFun={editFun}
+                              deleteFun={deleteFun}
+                            />
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
+                  <hr />
+                </div>
+              )}
 
-                <span className="text-muted ">
-                  <b className="nav-head">ALL ROLES </b>
-                </span>
-              </Stack>
-              <CottageOutlinedIcon
-                className="home-icon"
-                onClick={() => navigate("/")}
-                sx={{ fontSize: "x-large", color: "brown" }}
-              />
-              <Stack
-                direction="row"
-                onClick={() => navigate("/createrole")}
-                spacing={1}
-                sx={{ color: "brown", cursor: "pointer" }}>
-                <ModeOutlinedIcon sx={{ fontSize: "medium" }} />
-                <b className="nav-icon">Create Role</b>
-              </Stack>
-            </Stack>
-          </div>
-          <div className="p-5 border border-1  mt-5 form-class">
-            <Stack
-              direction="row"
-              spacing={1}
-              sx={{
-                width: "100%",
-                justifyContent: "flex-end",
-              }}>
-              <input
-                className="search-input"
-                type="text"
-                placeholder="Search...."
-                value={keyword}
-                onChange={(e) => {
-                  setKeyword(e.target.value);
-                }}
-              />
-              <SearchIcon
-                sx={{ fontSize: "xx-large", color: "brown", cursor: "pointer" }}
-                onClick={searchFunction}
-              />
-            </Stack>
-            <hr />
-            {showTable && (
-              <div className="table-responsive role-tableScroll">
+              <div className="table-responsive permission-tableScroll">
                 <table className="table table-striped text-muted">
                   <thead>
-                    <tr className="role-table-row">
+                    <tr className="permission-table-row">
                       <th>Roles</th>
                       <th style={{ textAlign: "center" }}>Edit</th>
                       <th style={{ textAlign: "center" }}>Delete</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {searchedValues.map((val, ind) => {
+                    {roles.map((val, ind) => {
                       return (
-                        <tr key={val._id} className="role-table-row">
+                        <tr key={val._id} className="permission-table-row">
                           <Individualrole
                             rolename={val.rolename}
                             id={val._id}
+                            editFun={editFun}
                             deleteFun={deleteFun}
                           />
                         </tr>
@@ -154,67 +206,47 @@ const Allroles = () => {
                     })}
                   </tbody>
                 </table>
-                <hr />
               </div>
-            )}
-
-            <div className="table-responsive permission-tableScroll">
-              <table className="table table-striped text-muted">
-                <thead>
-                  <tr className="permission-table-row">
-                    <th>Roles</th>
-                    <th style={{ textAlign: "center" }}>Edit</th>
-                    <th style={{ textAlign: "center" }}>Delete</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {roles.map((val, ind) => {
-                    return (
-                      <tr key={val._id} className="permission-table-row">
-                        <Individualrole
-                          rolename={val.rolename}
-                          id={val._id}
-                          deleteFun={deleteFun}
-                        />
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
+              <hr />
+              <Stack
+                direction="row"
+                sx={{ justifyContent: "center" }}
+                className="pagination-wrapper"
+                spacing={1}>
+                {pageArray.map((val, ind) => {
+                  const col = pageNumber === val ? "white" : "brown";
+                  const bcol = pageNumber === val ? "brown" : "white";
+                  return (
+                    <Stack
+                      className="pagination-icons"
+                      sx={{
+                        cursor: "pointer",
+                        color: col,
+                        backgroundColor: bcol,
+                        padding: "3px",
+                        borderRadius: "20px",
+                        border: "1px solid silver",
+                      }}
+                      onClick={() => {
+                        getAllRoles(val);
+                      }}
+                      key={val - 1}>
+                      {val}
+                    </Stack>
+                  );
+                })}
+              </Stack>
             </div>
-            <hr />
-            <Stack
-              direction="row"
-              sx={{ justifyContent: "center" }}
-              className="pagination-wrapper"
-              spacing={1}>
-              {pageArray.map((val, ind) => {
-                const col = pageNumber === val ? "white" : "brown";
-                const bcol = pageNumber === val ? "brown" : "white";
-                return (
-                  <Stack
-                    className="pagination-icons"
-                    sx={{
-                      cursor: "pointer",
-                      color: col,
-                      backgroundColor: bcol,
-                      padding: "3px",
-                      borderRadius: "20px",
-                      border: "1px solid silver",
-                    }}
-                    onClick={() => {
-                      getAllRoles(val);
-                    }}
-                    key={val - 1}>
-                    {val}
-                  </Stack>
-                );
-              })}
-            </Stack>
+            <Footer />
           </div>
-          <Footer />
         </div>
-      </div>
+      ) : (
+        <Editrole
+          id={editData._id}
+          rolename={editData.rolename}
+          closeEdit={closeEdit}
+        />
+      )}
     </>
   );
 };

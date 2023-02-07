@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import Footer from "../../footer/Footer.js";
-import "./Edituser.css";
+import React from "react";
+import Footer from "../../footer/Footer";
+import "./Editrole.css";
 import axios from "axios";
 import DisabledByDefaultIcon from "@mui/icons-material/DisabledByDefault";
 
@@ -10,10 +10,9 @@ import CottageOutlinedIcon from "@mui/icons-material/CottageOutlined";
 import { useNavigate } from "react-router-dom";
 import { Stack } from "@mui/material";
 import { useForm } from "react-hook-form";
-const Edituser = (props) => {
-  const { id, name, email, role, closeEdit } = props;
-  const [allRoles, setAllRoles] = useState([]);
-  const [roleName, setRole] = useState(role);
+const Editrole = (props) => {
+  const { id, rolename, closeEdit } = props;
+
   const navigate = useNavigate();
 
   const {
@@ -24,19 +23,16 @@ const Edituser = (props) => {
   } = useForm({
     mode: "onChange",
     defaultValues: {
-      name: name,
-      email: email,
+      rolename: rolename,
     },
   });
   const onSubmit = (data) => {
     console.log(data);
-    const updateUser = async () => {
+    const updateRole = async () => {
       await axios
-        .patch(`api/users/updateuser/${id}`, {
-          name: data.name,
-          email: data.email,
-          role: roleName,
-          currentemail: email,
+        .patch(`api/roles/updaterole/${id}`, {
+          rolename: data.rolename,
+          currentRole: rolename,
         })
         .then((res) => {
           alert(res.data.message);
@@ -48,31 +44,11 @@ const Edituser = (props) => {
           alert(err.response.data.message);
         });
     };
-    updateUser();
+    updateRole();
   };
-
-  useEffect(() => {
-    const getAllRoles = async () => {
-      try {
-        await axios
-          .get(`api/roles/getallroles`)
-          .then((res) => {
-            console.log(res);
-
-            setAllRoles(res.data.roles);
-          })
-          .catch((er) => {
-            console.log(er);
-          });
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    getAllRoles();
-  }, []);
   return (
     <>
-      <div className="edit-user-content">
+      <div className="edit-role-content">
         <div className="container-fluid">
           <div className="p-4 page-nav ">
             <Stack direction="row" sx={{ justifyContent: "space-between" }}>
@@ -88,7 +64,7 @@ const Edituser = (props) => {
                 />
 
                 <span className="text-muted ">
-                  <b className="nav-head">EDIT USER </b>
+                  <b className="nav-head">EDIT ROLE </b>
                 </span>
               </Stack>
 
@@ -103,7 +79,7 @@ const Edituser = (props) => {
                 onClick={closeEdit}
                 spacing={1}
                 sx={{ color: "brown", cursor: "pointer" }}>
-                <b>All Users</b>
+                <b>All Roles</b>
               </Stack>
             </Stack>
           </div>
@@ -122,52 +98,21 @@ const Edituser = (props) => {
               />
             </Stack>
             <br />
-
-            <label className="form-label">Name</label>
+            <label className="form-label">Role Name</label>
             <input
-              className="form-control "
-              type="text"
-              placeholder="Name"
-              {...register("name", { required: true })}
-            />
-
-            {errors.name && (
-              <span className="create-user-validation-error">
-                *Name is required
-              </span>
-            )}
-            <hr />
-            <label className="form-label">Email</label>
-            <input
+              placeholder="Role Name"
               className="form-control"
-              type="email"
-              placeholder="Email"
-              {...register("email", { required: true })}
+              type="text"
+              {...register("rolename", { required: true })}
             />
 
-            {errors.email && (
-              <span className="create-user-validation-error">
-                *Email is required
+            {errors.permissionname && (
+              <span className="permission-validation-error">
+                *This field is required
               </span>
             )}
             <hr />
 
-            <label className="form-label">Select Role</label>
-            <select
-              name="roles"
-              onChange={(e) => setRole(e.target.value)}
-              value={roleName}
-              className="form-control">
-              <option>Select-Role</option>
-              {allRoles.map((val, ind) => {
-                return (
-                  <option key={val._id} value={val.rolename}>
-                    {val.rolename}
-                  </option>
-                );
-              })}
-            </select>
-            <hr />
             <button type="submit" className="btn btn-info">
               Submit
             </button>
@@ -178,4 +123,4 @@ const Edituser = (props) => {
     </>
   );
 };
-export default Edituser;
+export default Editrole;

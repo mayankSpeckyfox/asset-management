@@ -73,11 +73,14 @@ export const getSearchedRoles = async (req, res) => {
 
 export const updateRole = async (req, res) => {
   try {
-    const { rolename } = req.body;
-    const temp = await Role.findOne({ rolename });
-    if (temp) {
-      return res.status(400).json({ message: "Role already exists" });
+    const { rolename, currentRole } = req.body;
+    if (rolename !== currentRole) {
+      const roleExist = await Role.findOne({ rolename: rolename });
+      if (roleExist) {
+        return res.status(400).json({ message: "Role already exists" });
+      }
     }
+
     const { id } = req.params;
     const result = await Role.findById({ _id: id });
     if (!result) {
