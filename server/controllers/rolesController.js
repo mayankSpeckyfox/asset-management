@@ -40,6 +40,7 @@ export const getAllRoles = async (req, res) => {
       roles,
       allroles,
       totalPages,
+      roleCount,
     });
   } catch (err) {
     console.log(err);

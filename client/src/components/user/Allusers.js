@@ -17,6 +17,7 @@ const Allusers = () => {
   const [totalpages, setTotalpages] = useState();
   const [showEdit, setShowEdit] = useState(false);
   const [keyword, setKeyword] = useState();
+  const [userCount, setUserCount] = useState(0);
   const [editData, setEditData] = useState();
   const [searchedValues, setSearchedValues] = useState([]);
   const navigate = useNavigate();
@@ -64,6 +65,7 @@ const Allusers = () => {
       .then((res) => {
         setUsers(res.data.users);
         setTotalpages(res.data.totalPages);
+        setUserCount(res.data.userCount);
         if (val) {
           setPageNumber(val);
         }
@@ -129,6 +131,7 @@ const Allusers = () => {
             </div>
 
             <div className="p-5 border border-1  mt-5 form-class">
+              <small className="user-count">User Count : {userCount}</small>
               <Stack
                 direction="row"
                 spacing={1}

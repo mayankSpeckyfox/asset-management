@@ -16,6 +16,7 @@ const Allpermissions = () => {
   const [showTable, setShowTable] = useState(false);
   const [totalpages, setTotalpages] = useState();
   const [editData, setEditData] = useState();
+  const [permissionCount, setPermissionCount] = useState(0);
   const [keyword, setKeyword] = useState();
   const [searchedValues, setSearchedValues] = useState([]);
   const navigate = useNavigate();
@@ -51,6 +52,7 @@ const Allpermissions = () => {
       .then((res) => {
         setPermissions(res.data.permissions);
         setTotalpages(res.data.totalPages);
+        setPermissionCount(res.data.permissionCount);
         if (val) {
           setPageNumber(val);
         }
@@ -128,6 +130,9 @@ const Allpermissions = () => {
               </Stack>
             </div>
             <div className="p-5 border border-1  mt-5 form-class">
+              <small className="permission-count">
+                Permission Count : {permissionCount}
+              </small>
               <Stack
                 direction="row"
                 spacing={1}

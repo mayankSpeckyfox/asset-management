@@ -18,7 +18,7 @@ const Allroles = () => {
   const [keyword, setKeyword] = useState();
   const [showEdit, setShowEdit] = useState(false);
   const [editData, setEditData] = useState();
-
+  const [roleCount, setRoleCount] = useState(0);
   const [searchedValues, setSearchedValues] = useState([]);
   const navigate = useNavigate();
   let pageArray = [];
@@ -52,6 +52,7 @@ const Allroles = () => {
       .then((res) => {
         setRoles(res.data.roles);
         setTotalpages(res.data.totalPages);
+        setRoleCount(res.data.roleCount);
         if (val) {
           setPageNumber(val);
         }
@@ -128,6 +129,7 @@ const Allroles = () => {
               </Stack>
             </div>
             <div className="p-5 border border-1  mt-5 form-class">
+              <small className="role-count">Role Count : {roleCount}</small>
               <Stack
                 direction="row"
                 spacing={1}

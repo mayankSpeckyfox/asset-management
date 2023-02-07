@@ -41,6 +41,7 @@ const Login = () => {
         <div className="col-lg-4 col-md-6 col-sm-8 p-4 login_form_container">
           <form onSubmit={handleSubmit(onSubmit)}>
             <h2 className="login_heading">LOGIN</h2>
+
             <input
               placeholder="Email"
               className="form-control"
@@ -62,7 +63,7 @@ const Login = () => {
             )}
             <hr />
 
-            <button className="form-control btn btn-success" type="submit">
+            <button className="form-control btn btn-info mb-4" type="submit">
               Login
             </button>
           </form>

@@ -43,6 +43,10 @@
 .nav-head {
   color: brown;
 }
+.permission-count {
+  color: brown;
+  font-weight: bolder;
+}
 @media screen and (max-width: 700px) {
   .all-permission-content {
     margin-left: 120px;

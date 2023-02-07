@@ -42,6 +42,10 @@
 .nav-head {
   color: brown;
 }
+.role-count {
+  color: brown;
+  font-weight: bolder;
+}
 @media screen and (max-width: 700px) {
   .all-roles-content {
     margin-left: 120px;
