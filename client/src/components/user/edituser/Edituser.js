@@ -158,7 +158,6 @@ const Edituser = (props) => {
               onChange={(e) => setRole(e.target.value)}
               value={roleName}
               className="form-control">
-              <option>Select-Role</option>
               {allRoles.map((val, ind) => {
                 return (
                   <option key={val._id} value={val.rolename}>
