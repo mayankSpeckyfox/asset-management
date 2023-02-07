@@ -83,8 +83,13 @@ export const getSearchedUsers = async (req, res) => {
 export const updateUser = async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, email, role } = req.body;
-
+    const { name, email, role, currentemail } = req.body;
+    if (email !== currentemail) {
+      const emailExist = await User.findOne({ email: email });
+      if (emailExist) {
+        return res.status(400).json({ message: "Email already exists" });
+      }
+    }
     if (!name || !email || !role) {
       return res.status(400).json({ message: "Please fill all fields" });
     }

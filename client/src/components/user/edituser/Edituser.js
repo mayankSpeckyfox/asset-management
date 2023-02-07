@@ -36,6 +36,7 @@ const Edituser = (props) => {
           name: data.name,
           email: data.email,
           role: roleName,
+          currentemail: email,
         })
         .then((res) => {
           alert(res.data.message);
