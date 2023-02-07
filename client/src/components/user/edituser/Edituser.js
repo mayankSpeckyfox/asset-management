@@ -1,6 +1,6 @@
-import React from "react";
-import Footer from "../../footer/Footer";
-import "./Editpermission.css";
+import React, { useState, useEffect } from "react";
+import Footer from "../../footer/Footer.js";
+import "./Edituser.css";
 import axios from "axios";
 import DisabledByDefaultIcon from "@mui/icons-material/DisabledByDefault";
 
@@ -10,9 +10,10 @@ import CottageOutlinedIcon from "@mui/icons-material/CottageOutlined";
 import { useNavigate } from "react-router-dom";
 import { Stack } from "@mui/material";
 import { useForm } from "react-hook-form";
-const Editpermission = (props) => {
-  const { id, permissionname, closeEdit } = props;
-
+const Edituser = (props) => {
+  const { id, name, email, role, closeEdit } = props;
+  const [allRoles, setAllRoles] = useState([]);
+  const [roleName, setRole] = useState(role);
   const navigate = useNavigate();
 
   const {
@@ -23,15 +24,18 @@ const Editpermission = (props) => {
   } = useForm({
     mode: "onChange",
     defaultValues: {
-      permissionname: permissionname,
+      name: name,
+      email: email,
     },
   });
   const onSubmit = (data) => {
     console.log(data);
-    const updatePermission = async () => {
+    const updateUser = async () => {
       await axios
-        .patch(`api/permissions/update/${id}`, {
-          permissionname: data.permissionname,
+        .patch(`api/users/updateuser/${id}`, {
+          name: data.name,
+          email: data.email,
+          role: roleName,
         })
         .then((res) => {
           alert(res.data.message);
@@ -43,11 +47,31 @@ const Editpermission = (props) => {
           alert(err.response.data.message);
         });
     };
-    updatePermission();
+    updateUser();
   };
+
+  useEffect(() => {
+    const getAllRoles = async () => {
+      try {
+        await axios
+          .get(`api/roles/getallroles`)
+          .then((res) => {
+            console.log(res);
+
+            setAllRoles(res.data.roles);
+          })
+          .catch((er) => {
+            console.log(er);
+          });
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getAllRoles();
+  }, []);
   return (
     <>
-      <div className="edit-permission-content">
+      <div className="edit-user-content">
         <div className="container-fluid">
           <div className="p-4 page-nav ">
             <Stack direction="row" sx={{ justifyContent: "space-between" }}>
@@ -78,7 +102,7 @@ const Editpermission = (props) => {
                 onClick={closeEdit}
                 spacing={1}
                 sx={{ color: "brown", cursor: "pointer" }}>
-                <b>All Permissions</b>
+                <b>All Users</b>
               </Stack>
             </Stack>
           </div>
@@ -97,21 +121,52 @@ const Editpermission = (props) => {
               />
             </Stack>
             <br />
-            <label className="form-label">Permission</label>
+
+            <label className="form-label">Name</label>
             <input
-              placeholder="Permission Name"
-              className="form-control"
+              className="form-control "
               type="text"
-              {...register("permissionname", { required: true })}
+              placeholder="Name"
+              {...register("name", { required: true })}
             />
 
-            {errors.permissionname && (
-              <span className="permission-validation-error">
-                *This field is required
+            {errors.name && (
+              <span className="create-user-validation-error">
+                *Name is required
+              </span>
+            )}
+            <hr />
+            <label className="form-label">Email</label>
+            <input
+              className="form-control"
+              type="email"
+              placeholder="Email"
+              {...register("email", { required: true })}
+            />
+
+            {errors.email && (
+              <span className="create-user-validation-error">
+                *Email is required
               </span>
             )}
             <hr />
 
+            <label className="form-label">Select Role</label>
+            <select
+              name="roles"
+              onChange={(e) => setRole(e.target.value)}
+              value={roleName}
+              className="form-control">
+              <option>Select-Role</option>
+              {allRoles.map((val, ind) => {
+                return (
+                  <option key={val._id} value={val.rolename}>
+                    {val.rolename}
+                  </option>
+                );
+              })}
+            </select>
+            <hr />
             <button type="submit" className="btn btn-info">
               Submit
             </button>
@@ -122,4 +177,4 @@ const Editpermission = (props) => {
     </>
   );
 };
-export default Editpermission;
+export default Edituser;

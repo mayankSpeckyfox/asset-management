@@ -84,6 +84,7 @@ export const updateUser = async (req, res) => {
   try {
     const { id } = req.params;
     const { name, email, role } = req.body;
+
     if (!name || !email || !role) {
       return res.status(400).json({ message: "Please fill all fields" });
     }

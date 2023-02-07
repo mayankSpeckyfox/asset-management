@@ -3,7 +3,7 @@ import "./Individualuser.css";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 const Individualuser = (props) => {
-  const { name, email, role, id, deleteFun } = props;
+  const { name, email, role, id, deleteFun, editFun } = props;
   return (
     <>
       <td>{name}</td>
@@ -12,6 +12,7 @@ const Individualuser = (props) => {
       <td className="tableData">
         {" "}
         <EditIcon
+          onClick={() => editFun(id)}
           sx={{
             color: "brown",
             cursor: "pointer",
