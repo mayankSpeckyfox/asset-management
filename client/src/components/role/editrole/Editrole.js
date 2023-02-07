@@ -125,10 +125,10 @@ const Editrole = (props) => {
                 <thead>
                   <tr className="tableRow">
                     <th>Permissions</th>
-                    <th>Create</th>
-                    <th>Read</th>
-                    <th>Update</th>
-                    <th>Delete</th>
+                    <th style={{ textAlign: "center" }}>Create</th>
+                    <th style={{ textAlign: "center" }}>Read</th>
+                    <th style={{ textAlign: "center" }}>Update</th>
+                    <th style={{ textAlign: "center" }}>Delete</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -136,7 +136,7 @@ const Editrole = (props) => {
                     return (
                       <tr key={val._id} className="tableRow">
                         <td>{val.permissionname}</td>
-                        <td>
+                        <td className="table-data">
                           <input
                             type="checkbox"
                             {...register(
@@ -145,7 +145,7 @@ const Editrole = (props) => {
                             )}
                           />
                         </td>
-                        <td>
+                        <td className="table-data">
                           <input
                             type="checkbox"
                             {...register(
@@ -154,7 +154,7 @@ const Editrole = (props) => {
                             )}
                           />
                         </td>
-                        <td>
+                        <td className="table-data">
                           <input
                             type="checkbox"
                             {...register(
@@ -163,7 +163,7 @@ const Editrole = (props) => {
                             )}
                           />
                         </td>
-                        <td>
+                        <td className="table-data">
                           <input
                             type="checkbox"
                             {...register(

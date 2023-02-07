@@ -4,7 +4,9 @@
 .nav-head {
   color: brown;
 }
-
+.table-data {
+  text-align: center;
+}
 @media screen and (max-width: 700px) {
   .edit-role-content {
     margin-left: 120px;
