@@ -18,6 +18,7 @@ const Allroles = () => {
   const [keyword, setKeyword] = useState();
   const [showEdit, setShowEdit] = useState(false);
   const [editData, setEditData] = useState();
+
   const [searchedValues, setSearchedValues] = useState([]);
   const navigate = useNavigate();
   let pageArray = [];
@@ -244,6 +245,7 @@ const Allroles = () => {
         <Editrole
           id={editData._id}
           rolename={editData.rolename}
+          rolepermissions={editData.permissions}
           closeEdit={closeEdit}
         />
       )}

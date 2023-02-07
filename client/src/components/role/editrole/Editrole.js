@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Footer from "../../footer/Footer";
 import "./Editrole.css";
 import axios from "axios";
@@ -11,19 +11,16 @@ import { useNavigate } from "react-router-dom";
 import { Stack } from "@mui/material";
 import { useForm } from "react-hook-form";
 const Editrole = (props) => {
-  const { id, rolename, closeEdit } = props;
+  const { id, rolename, closeEdit, rolepermissions } = props;
+  const [permissions, setPermissions] = useState([]);
+  const [role, setRole] = useState(rolename);
 
   const navigate = useNavigate();
 
-  const {
-    register,
-    handleSubmit,
-
-    formState: { errors },
-  } = useForm({
+  const { register, handleSubmit } = useForm({
     mode: "onChange",
     defaultValues: {
-      rolename: rolename,
+      permissions: rolepermissions,
     },
   });
   const onSubmit = (data) => {
@@ -31,8 +28,9 @@ const Editrole = (props) => {
     const updateRole = async () => {
       await axios
         .patch(`api/roles/updaterole/${id}`, {
-          rolename: data.rolename,
+          rolename: role,
           currentRole: rolename,
+          permissions: data.permissions,
         })
         .then((res) => {
           alert(res.data.message);
@@ -46,6 +44,20 @@ const Editrole = (props) => {
     };
     updateRole();
   };
+
+  const getPermissions = async () => {
+    await axios
+      .get(`api/permissions/getallpermissions`)
+      .then((res) => {
+        setPermissions(res.data.allPermissions);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  useEffect(() => {
+    getPermissions();
+  }, []);
   return (
     <>
       <div className="edit-role-content">
@@ -100,19 +112,72 @@ const Editrole = (props) => {
             <br />
             <label className="form-label">Role Name</label>
             <input
+              className="form-control "
               placeholder="Role Name"
-              className="form-control"
-              type="text"
-              {...register("rolename", { required: true })}
+              value={role}
+              onChange={(e) => {
+                setRole(e.target.value);
+              }}
             />
-
-            {errors.permissionname && (
-              <span className="permission-validation-error">
-                *This field is required
-              </span>
-            )}
             <hr />
-
+            <div className="table-responsive  tableScroll">
+              <table className=" table table-striped text-muted ">
+                <thead>
+                  <tr className="tableRow">
+                    <th>Permissions</th>
+                    <th>Create</th>
+                    <th>Read</th>
+                    <th>Update</th>
+                    <th>Delete</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {permissions.map((val, ind) => {
+                    return (
+                      <tr key={val._id} className="tableRow">
+                        <td>{val.permissionname}</td>
+                        <td>
+                          <input
+                            type="checkbox"
+                            {...register(
+                              `permissions.${val.permissionname}.create`,
+                              {}
+                            )}
+                          />
+                        </td>
+                        <td>
+                          <input
+                            type="checkbox"
+                            {...register(
+                              `permissions.${val.permissionname}.read`,
+                              {}
+                            )}
+                          />
+                        </td>
+                        <td>
+                          <input
+                            type="checkbox"
+                            {...register(
+                              `permissions.${val.permissionname}.update`,
+                              {}
+                            )}
+                          />
+                        </td>
+                        <td>
+                          <input
+                            type="checkbox"
+                            {...register(
+                              `permissions.${val.permissionname}.delete`,
+                              {}
+                            )}
+                          />
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
             <button type="submit" className="btn btn-info">
               Submit
             </button>
