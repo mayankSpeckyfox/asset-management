@@ -35,11 +35,47 @@ export const sendEmail = async (req, res) => {
 // create ticket
 export const createTicket = async (req, res) => {
   try {
-    const tickets = await Ticket.create(req.body);
+    const ticket = await Ticket.create(req.body);
+    if (!ticket) {
+      return res.status(400).json({ message: "sorry something went wrong" });
+    }
+    res.status(201).json({ message: "ticket created successfully", ticket });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "sorry error occured" });
+  }
+};
+
+//get all tickets
+export const getAllTickets = async (req, res) => {
+  try {
+    const tickets = await Ticket.find();
     if (!tickets) {
       return res.status(400).json({ message: "sorry something went wrong" });
     }
-    res.status(201).json({ message: "ticket created successfully", tickets });
+    res.status(200).json({ message: "tickets fetched successfully", tickets });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "sorry error occured" });
+  }
+};
+
+// update ticket by id
+export const updateTicket = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const ticketExist = await Ticket.findById({ _id: id });
+    if (!ticketExist) {
+      return res.status(404).json({ message: "Ticket does not exist" });
+    }
+    const updatedTicket = await Ticket.findByIdAndUpdate(
+      { _id: id },
+      req.body,
+      { new: true }
+    );
+    res
+      .status(200)
+      .json({ message: "Ticket updated successfully", updatedTicket });
   } catch (err) {
     console.log(err);
     res.status(500).json({ message: "sorry error occured" });
