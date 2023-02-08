@@ -6,6 +6,7 @@ import connect from "./db.js";
 import rolesRouter from "./routes/Rolesroute.js";
 import userRouter from "./routes/Userroutes.js";
 import permissionRouter from "./routes/Permissionroutes.js";
+import ticketRouter from "./routes/Ticketroutes.js";
 const app = express();
 app.use(express.json());
 dotenv.config();
@@ -19,7 +20,8 @@ app.use("/api/roles", rolesRouter);
 app.use("/api/users", userRouter);
 //router for permissions
 app.use("/api/permissions", permissionRouter);
-
+//router for tickets
+app.use("/api/tickets", ticketRouter);
 //port
 const Port = process.env.PORT;
 
