@@ -81,3 +81,38 @@ export const updateTicket = async (req, res) => {
     res.status(500).json({ message: "sorry error occured" });
   }
 };
+
+// get individual ticket by id
+
+export const getIndividualTicket = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const ticket = await Ticket.findById({ _id: id });
+    if (!ticket) {
+      return res.status(404).json({ message: "Ticket does not exist" });
+    }
+    res.status(200).json({ message: "Ticket fetched successfully", ticket });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "sorry error occured" });
+  }
+};
+
+// delete ticket by id
+
+export const deleteTicket = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const ticket = await Ticket.findById({ _id: id });
+    if (!ticket) {
+      return res.status(404).json({ message: "Ticket does not exist" });
+    }
+    const deletedTicket = await Ticket.findByIdAndDelete({ _id: id });
+    res
+      .status(200)
+      .json({ message: "Ticket deleted successfully", deletedTicket });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "sorry error occured" });
+  }
+};
