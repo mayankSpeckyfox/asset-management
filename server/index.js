@@ -7,6 +7,7 @@ import rolesRouter from "./routes/Rolesroute.js";
 import userRouter from "./routes/Userroutes.js";
 import permissionRouter from "./routes/Permissionroutes.js";
 import ticketRouter from "./routes/Ticketroutes.js";
+import departmentRouter from "./routes/Departmentroutes.js";
 const app = express();
 app.use(express.json());
 dotenv.config();
@@ -22,6 +23,8 @@ app.use("/api/users", userRouter);
 app.use("/api/permissions", permissionRouter);
 //router for tickets
 app.use("/api/tickets", ticketRouter);
+//router for department
+app.use("/api/department", departmentRouter);
 //port
 const Port = process.env.PORT;
 

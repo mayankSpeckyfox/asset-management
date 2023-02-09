@@ -53,7 +53,26 @@ export const getAllTickets = async (req, res) => {
     if (!tickets) {
       return res.status(400).json({ message: "sorry something went wrong" });
     }
-    res.status(200).json({ message: "tickets fetched successfully", tickets });
+    const hrTickets = await Ticket.find({
+      department: { $regex: "hr", $options: "i" },
+    });
+    const itTickets = await Ticket.find({
+      department: { $regex: "it", $options: "i" },
+    });
+    const adminTickets = await Ticket.find({
+      department: { $regex: "admin", $options: "i" },
+    });
+    const accountTickets = await Ticket.find({
+      department: { $regex: "account", $options: "i" },
+    });
+    res.status(200).json({
+      message: "tickets fetched successfully",
+      tickets,
+      hrTickets,
+      itTickets,
+      adminTickets,
+      accountTickets,
+    });
   } catch (err) {
     console.log(err);
     res.status(500).json({ message: "sorry error occured" });
