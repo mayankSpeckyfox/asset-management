@@ -11,6 +11,7 @@ import Createrole from "./components/role/Createrole";
 import Allroles from "./components/role/Allroles";
 import Permissions from "./components/permissions/Permissions.js";
 import Allpermissions from "./components/permissions/allpermissions/Allpermissions.js";
+import Settings from "./components/settings/Settings.js";
 
 const App = () => {
   const [myToken, setMyToken] = useState();
@@ -37,7 +38,7 @@ const App = () => {
           <Route path="/createrole" element={myToken && <Createrole />} />
           <Route path="/allusers" element={myToken && <Allusers />} />
           <Route path="/allroles" element={myToken && <Allroles />} />
-
+          <Route path="/settings" element={myToken && <Settings />} />
           <Route
             path="/createpermission"
             element={myToken && <Permissions />}

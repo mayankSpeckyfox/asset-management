@@ -107,7 +107,9 @@ const Layout = () => {
             </Link>
           </span>
         )}
-
+        <Link className="a " to="/settings">
+          <b>Settings</b>
+        </Link>
         <Link className=" a logout_button" to="/" onClick={logoutUser}>
           <LogoutOutlinedIcon sx={{ fontSize: "x-large" }} /> <b>Logout</b>
         </Link>
