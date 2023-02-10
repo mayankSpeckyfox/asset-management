@@ -12,6 +12,8 @@ import Allroles from "./components/role/Allroles";
 import Permissions from "./components/permissions/Permissions.js";
 import Allpermissions from "./components/permissions/allpermissions/Allpermissions.js";
 import Settings from "./components/settings/Settings.js";
+import Createticket from "./components/ticket/createticket/Createticket.js";
+import Alltickets from "./components/ticket/alltickets/Alltickets.js";
 
 const App = () => {
   const [myToken, setMyToken] = useState();
@@ -39,6 +41,8 @@ const App = () => {
           <Route path="/allusers" element={myToken && <Allusers />} />
           <Route path="/allroles" element={myToken && <Allroles />} />
           <Route path="/settings" element={myToken && <Settings />} />
+          <Route path="/createticket" element={myToken && <Createticket />} />
+          <Route path="/alltickets" element={myToken && <Alltickets />} />
           <Route
             path="/createpermission"
             element={myToken && <Permissions />}

@@ -2,7 +2,9 @@ import { Outlet } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 import DashboardOutlinedIcon from "@mui/icons-material/DashboardOutlined";
+import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 import SettingsIcon from "@mui/icons-material/Settings";
+import StorageOutlinedIcon from "@mui/icons-material/StorageOutlined";
 import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
 import BorderColorOutlinedIcon from "@mui/icons-material/BorderColorOutlined";
 import KeyOutlinedIcon from "@mui/icons-material/KeyOutlined";
@@ -17,6 +19,7 @@ import "../css/sidebar.css";
 const Layout = () => {
   const [showUser, setShowUser] = useState(false);
   const [showRole, setShowRole] = useState(false);
+  const [showHelp, setShowHelp] = useState(false);
   const [showPermission, setShowPermission] = useState(false);
   const logoutUser = async () => {
     await axios
@@ -108,6 +111,30 @@ const Layout = () => {
             </Link>
           </span>
         )}
+
+        <span className="a spreader" onClick={() => setShowHelp(!showHelp)}>
+          <HelpOutlineOutlinedIcon sx={{ fontSize: "x-large" }} />
+          <b> Help</b>
+          {showHelp ? (
+            <ArrowDropDownIcon sx={{ fontSize: "x-large" }} />
+          ) : (
+            <ArrowDropUpIcon sx={{ fontSize: "x-large" }} />
+          )}
+        </span>
+
+        {showHelp && (
+          <span>
+            <Link className="a spreader-link" to="/createticket">
+              <BorderColorOutlinedIcon sx={{ fontSize: "large" }} />
+              <b> Create Ticket</b>
+            </Link>
+            <Link className="a spreader-link" to="/alltickets">
+              <StorageOutlinedIcon sx={{ fontSize: "large" }} />
+              <b> All Tickets</b>
+            </Link>
+          </span>
+        )}
+
         <Link className="a " to="/settings">
           <SettingsIcon sx={{ fontSize: "x-large" }} /> <b>Settings</b>
         </Link>

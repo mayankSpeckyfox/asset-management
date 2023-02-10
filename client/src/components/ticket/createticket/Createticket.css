@@ -1,0 +1,8 @@
+.create-tickets-content {
+  margin-left: 200px;
+}
+@media screen and (max-width: 700px) {
+  .create-tickets-content {
+    margin-left: 120px;
+  }
+}

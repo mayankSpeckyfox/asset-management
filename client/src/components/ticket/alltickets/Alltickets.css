@@ -1,0 +1,8 @@
+.all-tickets-content {
+  margin-left: 200px;
+}
+@media screen and (max-width: 700px) {
+  .all-tickets-content {
+    margin-left: 120px;
+  }
+}
