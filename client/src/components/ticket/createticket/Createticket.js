@@ -39,16 +39,7 @@ const Createticket = () => {
     };
     if (department) {
       sendEmail(data.email, d.subject, d.description);
-
-      if (department === "hr") {
-        sendEmail(depData.hr.email, d.subject, d.description);
-      } else if (department === "it") {
-        sendEmail(depData.it.email, d.subject, d.description);
-      } else if (department === "admin") {
-        sendEmail(depData.admin.email, d.subject, d.description);
-      } else if (department === "account") {
-        sendEmail(depData.account.email, d.subject, d.description);
-      }
+      sendEmail(depData[department].email, d.subject, d.description);
     }
     const submitTicketData = async () => {
       try {
