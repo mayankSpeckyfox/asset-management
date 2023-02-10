@@ -2,6 +2,7 @@ import { Outlet } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 import DashboardOutlinedIcon from "@mui/icons-material/DashboardOutlined";
+import SettingsIcon from "@mui/icons-material/Settings";
 import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
 import BorderColorOutlinedIcon from "@mui/icons-material/BorderColorOutlined";
 import KeyOutlinedIcon from "@mui/icons-material/KeyOutlined";
@@ -108,7 +109,7 @@ const Layout = () => {
           </span>
         )}
         <Link className="a " to="/settings">
-          <b>Settings</b>
+          <SettingsIcon sx={{ fontSize: "x-large" }} /> <b>Settings</b>
         </Link>
         <Link className=" a logout_button" to="/" onClick={logoutUser}>
           <LogoutOutlinedIcon sx={{ fontSize: "x-large" }} /> <b>Logout</b>

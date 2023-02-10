@@ -1,0 +1,8 @@
+.close-icon:hover {
+  opacity: 0.5;
+}
+.department-validation-error {
+  color: red;
+  font-family: sans-serif;
+  font-size: small;
+}
