@@ -1,6 +1,11 @@
 .create-tickets-content {
   margin-left: 200px;
 }
+.create-ticket-validation-error {
+  color: red;
+  font-family: sans-serif;
+  font-size: small;
+}
 @media screen and (max-width: 700px) {
   .create-tickets-content {
     margin-left: 120px;

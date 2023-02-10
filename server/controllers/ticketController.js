@@ -3,6 +3,7 @@ import nodemailer from "nodemailer";
 //send email
 export const sendEmail = async (req, res) => {
   try {
+    const { email, subject, description } = req.body;
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
@@ -15,9 +16,9 @@ export const sendEmail = async (req, res) => {
 
     const mailOptions = {
       from: process.env.EMAIL,
-      to: req.body.email,
+      to: email,
       subject: "Ticket",
-      text: `A NEW ticket has been generated on ${date}! `,
+      text: `Subject:${subject} , Description:${description} , Date: ${date}!   `,
     };
     transporter.sendMail(mailOptions, function (error, info) {
       if (error) {
