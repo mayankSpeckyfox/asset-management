@@ -1,5 +1,6 @@
 import express from "express";
 import { isAuthenticatedUser } from "../middleware/auth.js";
+
 import {
   createTicket,
   deleteTicket,

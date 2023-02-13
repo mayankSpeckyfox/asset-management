@@ -1,5 +1,6 @@
 import Ticket from "../models/Ticket.js";
 import nodemailer from "nodemailer";
+import fs from "fs";
 //send email
 export const sendEmail = async (req, res) => {
   try {
@@ -36,7 +37,9 @@ export const sendEmail = async (req, res) => {
 // create ticket
 export const createTicket = async (req, res) => {
   try {
-    const ticket = await Ticket.create(req.body);
+    const { department, subject, description } = req.body;
+    console.log(req.files.file);
+    const ticket = await Ticket.create({ department, subject, description });
 
     if (!ticket) {
       return res.status(400).json({ message: "sorry something went wrong" });

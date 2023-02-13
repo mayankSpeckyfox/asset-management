@@ -9,9 +9,14 @@ import permissionRouter from "./routes/Permissionroutes.js";
 import ticketRouter from "./routes/Ticketroutes.js";
 import departmentRouter from "./routes/Departmentroutes.js";
 import Authrouter from "./routes/Authroutes.js";
-
+import fileupload from "express-fileupload";
 const app = express();
 app.use(express.json());
+app.use(
+  fileupload({
+    createParentPath: true,
+  })
+);
 dotenv.config();
 app.use(cookieParser());
 app.use(cors());

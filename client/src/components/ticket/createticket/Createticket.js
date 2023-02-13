@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Footer from "../../footer/Footer";
 import "./Createticket.css";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
@@ -10,7 +10,9 @@ import axios from "axios";
 import { useForm } from "react-hook-form";
 const Createticket = () => {
   const [data, setData] = useState({});
+  const inputRef = useRef(null);
   const [department, setDepartment] = useState("");
+  const [file, setFile] = useState();
 
   const [depData, setDepData] = useState({
     admin: { email: "" },
@@ -19,6 +21,7 @@ const Createticket = () => {
     account: { email: "" },
   });
   const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -27,8 +30,11 @@ const Createticket = () => {
   } = useForm();
 
   const onSubmit = (d) => {
-    console.log(d);
-
+    const formdata = new FormData();
+    formdata.append("department", d.department);
+    formdata.append("subject", d.subject);
+    formdata.append("description", d.description);
+    formdata.append("file", file);
     const sendEmail = async (receiver, SUBJECT, DESCRIPTION) => {
       await axios
         .post(`api/tickets/sendemail`, {
@@ -48,11 +54,11 @@ const Createticket = () => {
     const submitTicketData = async () => {
       try {
         await axios
-          .post(`api/tickets/create`, {
-            department: department,
-            subject: d.subject,
-            description: d.description,
-          })
+          .post(
+            `api/tickets/create`,
+
+            formdata
+          )
           .then((res) => {
             alert(res.data.message);
             navigate("/alltickets");
@@ -183,6 +189,15 @@ const Createticket = () => {
             )}
             <hr />
 
+            <input
+              ref={inputRef}
+              type="file"
+              name="file"
+              className="form-control"
+              accept=".png, .jpg, .jpeg"
+              onChange={(e) => setFile(e.target.files[0])}
+            />
+            <hr />
             <button className="btn btn-info" type="submit">
               Create Ticket
             </button>
