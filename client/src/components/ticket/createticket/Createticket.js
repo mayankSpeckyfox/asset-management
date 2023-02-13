@@ -31,10 +31,12 @@ const Createticket = () => {
 
   const onSubmit = (d) => {
     const formdata = new FormData();
-    formdata.append("department", d.department);
+    formdata.append("department", department);
     formdata.append("subject", d.subject);
     formdata.append("description", d.description);
+
     formdata.append("file", file);
+
     const sendEmail = async (receiver, SUBJECT, DESCRIPTION) => {
       await axios
         .post(`api/tickets/sendemail`, {
