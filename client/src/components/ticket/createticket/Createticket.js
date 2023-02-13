@@ -10,6 +10,7 @@ import { useForm } from "react-hook-form";
 const Createticket = () => {
   const [data, setData] = useState({});
   const [department, setDepartment] = useState("");
+
   const [depData, setDepData] = useState({
     admin: { email: "" },
     hr: { email: "" },
@@ -164,7 +165,8 @@ const Createticket = () => {
             )}
             <hr />
             <label className="form-label">Description</label>
-            <input
+            <textarea
+              rows="7"
               className="form-control "
               type="text"
               placeholder="Description"

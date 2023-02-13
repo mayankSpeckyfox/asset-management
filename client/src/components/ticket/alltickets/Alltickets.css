@@ -1,6 +1,22 @@
 .all-tickets-content {
   margin-left: 200px;
 }
+.tickets-tableScroll::-webkit-scrollbar {
+  display: none;
+}
+
+.ticket-table-row:hover {
+  background-color: silver;
+}
+.ticket-count {
+  color: brown;
+  font-weight: bolder;
+}
+.ticket-table-class {
+  margin-bottom: 100px;
+  background-color: white;
+  margin-top: 40px;
+}
 @media screen and (max-width: 700px) {
   .all-tickets-content {
     margin-left: 120px;

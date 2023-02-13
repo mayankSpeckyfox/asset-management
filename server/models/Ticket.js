@@ -17,6 +17,10 @@ const ticketSchema = new mongoose.Schema({
     data: Buffer,
     contentType: String,
   },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 export default mongoose.model("Ticket", ticketSchema);

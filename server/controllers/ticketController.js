@@ -50,6 +50,7 @@ export const createTicket = async (req, res) => {
 //get all tickets
 export const getAllTickets = async (req, res) => {
   try {
+    const ticketCount = await Ticket.countDocuments();
     const tickets = await Ticket.find();
     if (!tickets) {
       return res.status(400).json({ message: "sorry something went wrong" });
@@ -73,6 +74,7 @@ export const getAllTickets = async (req, res) => {
       itTickets,
       adminTickets,
       accountTickets,
+      ticketCount,
     });
   } catch (err) {
     console.log(err);
