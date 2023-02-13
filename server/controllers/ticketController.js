@@ -36,7 +36,11 @@ export const sendEmail = async (req, res) => {
 // create ticket
 export const createTicket = async (req, res) => {
   try {
-    const ticket = await Ticket.create(req.body);
+    const { department, subject, description } = req.body;
+    const ticket = new Ticket({ department, subject, description });
+
+    await ticket.save();
+
     if (!ticket) {
       return res.status(400).json({ message: "sorry something went wrong" });
     }

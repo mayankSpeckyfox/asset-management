@@ -14,8 +14,8 @@ const ticketSchema = new mongoose.Schema({
     required: true,
   },
   image: {
-    data: Buffer,
-    contentType: String,
+    Data: Buffer,
+    ContentType: String,
   },
   createdAt: {
     type: Date,

@@ -23,6 +23,17 @@ const Alltickets = () => {
         console.log(err);
       });
   };
+  const deleteFun = async (id) => {
+    await axios
+      .delete(`api/tickets/deleteticket/${id}`)
+      .then((res) => {
+        alert(res.data.message);
+        window.location.reload();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   useEffect(() => {
     getTickets();
   }, []);
@@ -72,13 +83,14 @@ const Alltickets = () => {
                   <th>Subject</th>
                   <th>Description</th>
                   <th>Created At</th>
+                  <th style={{ textAlign: "center" }}>Delete</th>
                 </tr>
               </thead>
               <tbody>
                 {tickets.map((val, ind) => {
                   return (
                     <tr key={val._id} className="ticket-table-row">
-                      <Individualticket val={val} />
+                      <Individualticket val={val} deleteFun={deleteFun} />
                     </tr>
                   );
                 })}

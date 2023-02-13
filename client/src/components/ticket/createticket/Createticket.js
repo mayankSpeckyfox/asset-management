@@ -26,6 +26,8 @@ const Createticket = () => {
   } = useForm();
 
   const onSubmit = (d) => {
+    console.log(d);
+
     const sendEmail = async (receiver, SUBJECT, DESCRIPTION) => {
       await axios
         .post(`api/tickets/sendemail`, {
