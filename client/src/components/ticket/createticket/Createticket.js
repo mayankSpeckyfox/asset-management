@@ -190,7 +190,7 @@ const Createticket = () => {
               </span>
             )}
             <hr />
-
+            <label className="form-label">Upload Image</label>
             <input
               ref={inputRef}
               type="file"
