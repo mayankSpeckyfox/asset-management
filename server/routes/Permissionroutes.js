@@ -27,7 +27,7 @@ router.patch(
 router.get(
   "/getallpermissions",
   isAuthenticatedUser,
-  authorizeRoles("admin"),
+
   getAllPermissions
 );
 //get searched permissions

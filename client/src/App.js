@@ -18,7 +18,7 @@ import Alltickets from "./components/ticket/alltickets/Alltickets.js";
 const App = () => {
   const [myToken, setMyToken] = useState();
   const [data, setData] = useState({});
-
+  const [roleData, setRoleData] = useState(null);
   const getTokenFromCookies = async () => {
     try {
       const res = await axios.get(`api/users/gettoken`);
@@ -33,6 +33,18 @@ const App = () => {
       .get(`api/authentication/getdata`)
       .then((res) => {
         setData(res.data.user);
+        getRoleData(res.data.user.role);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  console.log(roleData);
+  const getRoleData = async (name) => {
+    await axios
+      .get(`api/roles/rolebyname/${name}`)
+      .then((res) => {
+        setRoleData(res.data.individualRole.permissions);
       })
       .catch((err) => {
         console.log(err);
@@ -49,24 +61,42 @@ const App = () => {
       <Routes>
         <Route path="/" element={myToken && <Layout />}>
           <Route index element={myToken ? <Home /> : <Login />} />
-          <Route path="/createuser" element={myToken && <Createuser />} />
-          <Route path="/createrole" element={myToken && <Createrole />} />
-          <Route path="/allusers" element={myToken && <Allusers />} />
-          <Route path="/allroles" element={myToken && <Allroles />} />
-          <Route path="/settings" element={myToken && <Settings />} />
-          <Route path="/createticket" element={myToken && <Createticket />} />
-          <Route
-            path="/alltickets"
-            element={myToken && <Alltickets data={data} />}
-          />
-          <Route
-            path="/createpermission"
-            element={myToken && <Permissions />}
-          />
-          <Route
-            path="allpermissions"
-            element={myToken && <Allpermissions />}
-          />
+          {roleData && roleData.user.create ? (
+            <Route path="/createuser" element={myToken && <Createuser />} />
+          ) : null}
+          {roleData && roleData.role.create ? (
+            <Route path="/createrole" element={myToken && <Createrole />} />
+          ) : null}
+          {roleData && roleData.user.read ? (
+            <Route path="/allusers" element={myToken && <Allusers />} />
+          ) : null}
+          {roleData && roleData.role.read ? (
+            <Route path="/allroles" element={myToken && <Allroles />} />
+          ) : null}
+          {data.role === "admin" ? (
+            <Route path="/settings" element={myToken && <Settings />} />
+          ) : null}
+          {roleData && roleData.ticket.create ? (
+            <Route path="/createticket" element={myToken && <Createticket />} />
+          ) : null}
+          {roleData && roleData.ticket.read ? (
+            <Route
+              path="/alltickets"
+              element={myToken && <Alltickets data={data} />}
+            />
+          ) : null}
+          {data.role === "admin" ? (
+            <Route
+              path="/createpermission"
+              element={myToken && <Permissions />}
+            />
+          ) : null}
+          {data.role === "admin" ? (
+            <Route
+              path="allpermissions"
+              element={myToken && <Allpermissions />}
+            />
+          ) : null}
           <Route path="*" element={<Navigate to="/" />} />
         </Route>
       </Routes>

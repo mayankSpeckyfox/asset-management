@@ -135,3 +135,23 @@ export const getIndividualRole = async (req, res) => {
     res.status(500).json({ message: "Sorry error occured" });
   }
 };
+
+//get individual role by name
+
+export const getRoleByName = async (req, res) => {
+  try {
+    const { name } = req.params;
+    const individualRole = await Role.findOne({ rolename: name });
+    if (!individualRole) {
+      return res
+        .status(404)
+        .json({ message: "Sorry this role does not exist" });
+    }
+    res
+      .status(200)
+      .json({ message: "fetched role successfully", individualRole });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "Sorry error occured" });
+  }
+};

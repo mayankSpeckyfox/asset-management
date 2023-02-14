@@ -4,24 +4,25 @@ import {
   deleteRole,
   getAllRoles,
   getIndividualRole,
+  getRoleByName,
   getSearchedRoles,
   updateRole,
 } from "../controllers/rolesController.js";
-import { authorizeRoles, isAuthenticatedUser } from "../middleware/auth.js";
+import { isAuthenticatedUser } from "../middleware/auth.js";
 const router = express.Router();
 
 //create role
 router.post(
   "/create",
   isAuthenticatedUser,
-  authorizeRoles("admin"),
+
   createRole
 );
 //get all roles
 router.get(
   "/getallroles",
   isAuthenticatedUser,
-  authorizeRoles("admin"),
+
   getAllRoles
 );
 
@@ -29,21 +30,21 @@ router.get(
 router.get(
   "/getsearchedroles",
   isAuthenticatedUser,
-  authorizeRoles("admin"),
+
   getSearchedRoles
 );
 //update a role by id
 router.patch(
   "/updaterole/:id",
   isAuthenticatedUser,
-  authorizeRoles("admin"),
+
   updateRole
 );
 //delete role by id
 router.delete(
   "/deleterole/:id",
   isAuthenticatedUser,
-  authorizeRoles("admin"),
+
   deleteRole
 );
 
@@ -51,8 +52,15 @@ router.delete(
 router.get(
   "/individualrole/:id",
   isAuthenticatedUser,
-  authorizeRoles("admin"),
+
   getIndividualRole
 );
 
+//get single role by name
+router.get(
+  "/rolebyname/:name",
+  isAuthenticatedUser,
+
+  getRoleByName
+);
 export default router;

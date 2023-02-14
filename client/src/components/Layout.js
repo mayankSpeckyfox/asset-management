@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import DashboardOutlinedIcon from "@mui/icons-material/DashboardOutlined";
 import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
@@ -17,7 +17,9 @@ import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import GroupAddOutlinedIcon from "@mui/icons-material/GroupAddOutlined";
 import "../css/sidebar.css";
 const Layout = () => {
+  const [data, setData] = useState({});
   const [showUser, setShowUser] = useState(false);
+  const [roleData, setRoleData] = useState(null);
   const [showRole, setShowRole] = useState(false);
   const [showHelp, setShowHelp] = useState(false);
   const [showPermission, setShowPermission] = useState(false);
@@ -32,6 +34,33 @@ const Layout = () => {
         console.log(err);
       });
   };
+
+  const getData = async () => {
+    await axios
+      .get(`api/authentication/getdata`)
+      .then((res) => {
+        setData(res.data.user);
+        getRoleData(res.data.user.role);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const getRoleData = async (name) => {
+    await axios
+      .get(`api/roles/rolebyname/${name}`)
+      .then((res) => {
+        setRoleData(res.data.individualRole.permissions);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  console.log(roleData);
+  useEffect(() => {
+    getData();
+  }, []);
   return (
     <>
       <div className="sidebar sidebar-wrapper">
@@ -43,17 +72,19 @@ const Layout = () => {
           <DashboardOutlinedIcon sx={{ fontSize: "x-large" }} />
           <b> Dashboard</b>
         </Link>
-        <span
-          className="a spreader"
-          onClick={() => setShowPermission(!showPermission)}>
-          <KeyOutlinedIcon sx={{ fontSize: "x-large" }} />
-          <b> Permissions</b>
-          {showPermission ? (
-            <ArrowDropDownIcon sx={{ fontSize: "x-large" }} />
-          ) : (
-            <ArrowDropUpIcon sx={{ fontSize: "x-large" }} />
-          )}
-        </span>
+        {data.role === "admin" ? (
+          <span
+            className="a spreader"
+            onClick={() => setShowPermission(!showPermission)}>
+            <KeyOutlinedIcon sx={{ fontSize: "x-large" }} />
+            <b> Permissions</b>
+            {showPermission ? (
+              <ArrowDropDownIcon sx={{ fontSize: "x-large" }} />
+            ) : (
+              <ArrowDropUpIcon sx={{ fontSize: "x-large" }} />
+            )}
+          </span>
+        ) : null}
 
         {showPermission && (
           <span>
@@ -67,77 +98,97 @@ const Layout = () => {
             </Link>
           </span>
         )}
-        <span className="a spreader" onClick={() => setShowRole(!showRole)}>
-          <GroupOutlinedIcon sx={{ fontSize: "x-large" }} /> <b> Role</b>
-          {showRole ? (
-            <ArrowDropDownIcon sx={{ fontSize: "x-large" }} />
-          ) : (
-            <ArrowDropUpIcon sx={{ fontSize: "x-large" }} />
-          )}
-        </span>
+        {roleData && (roleData.role.create || roleData.role.read) ? (
+          <span className="a spreader" onClick={() => setShowRole(!showRole)}>
+            <GroupOutlinedIcon sx={{ fontSize: "x-large" }} /> <b> Role</b>
+            {showRole ? (
+              <ArrowDropDownIcon sx={{ fontSize: "x-large" }} />
+            ) : (
+              <ArrowDropUpIcon sx={{ fontSize: "x-large" }} />
+            )}
+          </span>
+        ) : null}
         {showRole && (
           <span>
-            <Link className="a spreader-link" to="/createrole">
-              <BorderColorOutlinedIcon sx={{ fontSize: "large" }} />{" "}
-              <b>Create Role</b>
-            </Link>
+            {roleData && roleData.role.create ? (
+              <Link className="a spreader-link" to="/createrole">
+                <BorderColorOutlinedIcon sx={{ fontSize: "large" }} />{" "}
+                <b>Create Role</b>
+              </Link>
+            ) : null}
 
-            <Link className="a spreader-link" to="/allroles">
-              <GroupAddOutlinedIcon sx={{ fontSize: "large" }} />{" "}
-              <b> All Roles</b>
-            </Link>
+            {roleData && roleData.role.read ? (
+              <Link className="a spreader-link" to="/allroles">
+                <GroupAddOutlinedIcon sx={{ fontSize: "large" }} />{" "}
+                <b> All Roles</b>
+              </Link>
+            ) : null}
           </span>
         )}
 
-        <span onClick={() => setShowUser(!showUser)} className="a spreader">
-          <AccountCircleOutlinedIcon sx={{ fontSize: "x-large" }} />
-          <b> User</b>
-          {showUser ? (
-            <ArrowDropDownIcon sx={{ fontSize: "x-large" }} />
-          ) : (
-            <ArrowDropUpIcon sx={{ fontSize: "x-large" }} />
-          )}
-        </span>
+        {roleData && (roleData.user.create || roleData.user.read) ? (
+          <span onClick={() => setShowUser(!showUser)} className="a spreader">
+            <AccountCircleOutlinedIcon sx={{ fontSize: "x-large" }} />
+            <b> User</b>
+            {showUser ? (
+              <ArrowDropDownIcon sx={{ fontSize: "x-large" }} />
+            ) : (
+              <ArrowDropUpIcon sx={{ fontSize: "x-large" }} />
+            )}
+          </span>
+        ) : null}
         {showUser && (
           <span>
-            <Link className="a spreader-link" to="/createuser">
-              <BorderColorOutlinedIcon sx={{ fontSize: "large" }} />
-              <b> Create User</b>
-            </Link>
+            {roleData && roleData.user.create ? (
+              <Link className="a spreader-link" to="/createuser">
+                <BorderColorOutlinedIcon sx={{ fontSize: "large" }} />
+                <b> Create User</b>
+              </Link>
+            ) : null}
 
-            <Link className="a spreader-link" to="/allusers">
-              <GroupAddOutlinedIcon sx={{ fontSize: "large" }} />{" "}
-              <b> All Users</b>
-            </Link>
+            {roleData && roleData.user.read ? (
+              <Link className="a spreader-link" to="/allusers">
+                <GroupAddOutlinedIcon sx={{ fontSize: "large" }} />{" "}
+                <b> All Users</b>
+              </Link>
+            ) : null}
           </span>
         )}
 
-        <span className="a spreader" onClick={() => setShowHelp(!showHelp)}>
-          <HelpOutlineOutlinedIcon sx={{ fontSize: "x-large" }} />
-          <b> Help</b>
-          {showHelp ? (
-            <ArrowDropDownIcon sx={{ fontSize: "x-large" }} />
-          ) : (
-            <ArrowDropUpIcon sx={{ fontSize: "x-large" }} />
-          )}
-        </span>
+        {roleData && (roleData.ticket.create || roleData.ticket.read) ? (
+          <span className="a spreader" onClick={() => setShowHelp(!showHelp)}>
+            <HelpOutlineOutlinedIcon sx={{ fontSize: "x-large" }} />
+            <b> Help</b>
+            {showHelp ? (
+              <ArrowDropDownIcon sx={{ fontSize: "x-large" }} />
+            ) : (
+              <ArrowDropUpIcon sx={{ fontSize: "x-large" }} />
+            )}
+          </span>
+        ) : null}
 
         {showHelp && (
           <span>
-            <Link className="a spreader-link" to="/createticket">
-              <BorderColorOutlinedIcon sx={{ fontSize: "large" }} />
-              <b> Create Ticket</b>
-            </Link>
-            <Link className="a spreader-link" to="/alltickets">
-              <StorageOutlinedIcon sx={{ fontSize: "large" }} />
-              <b> All Tickets</b>
-            </Link>
+            {roleData && roleData.ticket.create ? (
+              <Link className="a spreader-link" to="/createticket">
+                <BorderColorOutlinedIcon sx={{ fontSize: "large" }} />
+                <b> Create Ticket</b>
+              </Link>
+            ) : null}
+            {roleData && roleData.ticket.read ? (
+              <Link className="a spreader-link" to="/alltickets">
+                <StorageOutlinedIcon sx={{ fontSize: "large" }} />
+                <b> All Tickets</b>
+              </Link>
+            ) : null}
           </span>
         )}
 
-        <Link className="a " to="/settings">
-          <SettingsIcon sx={{ fontSize: "x-large" }} /> <b>Settings</b>
-        </Link>
+        {data.role === "admin" ? (
+          <Link className="a " to="/settings">
+            <SettingsIcon sx={{ fontSize: "x-large" }} /> <b>Settings</b>
+          </Link>
+        ) : null}
         <Link className=" a logout_button" to="/" onClick={logoutUser}>
           <LogoutOutlinedIcon sx={{ fontSize: "x-large" }} /> <b>Logout</b>
         </Link>
