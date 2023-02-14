@@ -93,7 +93,7 @@ const Createticket = () => {
       });
   };
 
-  const getDepartment = async (req, res) => {
+  const getDepartment = async () => {
     await axios
       .get(`api/department/getdepartment`)
       .then((res) => {
