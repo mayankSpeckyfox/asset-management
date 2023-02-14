@@ -8,15 +8,25 @@ import ModeOutlinedIcon from "@mui/icons-material/ModeOutlined";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Individualticket from "./individualticket/Individualticket.js";
-const Alltickets = () => {
+const Alltickets = (props) => {
+  const { data } = props;
   const [tickets, setTickets] = useState([]);
+
   const [ticketCount, setTicketCount] = useState(0);
   const navigate = useNavigate();
   const getTickets = async () => {
     await axios
       .get(`api/tickets/getalltickets`)
       .then((res) => {
-        setTickets(res.data.tickets);
+        if (data.department === "admin") {
+          setTickets(res.data.tickets);
+        } else if (data.department === "hr") {
+          setTickets(res.data.hrTickets);
+        } else if (data.department === "account") {
+          setTickets(res.data.accountTickets);
+        } else if (data.department === "it") {
+          setTickets(res.data.itTickets);
+        }
         setTicketCount(res.data.ticketCount);
       })
       .catch((err) => {

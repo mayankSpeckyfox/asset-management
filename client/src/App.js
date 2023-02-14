@@ -17,6 +17,7 @@ import Alltickets from "./components/ticket/alltickets/Alltickets.js";
 
 const App = () => {
   const [myToken, setMyToken] = useState();
+  const [data, setData] = useState({});
 
   const getTokenFromCookies = async () => {
     try {
@@ -27,7 +28,19 @@ const App = () => {
     }
   };
 
+  const getData = async () => {
+    await axios
+      .get(`api/authentication/getdata`)
+      .then((res) => {
+        setData(res.data.user);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   useEffect(() => {
+    getData();
     getTokenFromCookies();
   }, []);
 
@@ -42,7 +55,10 @@ const App = () => {
           <Route path="/allroles" element={myToken && <Allroles />} />
           <Route path="/settings" element={myToken && <Settings />} />
           <Route path="/createticket" element={myToken && <Createticket />} />
-          <Route path="/alltickets" element={myToken && <Alltickets />} />
+          <Route
+            path="/alltickets"
+            element={myToken && <Alltickets data={data} />}
+          />
           <Route
             path="/createpermission"
             element={myToken && <Permissions />}

@@ -33,7 +33,6 @@ const Createuser = () => {
             role: role,
           })
           .then((res) => {
-            console.log(res);
             alert(res.data.message);
             navigate("/allusers");
           })
@@ -60,8 +59,6 @@ const Createuser = () => {
         await axios
           .get(`api/roles/getallroles`)
           .then((res) => {
-            console.log(res);
-
             setAllRoles(res.data.roles);
           })
           .catch((er) => {

@@ -61,48 +61,50 @@ const Settings = () => {
             </Stack>
           </div>
           {!showEdit ? (
-            <div className="table-responsive department-tableScroll m-5 p-5 pt-4 border border-1">
-              <Stack
-                direction="row"
-                sx={{ justifyContent: "flex-end", marginBottom: "12px" }}>
-                <BorderColorIcon
-                  className="edit-icon"
-                  onClick={() => {
-                    setShowEdit(true);
-                  }}
-                  sx={{
-                    fontSize: "x-large",
-                    color: "brown",
-                    cursor: "pointer",
-                  }}
-                />
-              </Stack>
-              <table className="table table-striped text-muted">
-                <thead>
-                  <tr className="department-table-row">
-                    <th>Department</th>
-                    <th style={{ textAlign: "center" }}>Email</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr className="department-table-row">
-                    <td>ADMIN</td>
-                    <td className="table-data">{data.admin.email}</td>
-                  </tr>
-                  <tr className="department-table-row">
-                    <td>HR</td>
-                    <td className="table-data">{data.hr.email}</td>
-                  </tr>
-                  <tr className="department-table-row">
-                    <td>IT</td>
-                    <td className="table-data">{data.it.email}</td>
-                  </tr>
-                  <tr className="department-table-row">
-                    <td>ACCOUNTS</td>
-                    <td className="table-data">{data.account.email}</td>
-                  </tr>
-                </tbody>
-              </table>
+            <div className=" m-5">
+              <div className="table-responsive department-tableScroll p-5 border border-1">
+                <Stack
+                  direction="row"
+                  sx={{ justifyContent: "flex-end", marginBottom: "12px" }}>
+                  <BorderColorIcon
+                    className="edit-icon"
+                    onClick={() => {
+                      setShowEdit(true);
+                    }}
+                    sx={{
+                      fontSize: "x-large",
+                      color: "brown",
+                      cursor: "pointer",
+                    }}
+                  />
+                </Stack>
+                <table className="table table-striped text-muted">
+                  <thead>
+                    <tr className="department-table-row">
+                      <th>Department</th>
+                      <th style={{ textAlign: "center" }}>Email</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr className="department-table-row">
+                      <td>ADMIN</td>
+                      <td className="table-data">{data.admin.email}</td>
+                    </tr>
+                    <tr className="department-table-row">
+                      <td>HR</td>
+                      <td className="table-data">{data.hr.email}</td>
+                    </tr>
+                    <tr className="department-table-row">
+                      <td>IT</td>
+                      <td className="table-data">{data.it.email}</td>
+                    </tr>
+                    <tr className="department-table-row">
+                      <td>ACCOUNTS</td>
+                      <td className="table-data">{data.account.email}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
           ) : (
             <Editdepartment closeEdit={closeEdit} data={data} />
