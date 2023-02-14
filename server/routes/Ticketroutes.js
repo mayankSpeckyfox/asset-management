@@ -11,7 +11,7 @@ import {
 } from "../controllers/ticketController.js";
 const router = express.Router();
 // send email
-router.post("/sendemail", isAuthenticatedUser, sendEmail);
+router.post("/sendemail/:email", isAuthenticatedUser, sendEmail);
 // create ticket
 router.post("/create", isAuthenticatedUser, createTicket);
 // get all tickets

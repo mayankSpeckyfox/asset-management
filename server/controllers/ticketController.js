@@ -4,7 +4,9 @@ import nodemailer from "nodemailer";
 //send email
 export const sendEmail = async (req, res) => {
   try {
-    const { email, subject, description } = req.body;
+    const { subject, description } = req.body;
+    const { email } = req.params;
+
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
@@ -14,12 +16,26 @@ export const sendEmail = async (req, res) => {
     });
     const ms = Date.now();
     const date = Date(ms);
-
+    if (req.files) {
+      var imagedata = req.files.file.data;
+      var imagename = req.files.file.name;
+    }
     const mailOptions = {
       from: process.env.EMAIL,
       to: email,
       subject: "Ticket",
       text: `Subject:${subject} , Description:${description} , Date: ${date}!   `,
+      html: `<h2>Subject: ${subject}</h2>
+      <h2>Description:${description}</h2>
+      <h2>Date:${date}</h2>
+   ${req.files ? ` <img src="cid:image@nodemailer" />` : `<p></p>`}`,
+      attachments: req.files && [
+        {
+          filename: imagename,
+          content: imagedata,
+          cid: "image@nodemailer",
+        },
+      ],
     };
     transporter.sendMail(mailOptions, function (error, info) {
       if (error) {

@@ -37,21 +37,21 @@ const Createticket = () => {
 
     formdata.append("file", file);
 
-    const sendEmail = async (receiver, SUBJECT, DESCRIPTION) => {
+    const sendEmail = async (receiver, formdata) => {
       await axios
-        .post(`api/tickets/sendemail`, {
-          email: receiver,
-          subject: SUBJECT,
-          description: DESCRIPTION,
-        })
+        .post(
+          `api/tickets/sendemail/${receiver}`,
+
+          formdata
+        )
         .then((res) => {})
         .catch((err) => {
           console.log(err);
         });
     };
     if (department) {
-      sendEmail(data.email, d.subject, d.description);
-      sendEmail(depData[department].email, d.subject, d.description);
+      sendEmail(data.email, formdata);
+      sendEmail(depData[department].email, formdata);
     }
     const submitTicketData = async () => {
       try {
