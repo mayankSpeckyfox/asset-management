@@ -147,7 +147,7 @@ const Createuser = () => {
               onChange={(e) => {
                 setDepartment(e.target.value);
               }}>
-              <option>Select-Department</option>
+              <option value="">Select-Department</option>
               <option value="admin">ADMIN</option>
               <option value="hr">HR</option>
               <option value="it">IT</option>
@@ -187,7 +187,7 @@ const Createuser = () => {
               name="roles"
               onChange={(e) => setRole(e.target.value)}
               className="form-control">
-              <option>Select-Role</option>
+              <option value="">Select-Role</option>
               {allRoles.map((val, ind) => {
                 return (
                   <option key={val._id} value={val.rolename}>

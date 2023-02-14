@@ -20,6 +20,7 @@ const Alltickets = (props) => {
       .then((res) => {
         if (data.department === "admin") {
           setTickets(res.data.tickets);
+          setTicketCount(res.data.ticketCount);
         } else if (data.department === "hr") {
           setTickets(res.data.hrTickets);
         } else if (data.department === "account") {
@@ -27,7 +28,6 @@ const Alltickets = (props) => {
         } else if (data.department === "it") {
           setTickets(res.data.itTickets);
         }
-        setTicketCount(res.data.ticketCount);
       })
       .catch((err) => {
         console.log(err);
@@ -101,7 +101,11 @@ const Alltickets = (props) => {
           </div>
 
           <div className="table-responsive tickets-tableScroll ticket-table-class p-5">
-            <small className="ticket-count">Ticket Count : {ticketCount}</small>
+            {ticketCount ? (
+              <small className="ticket-count">
+                Ticket Count : {ticketCount}
+              </small>
+            ) : null}
             <table className="table table-striped text-muted">
               <thead>
                 <tr className="ticket-table-row">
