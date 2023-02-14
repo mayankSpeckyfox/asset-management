@@ -1,9 +1,10 @@
 import React from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import "./Individualticket.css";
+import FileDownloadIcon from "@mui/icons-material/FileDownload";
 const Individualticket = (props) => {
-  const { _id, department, subject, description, createdAt } = props.val;
-  const { deleteFun } = props;
+  const { _id, department, subject, description, createdAt, image } = props.val;
+  const { deleteFun, downloadImage } = props;
   return (
     <>
       <td>{_id}</td>
@@ -11,6 +12,17 @@ const Individualticket = (props) => {
       <td>{subject}</td>
       <td>{description}</td>
       <td>{createdAt}</td>
+      {image ? (
+        <td>
+          {image.contentType}{" "}
+          <FileDownloadIcon
+            onClick={() => downloadImage(_id)}
+            sx={{ color: "brown", fontSize: "large", cursor: "pointer" }}
+          />
+        </td>
+      ) : (
+        <td>NA</td>
+      )}
       <td className="tableData">
         {" "}
         <DeleteIcon

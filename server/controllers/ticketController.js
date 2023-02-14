@@ -57,9 +57,10 @@ export const createTicket = async (req, res) => {
 
     const ticket = new Ticket({ department, subject, description });
     if (req.files) {
-      const { data, mimetype } = req.files.file;
+      const { data, mimetype, name } = req.files.file;
       ticket.image.data = data;
       ticket.image.contentType = mimetype;
+      ticket.image.imgname = name;
     }
     await ticket.save();
     if (!ticket) {
@@ -158,6 +159,23 @@ export const deleteTicket = async (req, res) => {
     res
       .status(200)
       .json({ message: "Ticket deleted successfully", deletedTicket });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "sorry error occured" });
+  }
+};
+
+//download image
+
+export const downloadImage = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const ticket = await Ticket.findById({ _id: id }).select("+image.data");
+    if (!ticket) {
+      return res.status(404).json({ message: "Ticket does not exist" });
+    }
+    res.set("Content-Type", ticket.image.contentType);
+    res.status(200).send(ticket.image.data);
   } catch (err) {
     console.log(err);
     res.status(500).json({ message: "sorry error occured" });

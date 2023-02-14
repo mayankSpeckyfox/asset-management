@@ -23,6 +23,23 @@ const Alltickets = () => {
         console.log(err);
       });
   };
+
+  //download image function
+  const downloadImage = async (id) => {
+    const res = await axios.get(`api/tickets/getindividualticket/${id}`);
+
+    const response = await axios.get(`api/tickets/download/${id}`, {
+      responseType: "blob",
+    });
+
+    const url = URL.createObjectURL(new Blob([response.data]));
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = res.data.ticket.image.imgname;
+    link.click();
+    URL.revokeObjectURL(url);
+  };
+
   const deleteFun = async (id) => {
     await axios
       .delete(`api/tickets/deleteticket/${id}`)
@@ -83,6 +100,7 @@ const Alltickets = () => {
                   <th>Subject</th>
                   <th>Description</th>
                   <th>Created At</th>
+                  <th>Image</th>
                   <th style={{ textAlign: "center" }}>Delete</th>
                 </tr>
               </thead>
@@ -90,7 +108,11 @@ const Alltickets = () => {
                 {tickets.map((val, ind) => {
                   return (
                     <tr key={val._id} className="ticket-table-row">
-                      <Individualticket val={val} deleteFun={deleteFun} />
+                      <Individualticket
+                        val={val}
+                        deleteFun={deleteFun}
+                        downloadImage={downloadImage}
+                      />
                     </tr>
                   );
                 })}

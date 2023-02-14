@@ -14,6 +14,7 @@ const ticketSchema = new mongoose.Schema({
     required: true,
   },
   image: {
+    imgname: String,
     data: {
       type: Buffer,
       select: false,

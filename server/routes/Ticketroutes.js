@@ -4,6 +4,7 @@ import { isAuthenticatedUser } from "../middleware/auth.js";
 import {
   createTicket,
   deleteTicket,
+  downloadImage,
   getAllTickets,
   getIndividualTicket,
   sendEmail,
@@ -26,5 +27,6 @@ router.get(
 );
 // delete ticket by id
 router.delete("/deleteticket/:id", isAuthenticatedUser, deleteTicket);
-
+//download ticket image
+router.get("/download/:id", isAuthenticatedUser, downloadImage);
 export default router;
