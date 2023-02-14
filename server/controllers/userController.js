@@ -4,17 +4,17 @@ import { sendToken } from "../utils/jwtToken.js";
 //create a user
 export const createUser = async (req, res) => {
   try {
-    const { name, email, password, cpassword, role } = req.body;
+    const { name, email, department, password, cpassword, role } = req.body;
     const userExist = await User.findOne({ email });
 
-    if (!name || !email || !password || !cpassword || !role) {
+    if (!name || !email || !department || !password || !cpassword || !role) {
       return res.status(422).json({ error: "Please fill all the fields" });
     } else if (userExist) {
       return res.status(422).json({ message: "Sorry user already exists" });
     } else if (password !== cpassword) {
       return res.status(400).json({ error: "Passwords do not match" });
     } else {
-      const result = new User({ name, email, password, role });
+      const result = new User({ name, email, department, password, role });
       await result.save();
       res.status(201).json({ message: "user created successfully", result });
     }
@@ -83,7 +83,7 @@ export const getSearchedUsers = async (req, res) => {
 export const updateUser = async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, email, role, currentemail } = req.body;
+    const { name, email, department, role, currentemail } = req.body;
     if (email !== currentemail) {
       const emailExist = await User.findOne({ email: email });
       if (emailExist) {
@@ -100,7 +100,7 @@ export const updateUser = async (req, res) => {
     }
     const updatedUser = await User.findByIdAndUpdate(
       { _id: id },
-      { name, email, role },
+      { name, email, department, role },
       { new: true }
     );
     if (!updatedUser) {

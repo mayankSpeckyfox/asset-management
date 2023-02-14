@@ -165,6 +165,7 @@ const Allusers = () => {
                       <tr className="user-table-row">
                         <th>Users</th>
                         <th>Email</th>
+                        <th>Department</th>
                         <th>Role</th>
                         <th style={{ textAlign: "center" }}>Edit</th>
                         <th style={{ textAlign: "center" }}>Delete</th>
@@ -177,6 +178,7 @@ const Allusers = () => {
                             <Individualuser
                               name={val.name}
                               email={val.email}
+                              department={val.department}
                               role={val.role}
                               editFun={editFun}
                               id={val._id}
@@ -197,7 +199,9 @@ const Allusers = () => {
                     <tr className="user-table-row">
                       <th>Users</th>
                       <th>Email</th>
+                      <th>Department</th>
                       <th>Role</th>
+
                       <th style={{ textAlign: "center" }}>Edit</th>
                       <th style={{ textAlign: "center" }}>Delete</th>
                     </tr>
@@ -209,6 +213,7 @@ const Allusers = () => {
                           <Individualuser
                             name={val.name}
                             email={val.email}
+                            department={val.department}
                             editFun={editFun}
                             role={val.role}
                             id={val._id}
@@ -260,6 +265,7 @@ const Allusers = () => {
           id={editData._id}
           name={editData.name}
           email={editData.email}
+          department={editData.department}
           role={editData.role}
           closeEdit={closeEdit}
         />

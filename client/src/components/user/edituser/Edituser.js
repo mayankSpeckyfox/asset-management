@@ -11,8 +11,9 @@ import { useNavigate } from "react-router-dom";
 import { Stack } from "@mui/material";
 import { useForm } from "react-hook-form";
 const Edituser = (props) => {
-  const { id, name, email, role, closeEdit } = props;
+  const { id, name, email, role, closeEdit, department } = props;
   const [allRoles, setAllRoles] = useState([]);
+  const [editdepartment, setEditDepartment] = useState(department);
   const [roleName, setRole] = useState(role);
   const navigate = useNavigate();
 
@@ -35,6 +36,7 @@ const Edituser = (props) => {
         .patch(`api/users/updateuser/${id}`, {
           name: data.name,
           email: data.email,
+          department: editdepartment,
           role: roleName,
           currentemail: email,
         })
@@ -136,6 +138,21 @@ const Edituser = (props) => {
                 *Name is required
               </span>
             )}
+            <hr />
+            <label className="form-label">Department</label>
+
+            <select
+              className="form-control "
+              value={editdepartment}
+              onChange={(e) => {
+                setEditDepartment(e.target.value);
+              }}>
+              <option>Select-Department</option>
+              <option value="admin">ADMIN</option>
+              <option value="hr">HR</option>
+              <option value="it">IT</option>
+              <option value="account">ACCOUNTS</option>
+            </select>
             <hr />
             <label className="form-label">Email</label>
             <input

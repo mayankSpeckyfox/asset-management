@@ -8,8 +8,10 @@ import { useForm } from "react-hook-form";
 import CottageOutlinedIcon from "@mui/icons-material/CottageOutlined";
 import { Stack } from "@mui/material";
 import Footer from "../footer/Footer.js";
+
 const Createuser = () => {
   const [allRoles, setAllRoles] = useState([]);
+  const [department, setDepartment] = useState("");
   const [role, setRole] = useState();
   const navigate = useNavigate();
   const {
@@ -25,6 +27,7 @@ const Createuser = () => {
           .post(`api/users/create`, {
             name: data.name,
             email: data.email,
+            department: department,
             password: data.password,
             cpassword: data.cpassword,
             role: role,
@@ -48,6 +51,7 @@ const Createuser = () => {
     };
     submitUserData();
     setRole("");
+    setDepartment("");
     reset();
   };
   useEffect(() => {
@@ -136,6 +140,22 @@ const Createuser = () => {
                 *Email is required
               </span>
             )}
+            <hr />
+
+            <label className="form-label">Department</label>
+
+            <select
+              className="form-control "
+              value={department}
+              onChange={(e) => {
+                setDepartment(e.target.value);
+              }}>
+              <option>Select-Department</option>
+              <option value="admin">ADMIN</option>
+              <option value="hr">HR</option>
+              <option value="it">IT</option>
+              <option value="account">ACCOUNTS</option>
+            </select>
             <hr />
             <label className="form-label">Password</label>
             <input
