@@ -35,7 +35,7 @@ const Editrole = (props) => {
         .then((res) => {
           alert(res.data.message);
 
-          navigate("/");
+          window.location.reload();
         })
         .catch((err) => {
           console.log(err);

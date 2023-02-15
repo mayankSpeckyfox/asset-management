@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 const Editdepartment = (props) => {
   const { closeEdit, data } = props;
-  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -35,7 +35,7 @@ const Editdepartment = (props) => {
         .then((res) => {
           alert(res.data.message);
 
-          navigate("/");
+          window.location.reload();
         })
         .catch((err) => {
           console.log(err);
