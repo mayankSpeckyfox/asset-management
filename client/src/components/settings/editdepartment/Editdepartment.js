@@ -4,7 +4,7 @@ import { Stack } from "@mui/material";
 import "./Editdepartment.css";
 import axios from "axios";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+
 const Editdepartment = (props) => {
   const { closeEdit, data } = props;
 
