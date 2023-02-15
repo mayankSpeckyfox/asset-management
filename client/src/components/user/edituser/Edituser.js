@@ -43,7 +43,7 @@ const Edituser = (props) => {
         .then((res) => {
           alert(res.data.message);
 
-          window.location.reload();
+          navigate("/");
         })
         .catch((err) => {
           console.log(err);
