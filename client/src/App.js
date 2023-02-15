@@ -62,27 +62,66 @@ const App = () => {
         <Route path="/" element={myToken && <Layout />}>
           <Route index element={myToken ? <Home /> : <Login />} />
           {roleData && roleData.user.create ? (
-            <Route path="/createuser" element={myToken && <Createuser />} />
+            <Route
+              path="/createuser"
+              element={myToken && <Createuser read={roleData.user.read} />}
+            />
           ) : null}
           {roleData && roleData.role.create ? (
-            <Route path="/createrole" element={myToken && <Createrole />} />
+            <Route
+              path="/createrole"
+              element={myToken && <Createrole read={roleData.role.read} />}
+            />
           ) : null}
           {roleData && roleData.user.read ? (
-            <Route path="/allusers" element={myToken && <Allusers />} />
+            <Route
+              path="/allusers"
+              element={
+                myToken && (
+                  <Allusers
+                    create={roleData.user.create}
+                    update={roleData.user.update}
+                    del={roleData.user.delete}
+                  />
+                )
+              }
+            />
           ) : null}
           {roleData && roleData.role.read ? (
-            <Route path="/allroles" element={myToken && <Allroles />} />
+            <Route
+              path="/allroles"
+              element={
+                myToken && (
+                  <Allroles
+                    create={roleData.role.create}
+                    update={roleData.role.update}
+                    del={roleData.role.delete}
+                  />
+                )
+              }
+            />
           ) : null}
           {data.role === "admin" ? (
             <Route path="/settings" element={myToken && <Settings />} />
           ) : null}
           {roleData && roleData.ticket.create ? (
-            <Route path="/createticket" element={myToken && <Createticket />} />
+            <Route
+              path="/createticket"
+              element={myToken && <Createticket read={roleData.ticket.read} />}
+            />
           ) : null}
           {roleData && roleData.ticket.read ? (
             <Route
               path="/alltickets"
-              element={myToken && <Alltickets data={data} />}
+              element={
+                myToken && (
+                  <Alltickets
+                    data={data}
+                    create={roleData.ticket.create}
+                    del={roleData.ticket.delete}
+                  />
+                )
+              }
             />
           ) : null}
           {data.role === "admin" ? (

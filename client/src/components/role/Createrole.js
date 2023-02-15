@@ -9,7 +9,8 @@ import Footer from "../footer/Footer.js";
 
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import { Stack } from "@mui/material";
-const Createrole = () => {
+const Createrole = (props) => {
+  const { read } = props;
   const [permissions, setPermissions] = useState([]);
   const [rolename, setRolename] = useState();
   const navigate = useNavigate();
@@ -73,15 +74,17 @@ const Createrole = () => {
                 onClick={() => navigate("/")}
                 sx={{ fontSize: "x-large", color: "brown" }}
               />
-              <Stack
-                direction="row"
-                className="nav-icon"
-                onClick={() => navigate("/allroles")}
-                spacing={1}
-                sx={{ color: "brown", cursor: "pointer" }}>
-                <GroupOutlinedIcon sx={{ fontSize: "medium" }} />
-                <b>All Roles</b>
-              </Stack>
+              {read ? (
+                <Stack
+                  direction="row"
+                  className="nav-icon"
+                  onClick={() => navigate("/allroles")}
+                  spacing={1}
+                  sx={{ color: "brown", cursor: "pointer" }}>
+                  <GroupOutlinedIcon sx={{ fontSize: "medium" }} />
+                  <b>All Roles</b>
+                </Stack>
+              ) : null}
             </Stack>
           </div>
           <div className="p-5 border border-1 mt-5  form-class">

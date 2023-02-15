@@ -10,7 +10,8 @@ import { Stack } from "@mui/material";
 import Footer from "../footer/Footer.js";
 import Individualrole from "./individualrole/Individualrole.js";
 import Editrole from "./editrole/Editrole.js";
-const Allroles = () => {
+const Allroles = (props) => {
+  const { create, update, del } = props;
   const [roles, setRoles] = useState([]);
   const [pageNumber, setPageNumber] = useState(1);
   const [showTable, setShowTable] = useState(false);
@@ -118,14 +119,16 @@ const Allroles = () => {
                   onClick={() => navigate("/")}
                   sx={{ fontSize: "x-large", color: "brown" }}
                 />
-                <Stack
-                  direction="row"
-                  onClick={() => navigate("/createrole")}
-                  spacing={1}
-                  sx={{ color: "brown", cursor: "pointer" }}>
-                  <ModeOutlinedIcon sx={{ fontSize: "medium" }} />
-                  <b className="nav-icon">Create Role</b>
-                </Stack>
+                {create ? (
+                  <Stack
+                    direction="row"
+                    onClick={() => navigate("/createrole")}
+                    spacing={1}
+                    sx={{ color: "brown", cursor: "pointer" }}>
+                    <ModeOutlinedIcon sx={{ fontSize: "medium" }} />
+                    <b className="nav-icon">Create Role</b>
+                  </Stack>
+                ) : null}
               </Stack>
             </div>
             <div className="p-5 border border-1  mt-5 form-class">
@@ -162,8 +165,12 @@ const Allroles = () => {
                     <thead>
                       <tr className="role-table-row">
                         <th>Roles</th>
-                        <th style={{ textAlign: "center" }}>Edit</th>
-                        <th style={{ textAlign: "center" }}>Delete</th>
+                        {update ? (
+                          <th style={{ textAlign: "center" }}>Edit</th>
+                        ) : null}
+                        {del ? (
+                          <th style={{ textAlign: "center" }}>Delete</th>
+                        ) : null}
                       </tr>
                     </thead>
                     <tbody>
@@ -175,6 +182,8 @@ const Allroles = () => {
                               id={val._id}
                               editFun={editFun}
                               deleteFun={deleteFun}
+                              update={update}
+                              del={del}
                             />
                           </tr>
                         );
@@ -190,8 +199,12 @@ const Allroles = () => {
                   <thead>
                     <tr className="permission-table-row">
                       <th>Roles</th>
-                      <th style={{ textAlign: "center" }}>Edit</th>
-                      <th style={{ textAlign: "center" }}>Delete</th>
+                      {update ? (
+                        <th style={{ textAlign: "center" }}>Edit</th>
+                      ) : null}
+                      {del ? (
+                        <th style={{ textAlign: "center" }}>Delete</th>
+                      ) : null}
                     </tr>
                   </thead>
                   <tbody>
@@ -203,6 +216,8 @@ const Allroles = () => {
                             id={val._id}
                             editFun={editFun}
                             deleteFun={deleteFun}
+                            update={update}
+                            del={del}
                           />
                         </tr>
                       );

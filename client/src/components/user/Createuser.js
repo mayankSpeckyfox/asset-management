@@ -9,7 +9,8 @@ import CottageOutlinedIcon from "@mui/icons-material/CottageOutlined";
 import { Stack } from "@mui/material";
 import Footer from "../footer/Footer.js";
 
-const Createuser = () => {
+const Createuser = (props) => {
+  const { read } = props;
   const [allRoles, setAllRoles] = useState([]);
   const [department, setDepartment] = useState("");
   const [role, setRole] = useState();
@@ -95,15 +96,17 @@ const Createuser = () => {
                 onClick={() => navigate("/")}
                 sx={{ fontSize: "x-large", color: "brown" }}
               />
-              <Stack
-                className="nav-icon"
-                direction="row"
-                onClick={() => navigate("/allusers")}
-                spacing={1}
-                sx={{ color: "brown", cursor: "pointer" }}>
-                <GroupAddOutlinedIcon sx={{ fontSize: "medium" }} />
-                <b>All Users</b>
-              </Stack>
+              {read ? (
+                <Stack
+                  className="nav-icon"
+                  direction="row"
+                  onClick={() => navigate("/allusers")}
+                  spacing={1}
+                  sx={{ color: "brown", cursor: "pointer" }}>
+                  <GroupAddOutlinedIcon sx={{ fontSize: "medium" }} />
+                  <b>All Users</b>
+                </Stack>
+              ) : null}
             </Stack>
           </div>
           <form

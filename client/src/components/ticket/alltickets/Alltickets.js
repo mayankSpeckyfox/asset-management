@@ -9,7 +9,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Individualticket from "./individualticket/Individualticket.js";
 const Alltickets = (props) => {
-  const { data } = props;
+  const { data, create, del } = props;
   const [tickets, setTickets] = useState([]);
 
   const [ticketCount, setTicketCount] = useState(0);
@@ -89,14 +89,16 @@ const Alltickets = (props) => {
                 onClick={() => navigate("/")}
                 sx={{ fontSize: "x-large", color: "brown" }}
               />
-              <Stack
-                direction="row"
-                onClick={() => navigate("/createticket")}
-                spacing={1}
-                sx={{ color: "brown", cursor: "pointer" }}>
-                <ModeOutlinedIcon sx={{ fontSize: "medium" }} />
-                <b className="nav-icon">Create Ticket</b>
-              </Stack>
+              {create ? (
+                <Stack
+                  direction="row"
+                  onClick={() => navigate("/createticket")}
+                  spacing={1}
+                  sx={{ color: "brown", cursor: "pointer" }}>
+                  <ModeOutlinedIcon sx={{ fontSize: "medium" }} />
+                  <b className="nav-icon">Create Ticket</b>
+                </Stack>
+              ) : null}
             </Stack>
           </div>
 
@@ -115,7 +117,7 @@ const Alltickets = (props) => {
                   <th>Description</th>
                   <th>Created At</th>
                   <th>Image</th>
-                  <th style={{ textAlign: "center" }}>Delete</th>
+                  {del ? <th style={{ textAlign: "center" }}>Delete</th> : null}
                 </tr>
               </thead>
               <tbody>
@@ -126,6 +128,7 @@ const Alltickets = (props) => {
                         val={val}
                         deleteFun={deleteFun}
                         downloadImage={downloadImage}
+                        del={del}
                       />
                     </tr>
                   );
