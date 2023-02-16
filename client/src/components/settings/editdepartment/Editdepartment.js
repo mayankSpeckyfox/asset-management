@@ -20,6 +20,9 @@ const Editdepartment = (props) => {
       hr: data.hr.email,
       it: data.it.email,
       account: data.account.email,
+      qa: data.qa.email,
+      development: data.development.email,
+      sales: data.sales.email,
     },
   });
 
@@ -31,6 +34,9 @@ const Editdepartment = (props) => {
           hr: { email: d.hr },
           it: { email: d.it },
           account: { email: d.account },
+          qa: { email: d.qa },
+          development: { email: d.development },
+          sales: { email: d.sales },
         })
         .then((res) => {
           alert(res.data.message);
@@ -108,6 +114,48 @@ const Editdepartment = (props) => {
         />
 
         {errors.account && (
+          <span className="department-validation-error">
+            *This field is required
+          </span>
+        )}
+        <hr />
+        <label className="form-label">QA</label>
+        <input
+          placeholder="Email"
+          className="form-control"
+          type="email"
+          {...register("qa", { required: true })}
+        />
+
+        {errors.qa && (
+          <span className="department-validation-error">
+            *This field is required
+          </span>
+        )}
+        <hr />
+        <label className="form-label">DEVELOPMENT</label>
+        <input
+          placeholder="Email"
+          className="form-control"
+          type="email"
+          {...register("development", { required: true })}
+        />
+
+        {errors.development && (
+          <span className="department-validation-error">
+            *This field is required
+          </span>
+        )}
+        <hr />
+        <label className="form-label">SALES</label>
+        <input
+          placeholder="Email"
+          className="form-control"
+          type="email"
+          {...register("sales", { required: true })}
+        />
+
+        {errors.sales && (
           <span className="department-validation-error">
             *This field is required
           </span>

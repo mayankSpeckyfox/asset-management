@@ -2,6 +2,7 @@ import express from "express";
 import { isAuthenticatedUser } from "../middleware/auth.js";
 
 import {
+  changeStatusTicket,
   createTicket,
   deleteTicket,
   downloadImage,
@@ -19,6 +20,8 @@ router.post("/create", isAuthenticatedUser, createTicket);
 router.get("/getalltickets", isAuthenticatedUser, getAllTickets);
 // Update ticket by id
 router.patch("/updateticket/:id", isAuthenticatedUser, updateTicket);
+//change ticket status
+router.patch("/changestatus/:id", isAuthenticatedUser, changeStatusTicket);
 // get individual ticket by id
 router.get(
   "/getindividualticket/:id",

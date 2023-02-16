@@ -3,8 +3,9 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import "./Individualticket.css";
 import FileDownloadIcon from "@mui/icons-material/FileDownload";
 const Individualticket = (props) => {
-  const { _id, department, subject, description, createdAt, image } = props.val;
-  const { deleteFun, downloadImage, del } = props;
+  const { _id, department, subject, description, status, createdAt, image } =
+    props.val;
+  const { deleteFun, downloadImage } = props;
   return (
     <>
       <td>{_id}</td>
@@ -12,6 +13,7 @@ const Individualticket = (props) => {
       <td>{subject}</td>
       <td>{description}</td>
       <td>{createdAt}</td>
+
       {image ? (
         <td>
           {image.contentType}{" "}
@@ -23,18 +25,17 @@ const Individualticket = (props) => {
       ) : (
         <td>NA</td>
       )}
-      {del ? (
-        <td className="tableData">
-          {" "}
-          <DeleteIcon
-            onClick={() => deleteFun(_id)}
-            sx={{
-              color: "brown",
-              cursor: "pointer",
-            }}
-          />
-        </td>
-      ) : null}
+      <td>{status}</td>
+      <td className="tableData">
+        {" "}
+        <DeleteIcon
+          onClick={() => deleteFun(_id)}
+          sx={{
+            color: "brown",
+            cursor: "pointer",
+          }}
+        />
+      </td>
     </>
   );
 };

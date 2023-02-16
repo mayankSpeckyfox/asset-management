@@ -9,7 +9,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Individualticket from "./individualticket/Individualticket.js";
 const Alltickets = (props) => {
-  const { data, create, del } = props;
+  const { data } = props;
   const [tickets, setTickets] = useState([]);
 
   const [ticketCount, setTicketCount] = useState(0);
@@ -27,6 +27,12 @@ const Alltickets = (props) => {
           setTickets(res.data.accountTickets);
         } else if (data.department === "it") {
           setTickets(res.data.itTickets);
+        } else if (data.department === "qa") {
+          setTickets(res.data.qaTickets);
+        } else if (data.department === "development") {
+          setTickets(res.data.developmentTickets);
+        } else if (data.department === "sales") {
+          setTickets(res.data.salesTickets);
         }
       })
       .catch((err) => {
@@ -89,16 +95,15 @@ const Alltickets = (props) => {
                 onClick={() => navigate("/")}
                 sx={{ fontSize: "x-large", color: "brown" }}
               />
-              {create ? (
-                <Stack
-                  direction="row"
-                  onClick={() => navigate("/createticket")}
-                  spacing={1}
-                  sx={{ color: "brown", cursor: "pointer" }}>
-                  <ModeOutlinedIcon sx={{ fontSize: "medium" }} />
-                  <b className="nav-icon">Create Ticket</b>
-                </Stack>
-              ) : null}
+
+              <Stack
+                direction="row"
+                onClick={() => navigate("/createticket")}
+                spacing={1}
+                sx={{ color: "brown", cursor: "pointer" }}>
+                <ModeOutlinedIcon sx={{ fontSize: "medium" }} />
+                <b className="nav-icon">Create Ticket</b>
+              </Stack>
             </Stack>
           </div>
 
@@ -117,7 +122,8 @@ const Alltickets = (props) => {
                   <th>Description</th>
                   <th>Created At</th>
                   <th>Image</th>
-                  {del ? <th style={{ textAlign: "center" }}>Delete</th> : null}
+                  <th>Status</th>
+                  <th style={{ textAlign: "center" }}>Delete</th>
                 </tr>
               </thead>
               <tbody>
@@ -128,7 +134,6 @@ const Alltickets = (props) => {
                         val={val}
                         deleteFun={deleteFun}
                         downloadImage={downloadImage}
-                        del={del}
                       />
                     </tr>
                   );

@@ -21,6 +21,10 @@ const ticketSchema = new mongoose.Schema({
     },
     contentType: String,
   },
+  status: {
+    type: String,
+    default: "active",
+  },
   createdAt: {
     type: Date,
     default: Date.now,

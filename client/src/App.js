@@ -104,26 +104,14 @@ const App = () => {
           {data.role === "admin" ? (
             <Route path="/settings" element={myToken && <Settings />} />
           ) : null}
-          {roleData && roleData.ticket.create ? (
-            <Route
-              path="/createticket"
-              element={myToken && <Createticket read={roleData.ticket.read} />}
-            />
-          ) : null}
-          {roleData && roleData.ticket.read ? (
-            <Route
-              path="/alltickets"
-              element={
-                myToken && (
-                  <Alltickets
-                    data={data}
-                    create={roleData.ticket.create}
-                    del={roleData.ticket.delete}
-                  />
-                )
-              }
-            />
-          ) : null}
+
+          <Route path="/createticket" element={myToken && <Createticket />} />
+
+          <Route
+            path="/alltickets"
+            element={myToken && <Alltickets data={data} />}
+          />
+
           {data.role === "admin" ? (
             <Route
               path="/createpermission"

@@ -93,6 +93,15 @@ export const getAllTickets = async (req, res) => {
     const accountTickets = await Ticket.find({
       department: { $regex: "account", $options: "i" },
     });
+    const qaTickets = await Ticket.find({
+      department: { $regex: "qa", $options: "i" },
+    });
+    const developmentTickets = await Ticket.find({
+      department: { $regex: "development", $options: "i" },
+    });
+    const salesTickets = await Ticket.find({
+      department: { $regex: "sales", $options: "i" },
+    });
     res.status(200).json({
       message: "tickets fetched successfully",
       tickets,
@@ -100,6 +109,9 @@ export const getAllTickets = async (req, res) => {
       itTickets,
       adminTickets,
       accountTickets,
+      qaTickets,
+      developmentTickets,
+      salesTickets,
       ticketCount,
     });
   } catch (err) {
@@ -119,6 +131,27 @@ export const updateTicket = async (req, res) => {
     const updatedTicket = await Ticket.findByIdAndUpdate(
       { _id: id },
       req.body,
+      { new: true }
+    );
+    res
+      .status(200)
+      .json({ message: "Ticket updated successfully", updatedTicket });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "sorry error occured" });
+  }
+};
+//change status of ticket
+export const changeStatusTicket = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const ticketExist = await Ticket.findById({ _id: id });
+    if (!ticketExist) {
+      return res.status(404).json({ message: "Ticket does not exist" });
+    }
+    const updatedTicket = await Ticket.findByIdAndUpdate(
+      { _id: id },
+      { status: req.body.status },
       { new: true }
     );
     res

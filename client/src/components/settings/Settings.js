@@ -14,6 +14,9 @@ const Settings = () => {
     hr: { email: "" },
     it: { email: "" },
     account: { email: "" },
+    qa: { email: "" },
+    development: { email: "" },
+    sales: { email: "" },
   });
   const [showEdit, setShowEdit] = useState(false);
   const navigate = useNavigate();
@@ -101,6 +104,18 @@ const Settings = () => {
                     <tr className="department-table-row">
                       <td>ACCOUNTS</td>
                       <td className="table-data">{data.account.email}</td>
+                    </tr>
+                    <tr className="department-table-row">
+                      <td>QA</td>
+                      <td className="table-data">{data.qa.email}</td>
+                    </tr>
+                    <tr className="department-table-row">
+                      <td>DEVELOPMENT</td>
+                      <td className="table-data">{data.development.email}</td>
+                    </tr>
+                    <tr className="department-table-row">
+                      <td>SALES</td>
+                      <td className="table-data">{data.sales.email}</td>
                     </tr>
                   </tbody>
                 </table>

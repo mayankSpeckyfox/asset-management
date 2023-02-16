@@ -169,6 +169,7 @@ const Allusers = (props) => {
                         <th>Users</th>
                         <th>Email</th>
                         <th>Department</th>
+                        <th>Designation</th>
                         <th>Role</th>
                         {update ? (
                           <th style={{ textAlign: "center" }}>Edit</th>
@@ -186,6 +187,7 @@ const Allusers = (props) => {
                               name={val.name}
                               email={val.email}
                               department={val.department}
+                              designation={val.designation}
                               role={val.role}
                               editFun={editFun}
                               id={val._id}
@@ -209,6 +211,7 @@ const Allusers = (props) => {
                       <th>Users</th>
                       <th>Email</th>
                       <th>Department</th>
+                      <th>Designation</th>
                       <th>Role</th>
 
                       {update ? (
@@ -227,6 +230,7 @@ const Allusers = (props) => {
                             name={val.name}
                             email={val.email}
                             department={val.department}
+                            designation={val.designation}
                             editFun={editFun}
                             role={val.role}
                             id={val._id}
@@ -281,6 +285,7 @@ const Allusers = (props) => {
           name={editData.name}
           email={editData.email}
           department={editData.department}
+          designation={editData.designation}
           role={editData.role}
           closeEdit={closeEdit}
         />

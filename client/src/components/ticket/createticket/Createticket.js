@@ -8,8 +8,7 @@ import { useNavigate } from "react-router-dom";
 import CottageOutlinedIcon from "@mui/icons-material/CottageOutlined";
 import axios from "axios";
 import { useForm } from "react-hook-form";
-const Createticket = (props) => {
-  const { read } = props;
+const Createticket = () => {
   const [data, setData] = useState({});
   const inputRef = useRef(null);
   const [department, setDepartment] = useState("");
@@ -132,16 +131,15 @@ const Createticket = (props) => {
                 onClick={() => navigate("/")}
                 sx={{ fontSize: "x-large", color: "brown" }}
               />
-              {read ? (
-                <Stack
-                  onClick={() => navigate("/alltickets")}
-                  direction="row"
-                  spacing={1}
-                  className="nav-icon"
-                  sx={{ color: "brown", cursor: "pointer" }}>
-                  <b>All tickets</b>
-                </Stack>
-              ) : null}
+
+              <Stack
+                onClick={() => navigate("/alltickets")}
+                direction="row"
+                spacing={1}
+                className="nav-icon"
+                sx={{ color: "brown", cursor: "pointer" }}>
+                <b>All tickets</b>
+              </Stack>
             </Stack>
           </div>
           <form
