@@ -155,11 +155,14 @@ const Createticket = () => {
                 setDepartment(e.target.value);
                 getDepartment();
               }}>
-              <option>Select-Department</option>
+              <option value="">Select-Department</option>
               <option value="admin">ADMIN</option>
               <option value="hr">HR</option>
               <option value="it">IT</option>
               <option value="account">ACCOUNTS</option>
+              <option value="qa">QA</option>
+              <option value="development">DEVELOPMENT</option>
+              <option value="sales">SALES</option>
             </select>
             <hr />
             <label className="form-label">Subject</label>

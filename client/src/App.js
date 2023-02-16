@@ -39,7 +39,7 @@ const App = () => {
         console.log(err);
       });
   };
-  console.log(roleData);
+
   const getRoleData = async (name) => {
     await axios
       .get(`api/roles/rolebyname/${name}`)

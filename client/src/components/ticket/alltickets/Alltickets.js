@@ -11,7 +11,7 @@ import Individualticket from "./individualticket/Individualticket.js";
 const Alltickets = (props) => {
   const { data } = props;
   const [tickets, setTickets] = useState([]);
-
+  const [userData, setUserData] = useState({});
   const [ticketCount, setTicketCount] = useState(0);
   const navigate = useNavigate();
   const getTickets = async () => {
@@ -67,8 +67,21 @@ const Alltickets = (props) => {
         console.log(err);
       });
   };
+
+  const getData = async () => {
+    await axios
+      .get(`api/authentication/getdata`)
+      .then((res) => {
+        setUserData(res.data.user);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   useEffect(() => {
     getTickets();
+    getData();
   }, []);
   return (
     <>
@@ -123,7 +136,9 @@ const Alltickets = (props) => {
                   <th>Created At</th>
                   <th>Image</th>
                   <th>Status</th>
-                  <th style={{ textAlign: "center" }}>Delete</th>
+                  {userData.designation === "head" ? (
+                    <th style={{ textAlign: "center" }}>Delete</th>
+                  ) : null}
                 </tr>
               </thead>
               <tbody>
@@ -134,6 +149,7 @@ const Alltickets = (props) => {
                         val={val}
                         deleteFun={deleteFun}
                         downloadImage={downloadImage}
+                        designation={userData.designation}
                       />
                     </tr>
                   );

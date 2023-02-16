@@ -27,7 +27,6 @@ const Layout = () => {
     await axios
       .get(`api/users/logout`)
       .then((res) => {
-        console.log(res);
         window.location.reload();
       })
       .catch((err) => {
@@ -57,7 +56,7 @@ const Layout = () => {
         console.log(err);
       });
   };
-  console.log(roleData);
+
   useEffect(() => {
     getData();
   }, []);
@@ -155,32 +154,27 @@ const Layout = () => {
           </span>
         )}
 
-        {roleData && (roleData.ticket.create || roleData.ticket.read) ? (
-          <span className="a spreader" onClick={() => setShowHelp(!showHelp)}>
-            <HelpOutlineOutlinedIcon sx={{ fontSize: "x-large" }} />
-            <b> Help</b>
-            {showHelp ? (
-              <ArrowDropDownIcon sx={{ fontSize: "x-large" }} />
-            ) : (
-              <ArrowDropUpIcon sx={{ fontSize: "x-large" }} />
-            )}
-          </span>
-        ) : null}
+        <span className="a spreader" onClick={() => setShowHelp(!showHelp)}>
+          <HelpOutlineOutlinedIcon sx={{ fontSize: "x-large" }} />
+          <b> Help Desk</b>
+          {showHelp ? (
+            <ArrowDropDownIcon sx={{ fontSize: "x-large" }} />
+          ) : (
+            <ArrowDropUpIcon sx={{ fontSize: "x-large" }} />
+          )}
+        </span>
 
         {showHelp && (
           <span>
-            {roleData && roleData.ticket.create ? (
-              <Link className="a spreader-link" to="/createticket">
-                <BorderColorOutlinedIcon sx={{ fontSize: "large" }} />
-                <b> Create Ticket</b>
-              </Link>
-            ) : null}
-            {roleData && roleData.ticket.read ? (
-              <Link className="a spreader-link" to="/alltickets">
-                <StorageOutlinedIcon sx={{ fontSize: "large" }} />
-                <b> All Tickets</b>
-              </Link>
-            ) : null}
+            <Link className="a spreader-link" to="/createticket">
+              <BorderColorOutlinedIcon sx={{ fontSize: "large" }} />
+              <b> Create Ticket</b>
+            </Link>
+
+            <Link className="a spreader-link" to="/alltickets">
+              <StorageOutlinedIcon sx={{ fontSize: "large" }} />
+              <b> All Tickets</b>
+            </Link>
           </span>
         )}
 

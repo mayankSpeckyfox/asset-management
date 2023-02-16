@@ -5,7 +5,7 @@ import FileDownloadIcon from "@mui/icons-material/FileDownload";
 const Individualticket = (props) => {
   const { _id, department, subject, description, status, createdAt, image } =
     props.val;
-  const { deleteFun, downloadImage } = props;
+  const { deleteFun, downloadImage, designation } = props;
   return (
     <>
       <td>{_id}</td>
@@ -26,16 +26,18 @@ const Individualticket = (props) => {
         <td>NA</td>
       )}
       <td>{status}</td>
-      <td className="tableData">
-        {" "}
-        <DeleteIcon
-          onClick={() => deleteFun(_id)}
-          sx={{
-            color: "brown",
-            cursor: "pointer",
-          }}
-        />
-      </td>
+      {designation === "head" ? (
+        <td className="tableData">
+          {" "}
+          <DeleteIcon
+            onClick={() => deleteFun(_id)}
+            sx={{
+              color: "brown",
+              cursor: "pointer",
+            }}
+          />
+        </td>
+      ) : null}
     </>
   );
 };
