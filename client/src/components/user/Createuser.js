@@ -160,19 +160,36 @@ const Createuser = (props) => {
               <option value="account">ACCOUNTS</option>
             </select>
             <hr />
-            <label className="form-label">Designation</label>
 
-            <select
-              className="form-control "
-              value={designation}
-              onChange={(e) => {
-                setDesignation(e.target.value);
-              }}>
-              <option value="">Select-Designation</option>
-              <option value="head">Department Head</option>
-              <option value="other">Other</option>
-            </select>
-            <hr />
+            {department ? (
+              <>
+                <label className="form-label">Designation</label>
+                <select
+                  className="form-control "
+                  value={designation}
+                  onChange={(e) => {
+                    setDesignation(e.target.value);
+                  }}>
+                  <option value="">Select-Designation</option>
+                  {department !== "admin" ? (
+                    <>
+                      {" "}
+                      <option value="head">Department Head</option>
+                      <option value="director">Director</option>
+                      <option value="other">Other</option>
+                    </>
+                  ) : (
+                    <>
+                      {" "}
+                      <option value="ceo">CEO</option>
+                      <option value="head">Department Head</option>
+                    </>
+                  )}
+                </select>
+                <hr />
+              </>
+            ) : null}
+
             <label className="form-label">Password</label>
             <input
               className="form-control"
