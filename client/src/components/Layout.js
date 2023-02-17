@@ -166,10 +166,12 @@ const Layout = () => {
 
         {showHelp && (
           <span>
-            <Link className="a spreader-link" to="/createticket">
-              <BorderColorOutlinedIcon sx={{ fontSize: "large" }} />
-              <b> Create Ticket</b>
-            </Link>
+            {data.designation === "other" ? (
+              <Link className="a spreader-link" to="/createticket">
+                <BorderColorOutlinedIcon sx={{ fontSize: "large" }} />
+                <b> Create Ticket</b>
+              </Link>
+            ) : null}
 
             <Link className="a spreader-link" to="/alltickets">
               <StorageOutlinedIcon sx={{ fontSize: "large" }} />

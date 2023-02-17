@@ -78,7 +78,16 @@ const Alltickets = (props) => {
         console.log(err);
       });
   };
-
+  const changeStatus = async (id, data) => {
+    await axios
+      .patch(`api/tickets/changestatus/${id}`, { status: data })
+      .then((res) => {
+        window.location.reload();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   useEffect(() => {
     getTickets();
     getData();
@@ -137,7 +146,10 @@ const Alltickets = (props) => {
                   <th>Image</th>
                   <th>Status</th>
                   {userData.designation === "head" ? (
-                    <th style={{ textAlign: "center" }}>Delete</th>
+                    <>
+                      <th>Action</th>
+                      <th style={{ textAlign: "center" }}>Delete</th>
+                    </>
                   ) : null}
                 </tr>
               </thead>
@@ -149,6 +161,7 @@ const Alltickets = (props) => {
                         val={val}
                         deleteFun={deleteFun}
                         downloadImage={downloadImage}
+                        changeStatus={changeStatus}
                         designation={userData.designation}
                       />
                     </tr>

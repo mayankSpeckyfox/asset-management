@@ -105,7 +105,9 @@ const App = () => {
             <Route path="/settings" element={myToken && <Settings />} />
           ) : null}
 
-          <Route path="/createticket" element={myToken && <Createticket />} />
+          {data.designation === "other" ? (
+            <Route path="/createticket" element={myToken && <Createticket />} />
+          ) : null}
 
           <Route
             path="/alltickets"
