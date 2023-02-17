@@ -158,6 +158,9 @@ const Createuser = (props) => {
               <option value="hr">HR</option>
               <option value="it">IT</option>
               <option value="account">ACCOUNTS</option>
+              <option value="qa">QA</option>
+              <option value="development">DEVELOPMENT</option>
+              <option value="sales">SALES</option>
             </select>
             <hr />
 
@@ -174,8 +177,8 @@ const Createuser = (props) => {
                   {department !== "admin" ? (
                     <>
                       {" "}
-                      <option value="head">Department Head</option>
                       <option value="director">Director</option>
+                      <option value="head">Department Head</option>
                       <option value="other">Other</option>
                     </>
                   ) : (

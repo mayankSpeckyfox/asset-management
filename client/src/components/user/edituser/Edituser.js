@@ -154,21 +154,41 @@ const Edituser = (props) => {
               <option value="hr">HR</option>
               <option value="it">IT</option>
               <option value="account">ACCOUNTS</option>
+              <option value="qa">QA</option>
+              <option value="development">DEVELOPMENT</option>
+              <option value="sales">SALES</option>
             </select>
             <hr />
-            <label className="form-label">Department</label>
 
-            <select
-              className="form-control "
-              value={editdesignation}
-              onChange={(e) => {
-                setEditDesignation(e.target.value);
-              }}>
-              <option value="">Select-Designation</option>
-              <option value="head">Department Head</option>
-              <option value="other">Other</option>
-            </select>
-            <hr />
+            {editdepartment ? (
+              <>
+                <label className="form-label">Designation</label>
+                <select
+                  className="form-control "
+                  value={editdesignation}
+                  onChange={(e) => {
+                    setEditDesignation(e.target.value);
+                  }}>
+                  <option value="">Select-Designation</option>
+                  {editdepartment !== "admin" ? (
+                    <>
+                      {" "}
+                      <option value="director">Director</option>
+                      <option value="head">Department Head</option>
+                      <option value="other">Other</option>
+                    </>
+                  ) : (
+                    <>
+                      {" "}
+                      <option value="ceo">CEO</option>
+                      <option value="head">Department Head</option>
+                    </>
+                  )}
+                </select>
+                <hr />
+              </>
+            ) : null}
+
             <label className="form-label">Email</label>
             <input
               className="form-control"
