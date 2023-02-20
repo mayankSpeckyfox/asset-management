@@ -13,7 +13,8 @@ const Createticket = () => {
   const inputRef = useRef(null);
   const [department, setDepartment] = useState("");
   const [file, setFile] = useState();
-
+  const [assigntousers, setAssigntoUsers] = useState([]);
+  const [assignto, setAssignto] = useState();
   const [depData, setDepData] = useState({
     admin: { email: "" },
     hr: { email: "" },
@@ -32,6 +33,7 @@ const Createticket = () => {
   const onSubmit = (d) => {
     const formdata = new FormData();
     formdata.append("department", department);
+    formdata.append("assignedTo", assignto);
     formdata.append("subject", d.subject);
     formdata.append("description", d.description);
 
@@ -49,6 +51,7 @@ const Createticket = () => {
           console.log(err);
         });
     };
+
     if (department) {
       sendEmail(data.email, formdata);
       sendEmail(depData[department].email, formdata);
@@ -81,7 +84,16 @@ const Createticket = () => {
     setDepartment("");
     reset();
   };
-
+  const getUserDept = async (val) => {
+    await axios
+      .get(`api/users/getusersbydepartment/${val}`)
+      .then((res) => {
+        setAssigntoUsers(res.data.users);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   const getData = async () => {
     await axios
       .get(`api/authentication/getdata`)
@@ -149,11 +161,12 @@ const Createticket = () => {
             <label className="form-label">Department</label>
 
             <select
-              className="form-control "
+              className="form-control"
               value={department}
               onChange={(e) => {
                 setDepartment(e.target.value);
                 getDepartment();
+                getUserDept(e.target.value);
               }}>
               <option value="">Select-Department</option>
               <option value="admin">ADMIN</option>
@@ -165,6 +178,23 @@ const Createticket = () => {
               <option value="sales">SALES</option>
             </select>
             <hr />
+            {department ? (
+              <>
+                <label className="form-label">Assign to</label>
+                <select
+                  className="form-control"
+                  value={assignto}
+                  onChange={(e) => setAssignto(e.target.value)}>
+                  <option value="">Assign to</option>
+                  {assigntousers.map((val) => (
+                    <option key={val._id} value={val._id}>
+                      {val.name}
+                    </option>
+                  ))}
+                </select>
+                <hr />
+              </>
+            ) : null}
             <label className="form-label">Subject</label>
             <input
               className="form-control "

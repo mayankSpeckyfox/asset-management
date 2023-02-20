@@ -11,7 +11,7 @@ const Individualuser = (props) => {
     deleteFun,
     editFun,
     department,
-    designation,
+
     update,
     del,
   } = props;
@@ -20,7 +20,7 @@ const Individualuser = (props) => {
       <td>{name}</td>
       <td>{email}</td>
       <td>{department}</td>
-      <td>{designation}</td>
+
       <td>{role}</td>
       {update ? (
         <td className="tableData">

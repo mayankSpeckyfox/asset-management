@@ -1,14 +1,28 @@
 import React from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import "./Individualticket.css";
+import VisibilityIcon from "@mui/icons-material/Visibility";
 import FileDownloadIcon from "@mui/icons-material/FileDownload";
+import { Stack } from "@mui/material";
+
 const Individualticket = (props) => {
   const { _id, department, subject, description, status, createdAt, image } =
     props.val;
-  const { deleteFun, downloadImage, designation, changeStatus } = props;
+  const { deleteFun, downloadImage, del, setViewFun, sendTicketInfo } = props;
   return (
     <>
-      <td>{_id}</td>
+      <td>
+        <Stack direction="row" spacing={1}>
+          <VisibilityIcon
+            onClick={() => {
+              setViewFun(true);
+              sendTicketInfo(props.val);
+            }}
+            sx={{ fontSize: "large", cursor: "pointer", color: "blue" }}
+          />
+          <Stack> {_id}</Stack>
+        </Stack>
+      </td>
       <td>{department}</td>
       <td>{subject}</td>
       <td>{description}</td>
@@ -46,36 +60,18 @@ const Individualticket = (props) => {
           {status}
         </td>
       )}
-      {designation === "head" ? (
-        <>
-          <td className="tableData">
-            <select
-              className="form-control"
-              onChange={(e) => changeStatus(_id, e.target.value)}>
-              {status === "closed" ? (
-                <>
-                  <option value="closed">closed</option>
-                  <option value="active">open</option>
-                </>
-              ) : (
-                <>
-                  <option value="active">active</option>
-                  <option value="closed">close</option>
-                </>
-              )}
-            </select>
-          </td>
-          <td className="tableData">
-            {" "}
-            <DeleteIcon
-              onClick={() => deleteFun(_id)}
-              sx={{
-                color: "brown",
-                cursor: "pointer",
-              }}
-            />
-          </td>
-        </>
+
+      {del ? (
+        <td className="tableData">
+          {" "}
+          <DeleteIcon
+            onClick={() => deleteFun(_id)}
+            sx={{
+              color: "brown",
+              cursor: "pointer",
+            }}
+          />
+        </td>
       ) : null}
     </>
   );

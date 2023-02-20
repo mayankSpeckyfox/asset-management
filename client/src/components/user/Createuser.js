@@ -13,7 +13,7 @@ const Createuser = (props) => {
   const { read } = props;
   const [allRoles, setAllRoles] = useState([]);
   const [department, setDepartment] = useState("");
-  const [designation, setDesignation] = useState("");
+
   const [role, setRole] = useState();
   const navigate = useNavigate();
   const {
@@ -30,7 +30,7 @@ const Createuser = (props) => {
             name: data.name,
             email: data.email,
             department: department,
-            designation: designation,
+
             password: data.password,
             cpassword: data.cpassword,
             role: role,
@@ -54,7 +54,7 @@ const Createuser = (props) => {
     submitUserData();
     setRole("");
     setDepartment("");
-    setDesignation("");
+
     reset();
   };
   useEffect(() => {
@@ -163,35 +163,6 @@ const Createuser = (props) => {
               <option value="sales">SALES</option>
             </select>
             <hr />
-
-            {department ? (
-              <>
-                <label className="form-label">Designation</label>
-                <select
-                  className="form-control "
-                  value={designation}
-                  onChange={(e) => {
-                    setDesignation(e.target.value);
-                  }}>
-                  <option value="">Select-Designation</option>
-                  {department !== "admin" ? (
-                    <>
-                      {" "}
-                      <option value="director">Director</option>
-                      <option value="head">Department Head</option>
-                      <option value="other">Other</option>
-                    </>
-                  ) : (
-                    <>
-                      {" "}
-                      <option value="ceo">CEO</option>
-                      <option value="head">Department Head</option>
-                    </>
-                  )}
-                </select>
-                <hr />
-              </>
-            ) : null}
 
             <label className="form-label">Password</label>
             <input

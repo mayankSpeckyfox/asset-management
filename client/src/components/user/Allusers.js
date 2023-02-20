@@ -187,7 +187,6 @@ const Allusers = (props) => {
                               name={val.name}
                               email={val.email}
                               department={val.department}
-                              designation={val.designation}
                               role={val.role}
                               editFun={editFun}
                               id={val._id}
@@ -230,7 +229,6 @@ const Allusers = (props) => {
                             name={val.name}
                             email={val.email}
                             department={val.department}
-                            designation={val.designation}
                             editFun={editFun}
                             role={val.role}
                             id={val._id}
@@ -285,7 +283,6 @@ const Allusers = (props) => {
           name={editData.name}
           email={editData.email}
           department={editData.department}
-          designation={editData.designation}
           role={editData.role}
           closeEdit={closeEdit}
         />

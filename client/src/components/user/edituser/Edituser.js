@@ -11,10 +11,10 @@ import { useNavigate } from "react-router-dom";
 import { Stack } from "@mui/material";
 import { useForm } from "react-hook-form";
 const Edituser = (props) => {
-  const { id, name, email, role, closeEdit, department, designation } = props;
+  const { id, name, email, role, closeEdit, department } = props;
   const [allRoles, setAllRoles] = useState([]);
   const [editdepartment, setEditDepartment] = useState(department);
-  const [editdesignation, setEditDesignation] = useState(designation);
+
   const [roleName, setRole] = useState(role);
   const navigate = useNavigate();
 
@@ -38,7 +38,7 @@ const Edituser = (props) => {
           name: data.name,
           email: data.email,
           department: editdepartment,
-          designation: editdesignation,
+
           role: roleName,
           currentemail: email,
         })
@@ -159,35 +159,6 @@ const Edituser = (props) => {
               <option value="sales">SALES</option>
             </select>
             <hr />
-
-            {editdepartment ? (
-              <>
-                <label className="form-label">Designation</label>
-                <select
-                  className="form-control "
-                  value={editdesignation}
-                  onChange={(e) => {
-                    setEditDesignation(e.target.value);
-                  }}>
-                  <option value="">Select-Designation</option>
-                  {editdepartment !== "admin" ? (
-                    <>
-                      {" "}
-                      <option value="director">Director</option>
-                      <option value="head">Department Head</option>
-                      <option value="other">Other</option>
-                    </>
-                  ) : (
-                    <>
-                      {" "}
-                      <option value="ceo">CEO</option>
-                      <option value="head">Department Head</option>
-                    </>
-                  )}
-                </select>
-                <hr />
-              </>
-            ) : null}
 
             <label className="form-label">Email</label>
             <input

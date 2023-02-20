@@ -6,6 +6,7 @@ import {
   getCookies,
   getIndividualUser,
   getSearchedUsers,
+  getUsersByDept,
   loginUser,
   logout,
   updateUser,
@@ -16,42 +17,38 @@ const router = express.Router();
 //create user
 router.post(
   "/create",
-  isAuthenticatedUser,
 
   createUser
 );
 //get all users
 router.get(
   "/getallusers",
-  isAuthenticatedUser,
 
   getAllUsers
 );
+//get users by department
+router.get("/getusersbydepartment/:department", getUsersByDept);
 //get searched users
 router.get(
   "/getsearchedusers",
-  isAuthenticatedUser,
 
   getSearchedUsers
 );
 //update individual user by id
 router.patch(
   "/updateuser/:id",
-  isAuthenticatedUser,
 
   updateUser
 );
 //delete individual user by id
 router.delete(
   "/deleteuser/:id",
-  isAuthenticatedUser,
 
   deleteUser
 );
 //get individual user by id
 router.get(
   "/individualuser/:id",
-  isAuthenticatedUser,
 
   getIndividualUser
 );

@@ -154,29 +154,33 @@ const Layout = () => {
           </span>
         )}
 
-        <span className="a spreader" onClick={() => setShowHelp(!showHelp)}>
-          <HelpOutlineOutlinedIcon sx={{ fontSize: "x-large" }} />
-          <b> Help Desk</b>
-          {showHelp ? (
-            <ArrowDropDownIcon sx={{ fontSize: "x-large" }} />
-          ) : (
-            <ArrowDropUpIcon sx={{ fontSize: "x-large" }} />
-          )}
-        </span>
+        {roleData && (roleData.ticket.create || roleData.ticket.read) ? (
+          <span className="a spreader" onClick={() => setShowHelp(!showHelp)}>
+            <HelpOutlineOutlinedIcon sx={{ fontSize: "x-large" }} />
+            <b> Help Desk</b>
+            {showHelp ? (
+              <ArrowDropDownIcon sx={{ fontSize: "x-large" }} />
+            ) : (
+              <ArrowDropUpIcon sx={{ fontSize: "x-large" }} />
+            )}
+          </span>
+        ) : null}
 
         {showHelp && (
           <span>
-            {data.designation === "other" ? (
+            {roleData && roleData.ticket.create ? (
               <Link className="a spreader-link" to="/createticket">
                 <BorderColorOutlinedIcon sx={{ fontSize: "large" }} />
                 <b> Create Ticket</b>
               </Link>
             ) : null}
 
-            <Link className="a spreader-link" to="/alltickets">
-              <StorageOutlinedIcon sx={{ fontSize: "large" }} />
-              <b> All Tickets</b>
-            </Link>
+            {roleData && roleData.ticket.read ? (
+              <Link className="a spreader-link" to="/alltickets">
+                <StorageOutlinedIcon sx={{ fontSize: "large" }} />
+                <b> All Tickets</b>
+              </Link>
+            ) : null}
           </span>
         )}
 

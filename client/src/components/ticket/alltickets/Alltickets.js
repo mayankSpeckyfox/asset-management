@@ -8,19 +8,21 @@ import ModeOutlinedIcon from "@mui/icons-material/ModeOutlined";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Individualticket from "./individualticket/Individualticket.js";
+import Viewticket from "../viewticket/Viewticket.js";
 const Alltickets = (props) => {
-  const { data } = props;
+  const { data, create, del } = props;
   const [tickets, setTickets] = useState([]);
   const [userData, setUserData] = useState({});
-  const [ticketCount, setTicketCount] = useState(0);
+  const [view, setView] = useState(false);
+  const [ticketInfo, setTicketInfo] = useState({});
+
   const navigate = useNavigate();
-  const getTickets = async () => {
+  /* const getTickets = async () => {
     await axios
       .get(`api/tickets/getalltickets`)
       .then((res) => {
         if (data.department === "admin") {
           setTickets(res.data.tickets);
-          setTicketCount(res.data.ticketCount);
         } else if (data.department === "hr") {
           setTickets(res.data.hrTickets);
         } else if (data.department === "account") {
@@ -38,7 +40,7 @@ const Alltickets = (props) => {
       .catch((err) => {
         console.log(err);
       });
-  };
+  };*/
 
   //download image function
   const downloadImage = async (id) => {
@@ -67,7 +69,16 @@ const Alltickets = (props) => {
         console.log(err);
       });
   };
-
+  const getAssignedTickets = async () => {
+    await axios
+      .get(`api/tickets/getassignedtickets/${data._id}`)
+      .then((res) => {
+        setTickets(res.data.tickets);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   const getData = async () => {
     await axios
       .get(`api/authentication/getdata`)
@@ -88,8 +99,14 @@ const Alltickets = (props) => {
         console.log(err);
       });
   };
+  const setViewFun = (val) => {
+    setView(val);
+  };
+  const sendTicketInfo = (val) => {
+    setTicketInfo(val);
+  };
   useEffect(() => {
-    getTickets();
+    getAssignedTickets();
     getData();
   }, []);
   return (
@@ -118,58 +135,59 @@ const Alltickets = (props) => {
                 sx={{ fontSize: "x-large", color: "brown" }}
               />
 
-              <Stack
-                direction="row"
-                onClick={() => navigate("/createticket")}
-                spacing={1}
-                sx={{ color: "brown", cursor: "pointer" }}>
-                <ModeOutlinedIcon sx={{ fontSize: "medium" }} />
-                <b className="nav-icon">Create Ticket</b>
-              </Stack>
+              {create ? (
+                <Stack
+                  direction="row"
+                  onClick={() => navigate("/createticket")}
+                  spacing={1}
+                  sx={{ color: "brown", cursor: "pointer" }}>
+                  <ModeOutlinedIcon sx={{ fontSize: "medium" }} />
+                  <b className="nav-icon">Create Ticket</b>
+                </Stack>
+              ) : null}
             </Stack>
           </div>
 
-          <div className="table-responsive tickets-tableScroll ticket-table-class p-5">
-            {ticketCount ? (
-              <small className="ticket-count">
-                Ticket Count : {ticketCount}
-              </small>
-            ) : null}
-            <table className="table table-striped text-muted">
-              <thead>
-                <tr className="ticket-table-row">
-                  <th>ID</th>
-                  <th>Department</th>
-                  <th>Subject</th>
-                  <th>Description</th>
-                  <th>Created At</th>
-                  <th>Image</th>
-                  <th>Status</th>
-                  {userData.designation === "head" ? (
-                    <>
-                      <th>Action</th>
+          {!view ? (
+            <div className="table-responsive tickets-tableScroll ticket-table-class p-5">
+              <table className="table table-striped text-muted">
+                <thead>
+                  <tr className="ticket-table-row">
+                    <th>ID</th>
+                    <th>Department</th>
+                    <th>Subject</th>
+                    <th>Description</th>
+                    <th>Created At</th>
+                    <th>Image</th>
+                    <th>Status</th>
+
+                    {del ? (
                       <th style={{ textAlign: "center" }}>Delete</th>
-                    </>
-                  ) : null}
-                </tr>
-              </thead>
-              <tbody>
-                {tickets.map((val, ind) => {
-                  return (
-                    <tr key={val._id} className="ticket-table-row">
-                      <Individualticket
-                        val={val}
-                        deleteFun={deleteFun}
-                        downloadImage={downloadImage}
-                        changeStatus={changeStatus}
-                        designation={userData.designation}
-                      />
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
+                    ) : null}
+                  </tr>
+                </thead>
+                <tbody>
+                  {tickets.map((val, ind) => {
+                    return (
+                      <tr key={val._id} className="ticket-table-row">
+                        <Individualticket
+                          val={val}
+                          deleteFun={deleteFun}
+                          del={del}
+                          downloadImage={downloadImage}
+                          changeStatus={changeStatus}
+                          setViewFun={setViewFun}
+                          sendTicketInfo={sendTicketInfo}
+                        />
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          ) : (
+            <Viewticket setViewFun={setViewFun} ticketInfo={ticketInfo} />
+          )}
           <Footer />
         </div>
       </div>

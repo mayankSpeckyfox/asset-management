@@ -4,19 +4,10 @@ import { sendToken } from "../utils/jwtToken.js";
 //create a user
 export const createUser = async (req, res) => {
   try {
-    const { name, email, department, designation, password, cpassword, role } =
-      req.body;
+    const { name, email, department, password, cpassword, role } = req.body;
     const userExist = await User.findOne({ email });
 
-    if (
-      !name ||
-      !email ||
-      !department ||
-      !designation ||
-      !password ||
-      !cpassword ||
-      !role
-    ) {
+    if (!name || !email || !department || !password || !cpassword || !role) {
       return res.status(422).json({ error: "Please fill all the fields" });
     } else if (userExist) {
       return res.status(422).json({ message: "Sorry user already exists" });
@@ -27,7 +18,7 @@ export const createUser = async (req, res) => {
         name,
         email,
         department,
-        designation,
+
         password,
         role,
       });
@@ -39,7 +30,21 @@ export const createUser = async (req, res) => {
     res.status(500).json({ message: "Sorry ! Error occured" });
   }
 };
+//get user by department
 
+export const getUsersByDept = async (req, res) => {
+  try {
+    const users = await User.find({ department: req.params.department });
+
+    res.status(200).json({
+      message: "Users fetched successfully",
+      users,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "Sorry ! Error occured " });
+  }
+};
 //get all users
 
 export const getAllUsers = async (req, res) => {
@@ -99,15 +104,14 @@ export const getSearchedUsers = async (req, res) => {
 export const updateUser = async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, email, department, designation, role, currentemail } =
-      req.body;
+    const { name, email, department, role, currentemail } = req.body;
     if (email !== currentemail) {
       const emailExist = await User.findOne({ email: email });
       if (emailExist) {
         return res.status(400).json({ message: "Email already exists" });
       }
     }
-    if (!name || !email || !role || !department || !designation) {
+    if (!name || !email || !role || !department) {
       return res.status(400).json({ message: "Please fill all fields" });
     }
 
@@ -117,7 +121,7 @@ export const updateUser = async (req, res) => {
     }
     const updatedUser = await User.findByIdAndUpdate(
       { _id: id },
-      { name, email, department, designation, role },
+      { name, email, department, role },
       { new: true }
     );
     if (!updatedUser) {

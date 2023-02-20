@@ -53,9 +53,9 @@ export const sendEmail = async (req, res) => {
 // create ticket
 export const createTicket = async (req, res) => {
   try {
-    const { department, subject, description } = req.body;
+    const { department, subject, description, assignedTo } = req.body;
 
-    const ticket = new Ticket({ department, subject, description });
+    const ticket = new Ticket({ department, subject, description, assignedTo });
     if (req.files) {
       const { data, mimetype, name } = req.files.file;
       ticket.image.data = data;
@@ -119,7 +119,19 @@ export const getAllTickets = async (req, res) => {
     res.status(500).json({ message: "sorry error occured" });
   }
 };
+//get assigned tickets
+export const getAssignedTickets = async (req, res) => {
+  try {
+    const tickets = await Ticket.find({ assignedTo: req.params.id });
 
+    res
+      .status(200)
+      .json({ message: "Assigned tickets fetched successfully", tickets });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "sorry error occured" });
+  }
+};
 // update ticket by id
 export const updateTicket = async (req, res) => {
   try {

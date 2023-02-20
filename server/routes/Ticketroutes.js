@@ -7,6 +7,7 @@ import {
   deleteTicket,
   downloadImage,
   getAllTickets,
+  getAssignedTickets,
   getIndividualTicket,
   sendEmail,
   updateTicket,
@@ -28,6 +29,8 @@ router.get(
   isAuthenticatedUser,
   getIndividualTicket
 );
+//get assigned tickets
+router.get("/getassignedtickets/:id", getAssignedTickets);
 // delete ticket by id
 router.delete("/deleteticket/:id", isAuthenticatedUser, deleteTicket);
 //download ticket image
