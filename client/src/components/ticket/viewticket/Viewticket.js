@@ -86,6 +86,11 @@ const Viewticket = (props) => {
         </p>
         <hr />
         <p>
+          <b>Status : </b>
+          {ticketInfo.status}{" "}
+        </p>
+        <hr />
+        <p>
           <b>Description :</b> {ticketInfo.description}
         </p>
         {update ? (

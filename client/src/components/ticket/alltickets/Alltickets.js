@@ -17,12 +17,14 @@ const Alltickets = (props) => {
   const [ticketInfo, setTicketInfo] = useState({});
 
   const navigate = useNavigate();
-  /* const getTickets = async () => {
+  const getTickets = async () => {
     await axios
       .get(`api/tickets/getalltickets`)
       .then((res) => {
-        if (data.department === "admin") {
+        if (data.role === "ceo") {
           setTickets(res.data.tickets);
+        } else if (data.department === "admin") {
+          setTickets(res.data.adminTickets);
         } else if (data.department === "hr") {
           setTickets(res.data.hrTickets);
         } else if (data.department === "account") {
@@ -40,7 +42,7 @@ const Alltickets = (props) => {
       .catch((err) => {
         console.log(err);
       });
-  };*/
+  };
 
   //download image function
   const downloadImage = async (id) => {
@@ -106,7 +108,16 @@ const Alltickets = (props) => {
     setTicketInfo(val);
   };
   useEffect(() => {
-    getAssignedTickets();
+    if (
+      data.role === "manager" ||
+      data.role === "head" ||
+      data.role === "ceo"
+    ) {
+      getTickets();
+    } else {
+      getAssignedTickets();
+    }
+
     getData();
   }, []);
   return (
