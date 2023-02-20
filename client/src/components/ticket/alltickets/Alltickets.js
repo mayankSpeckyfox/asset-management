@@ -181,15 +181,27 @@ const Alltickets = (props) => {
                   {tickets.map((val, ind) => {
                     return (
                       <tr key={val._id} className="ticket-table-row">
-                        <Individualticket
-                          val={val}
-                          deleteFun={deleteFun}
-                          del={del}
-                          downloadImage={downloadImage}
-                          changeStatus={changeStatus}
-                          setViewFun={setViewFun}
-                          sendTicketInfo={sendTicketInfo}
-                        />
+                        {val.status !== "pending" ? (
+                          <Individualticket
+                            val={val}
+                            deleteFun={deleteFun}
+                            del={del}
+                            downloadImage={downloadImage}
+                            changeStatus={changeStatus}
+                            setViewFun={setViewFun}
+                            sendTicketInfo={sendTicketInfo}
+                          />
+                        ) : data.role === "manager" ? (
+                          <Individualticket
+                            val={val}
+                            deleteFun={deleteFun}
+                            del={del}
+                            downloadImage={downloadImage}
+                            changeStatus={changeStatus}
+                            setViewFun={setViewFun}
+                            sendTicketInfo={sendTicketInfo}
+                          />
+                        ) : null}
                       </tr>
                     );
                   })}

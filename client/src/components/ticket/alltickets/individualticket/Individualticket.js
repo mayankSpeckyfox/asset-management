@@ -39,7 +39,7 @@ const Individualticket = (props) => {
       ) : (
         <td>NA</td>
       )}
-      {status === "active" ? (
+      {status === "active" || status === "pending" ? (
         <td
           style={{
             color: "red",
