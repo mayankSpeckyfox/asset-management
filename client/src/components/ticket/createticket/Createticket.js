@@ -8,7 +8,8 @@ import { useNavigate } from "react-router-dom";
 import CottageOutlinedIcon from "@mui/icons-material/CottageOutlined";
 import axios from "axios";
 import { useForm } from "react-hook-form";
-const Createticket = () => {
+const Createticket = (props) => {
+  const { userdata } = props;
   const [data, setData] = useState({});
   const inputRef = useRef(null);
   const [department, setDepartment] = useState("");
@@ -186,11 +187,13 @@ const Createticket = () => {
                   value={assignto}
                   onChange={(e) => setAssignto(e.target.value)}>
                   <option value="">Assign to</option>
-                  {assigntousers.map((val) => (
-                    <option key={val._id} value={val._id}>
-                      {val.name}
-                    </option>
-                  ))}
+                  {assigntousers.map((val) => {
+                    return val._id !== userdata._id ? (
+                      <option key={val._id} value={val._id}>
+                        {val.name}
+                      </option>
+                    ) : null;
+                  })}
                 </select>
                 <hr />
               </>

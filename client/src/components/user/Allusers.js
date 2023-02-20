@@ -169,7 +169,7 @@ const Allusers = (props) => {
                         <th>Users</th>
                         <th>Email</th>
                         <th>Department</th>
-                        <th>Designation</th>
+
                         <th>Role</th>
                         {update ? (
                           <th style={{ textAlign: "center" }}>Edit</th>
@@ -210,7 +210,7 @@ const Allusers = (props) => {
                       <th>Users</th>
                       <th>Email</th>
                       <th>Department</th>
-                      <th>Designation</th>
+
                       <th>Role</th>
 
                       {update ? (

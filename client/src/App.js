@@ -106,7 +106,10 @@ const App = () => {
           ) : null}
 
           {roleData && roleData.ticket.create ? (
-            <Route path="/createticket" element={myToken && <Createticket />} />
+            <Route
+              path="/createticket"
+              element={myToken && <Createticket userdata={data} />}
+            />
           ) : null}
           {roleData && roleData.ticket.read ? (
             <Route

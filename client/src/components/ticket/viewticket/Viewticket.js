@@ -98,15 +98,11 @@ const Viewticket = (props) => {
               onChange={(e) => assign(e.target.value)}>
               <option value="">Assign-To</option>
               {assigntousers.map((val) => {
-                return (
-                  <>
-                    {val._id !== data._id ? (
-                      <option key={val._id} value={val._id}>
-                        {val.name}
-                      </option>
-                    ) : null}
-                  </>
-                );
+                return val._id !== data._id ? (
+                  <option key={val._id} value={val._id}>
+                    {val.name}
+                  </option>
+                ) : null;
               })}
             </select>
             <hr />
