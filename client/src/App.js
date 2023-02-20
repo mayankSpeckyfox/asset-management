@@ -115,6 +115,7 @@ const App = () => {
                 myToken && (
                   <Alltickets
                     data={data}
+                    update={roleData.ticket.update}
                     create={roleData.ticket.create}
                     del={roleData.ticket.delete}
                   />

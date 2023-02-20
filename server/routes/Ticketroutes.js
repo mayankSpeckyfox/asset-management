@@ -2,6 +2,7 @@ import express from "express";
 import { isAuthenticatedUser } from "../middleware/auth.js";
 
 import {
+  assignTo,
   changeStatusTicket,
   createTicket,
   deleteTicket,
@@ -29,6 +30,8 @@ router.get(
   isAuthenticatedUser,
   getIndividualTicket
 );
+//assign to
+router.patch("/assignto/:id", assignTo);
 //get assigned tickets
 router.get("/getassignedtickets/:id", getAssignedTickets);
 // delete ticket by id

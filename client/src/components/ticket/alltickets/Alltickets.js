@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 import Individualticket from "./individualticket/Individualticket.js";
 import Viewticket from "../viewticket/Viewticket.js";
 const Alltickets = (props) => {
-  const { data, create, del } = props;
+  const { data, create, del, update } = props;
   const [tickets, setTickets] = useState([]);
   const [userData, setUserData] = useState({});
   const [view, setView] = useState(false);
@@ -186,7 +186,12 @@ const Alltickets = (props) => {
               </table>
             </div>
           ) : (
-            <Viewticket setViewFun={setViewFun} ticketInfo={ticketInfo} />
+            <Viewticket
+              setViewFun={setViewFun}
+              ticketInfo={ticketInfo}
+              data={data}
+              update={update}
+            />
           )}
           <Footer />
         </div>
