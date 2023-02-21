@@ -12,7 +12,7 @@ import Viewticket from "../viewticket/Viewticket.js";
 const Alltickets = (props) => {
   const { data, create, del, update } = props;
   const [tickets, setTickets] = useState([]);
-  const [userData, setUserData] = useState({});
+
   const [view, setView] = useState(false);
   const [ticketInfo, setTicketInfo] = useState({});
 
@@ -81,16 +81,7 @@ const Alltickets = (props) => {
         console.log(err);
       });
   };
-  const getData = async () => {
-    await axios
-      .get(`api/authentication/getdata`)
-      .then((res) => {
-        setUserData(res.data.user);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+
   const changeStatus = async (id, data) => {
     await axios
       .patch(`api/tickets/changestatus/${id}`, { status: data })
@@ -117,8 +108,6 @@ const Alltickets = (props) => {
     } else {
       getAssignedTickets();
     }
-
-    getData();
   }, []);
   return (
     <>

@@ -35,6 +35,7 @@ const Createticket = (props) => {
     const formdata = new FormData();
     formdata.append("department", department);
     formdata.append("assignedTo", assignto);
+    formdata.append("createdBy", userdata._id);
     formdata.append("subject", d.subject);
     formdata.append("description", d.description);
 

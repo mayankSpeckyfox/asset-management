@@ -53,9 +53,16 @@ export const sendEmail = async (req, res) => {
 // create ticket
 export const createTicket = async (req, res) => {
   try {
-    const { department, subject, description, assignedTo } = req.body;
+    const { department, subject, description, assignedTo, createdBy } =
+      req.body;
 
-    const ticket = new Ticket({ department, subject, description, assignedTo });
+    const ticket = new Ticket({
+      department,
+      subject,
+      description,
+      assignedTo,
+      createdBy,
+    });
     if (req.files) {
       const { data, mimetype, name } = req.files.file;
       ticket.image.data = data;
@@ -122,7 +129,9 @@ export const getAllTickets = async (req, res) => {
 //get assigned tickets
 export const getAssignedTickets = async (req, res) => {
   try {
-    const tickets = await Ticket.find({ assignedTo: req.params.id });
+    const tickets = await Ticket.find({
+      $or: [{ assignedTo: req.params.id }, { createdBy: req.params.id }],
+    });
 
     res
       .status(200)
